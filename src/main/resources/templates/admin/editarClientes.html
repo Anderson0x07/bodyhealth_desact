@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Edicion de clientes</title>
+</head>
+<body>
+<h1>hola</h1>
+<form th:action="@{/admin/guardar}" th:object="${cliente}"
+      method="POST">
+            <div class="card-header">
+              <h4>Editar</h4>
+            </div>
+            <div class="card-body">
+
+               <input type="hidden" name="documento" th:field="*{documento}"/>
+
+                <div class="form-group">
+                    <label>Documento: </label>
+                    <input type="text" class="form-control" name="documento"
+                           disabled required="true" th:field="*{documento}"/>
+                </div>
+              <div class="form-group">
+                <label>Nombre: </label>
+                <input type="text" class="form-control" name="nombre"
+                       required="true" th:field="*{nombre}"/>
+              </div>
+              <div class="form-group">
+                <label>Apellido: </label>
+                <input type="text" class="form-control" name="apellido"
+                       required="true" th:field="*{apellido}"/>
+              </div>
+              <div class="form-group">
+                <label>Email: </label>
+                <input type="email" class="form-control" name="email"
+                       required="true" th:field="*{email}"/>
+              </div>
+              <div class="form-group">
+                <label>Telefono: </label>
+                <input type="text" class="form-control" name="telefono"
+                       required="true" th:field="*{telefono}"/>
+              </div>
+
+                <div class="form-group">
+                    <button type="submit" class="form-control">
+                        ENVIARR
+                    </button>
+                </div>
+            </div>
+
+</form>
+
+</body>
+</html>

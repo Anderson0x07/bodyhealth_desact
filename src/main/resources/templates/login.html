@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <title>Inicio de sesion</title>
+    <meta charset="UTF-8"/>
+
+</head>
+<body>
+          <h4>Login</h4>
+
+          <form method="POST" th:action="@{/autenticacion}">
+
+                <div class="form-group">
+                  <label for="username">Username: </label>
+                  <input type="text" name="username" id="username"/>
+                </div>
+                <br>
+
+                <div class="form-group">
+                  <label for="password">Password: </label>
+                  <input type="password" name="password" id="password"/>
+                </div>
+                <br>
+
+                <input type="submit" value="Login" class="btn btn-primary btn-block"/>
+
+                <div th:if="${param.error!=null}">
+                    <p style="color: blue">Error, datos incorrectos</p>
+                </div>
+
+                <div th:if="${param.logout!=null}">
+                    <p th:text="${param.logout.size()}"></p>
+                    <p style="color: green">Cierre de sesion exitoso</p>
+                </div>
+
+          </form>
+</body>
+</html>
