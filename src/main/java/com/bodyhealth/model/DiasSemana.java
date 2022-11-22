@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class DiasSemana implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_diasemana;
 
     private String descripcion;
 }

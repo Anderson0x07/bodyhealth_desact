@@ -22,14 +22,16 @@ public class H_EntrenadorClienteImplement implements H_EntrenadorClienteService 
 
     @Override
     public void guardar(H_EntrenadorCliente h_entrenadorCliente) {
-        h_entrenadorClienteRepository.save(h_entrenadorCliente);
+
     }
 
     @Override
     public void eliminar(H_EntrenadorCliente h_entrenadorCliente) {
-        h_entrenadorClienteRepository.delete(h_entrenadorCliente);
+
     }
 
-
-
+    @Override
+    public H_EntrenadorCliente encontrarH_EntrenadorCliente(H_EntrenadorCliente h_entrenadorCliente) {
+        return null;
+    }
 }

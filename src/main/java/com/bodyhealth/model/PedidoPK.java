@@ -10,4 +10,5 @@ public class PedidoPK implements Serializable {
     private int id_producto;
     @Column(name = "id_compra")
     private int id_compra;
+    private int id_pedido;
 }

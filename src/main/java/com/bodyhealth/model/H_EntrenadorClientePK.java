@@ -8,8 +8,10 @@ import java.io.Serializable;
 public class H_EntrenadorClientePK implements Serializable {
     @Column(name = "documentoE")
     private int documentoE;
-    @Column(name = "documento")
-    private int documento;
-    @Column(name = "id_horario")
-    private int id_horario;
+
+    @Column(name = "documentoC")
+    private int documentoC;
+
+    @Column(name = "id_horario_entrenador")
+    private int id_horario_entrenador;
 }

@@ -14,9 +14,9 @@ public class Administrador implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int documento;
+    private int documentoA;
 
-    private String tipo_documento;
+    private String tipodocumento;
 
     private String nombre;
 
@@ -24,13 +24,13 @@ public class Administrador implements Serializable{
 
     private String telefono;
 
-    private Date fechaN;
+    private Date fecha_nacimiento;
 
     private String email;
 
     private String password;
 
     @ManyToOne
-    @JoinColumn(name="id")
+    @JoinColumn(name="id_rol")
     private Rol id_rol;
 }

@@ -13,20 +13,20 @@ public class H_EntrenadorCliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int documentoE;
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "documentoE",foreignKey = @ForeignKey(name = "FK_E_HEC"))
+    @JoinColumn(name = "documentoE",insertable = false,updatable = false)
     private Entrenador entrenador;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int documento;
+    private int documentoC;
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "documento",foreignKey = @ForeignKey(name = "FK_C_HEC"))
+    @JoinColumn(name = "documentoC",insertable = false,updatable = false)
     private Cliente cliente;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_horario;
+    private int id_horario_entrenador;
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "id_horario",foreignKey = @ForeignKey(name = "FK_H_HEC"))
-    private Horario horario;
+    @JoinColumn(name = "id_horario_entrenador",insertable = false,updatable = false)
+    private HorarioEntrenador horarioEntrenador;
 }

@@ -13,6 +13,7 @@ public interface H_EntrenadorClienteService {
     public void guardar(H_EntrenadorCliente h_entrenadorCliente);
 
     public void eliminar(H_EntrenadorCliente h_entrenadorCliente);
+    public H_EntrenadorCliente encontrarH_EntrenadorCliente(H_EntrenadorCliente h_entrenadorCliente);
 
 
 }

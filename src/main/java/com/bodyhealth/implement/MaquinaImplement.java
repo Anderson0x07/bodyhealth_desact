@@ -1,16 +1,20 @@
 package com.bodyhealth.implement;
 
 import com.bodyhealth.model.Maquina;
+import com.bodyhealth.repository.MaquinaRepository;
 import com.bodyhealth.service.MaquinaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class MaquinaImplement implements MaquinaService {
+    @Autowired
+    private MaquinaRepository maquinaRepository;
     @Override
     public List<Maquina> listarMaquinas() {
-        return null;
+        return (List<Maquina>) maquinaRepository.findAll();
     }
 
     @Override

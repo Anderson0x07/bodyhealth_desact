@@ -12,23 +12,27 @@ import java.util.List;
 
 @Service
 public class HorarioEntrenadorImplement implements HorarioEntrenadorService {
-
     @Autowired
     private HorarioEntrenadorRepository horarioEntrenadorRepository;
 
 
     @Override
-    public void AsignarHorarioEntrenador(HorarioEntrenador horarioEntrenador) {
-        horarioEntrenadorRepository.save(horarioEntrenador);
+    public List<HorarioEntrenador> listarHorariosEntrenador() {
+        return (List<HorarioEntrenador>) horarioEntrenadorRepository.findAll();
     }
 
     @Override
-    public void EliminarHorarioEntrenador(HorarioEntrenador horarioEntrenador) {
-        horarioEntrenadorRepository.delete(horarioEntrenador);
+    public void guardar(HorarioEntrenador horarioEntrenador) {
+
     }
 
     @Override
-    public List<HorarioEntrenador> BuscarHorarioEntrenador(HorarioEntrenador horarioEntrenador) {
-        return horarioEntrenadorRepository.findAll();
+    public void eliminar(HorarioEntrenador horarioEntrenador) {
+
+    }
+
+    @Override
+    public HorarioEntrenador encontrarHorarioEntrenador(HorarioEntrenador horarioEntrenador) {
+        return null;
     }
 }

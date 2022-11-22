@@ -10,13 +10,11 @@ import java.io.Serializable;
 public class Horario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_horario;
 
     private String jornada;
-
-    private int id_diasemana;
     @ManyToOne
-    @PrimaryKeyJoinColumn
-    private DiasSemana diasSemana;
+    @JoinColumn(name = "id_diasemana")
+    private DiasSemana id_diasemana;
 
 }

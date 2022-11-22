@@ -15,7 +15,8 @@ public class ControlEntrenador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int documentoE;
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "documentoE",foreignKey = @ForeignKey(name = "FK_E_CE"))
+    @JoinColumn(name = "documentoE",insertable = false,updatable = false)
+    //@PrimaryKeyJoinColumn(name = "documentoE",foreignKey = @ForeignKey(name = "FK_E_CE"))
     private Entrenador entrenador;
 
     private double peso;

@@ -7,21 +7,19 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "horario_entrenador")
-@IdClass(HorarioEntrenadorPK.class)
 public class HorarioEntrenador implements Serializable {
     @Id
-    private int documentoE;
+    private int id_horario_entrenador;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "documentoE",foreignKey = @ForeignKey(name = "FK_E_HE"))
-    private Entrenador entrenador;
-
-    @Id
-    private int id_horario;
+    @JoinColumn(name = "documentoE")
+    //@PrimaryKeyJoinColumn(name = "documentoE",foreignKey = @ForeignKey(name = "FK_E_HE"))
+    private Entrenador documentoE;
 
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "id_horario",foreignKey = @ForeignKey(name = "FK_H_HE"))
-    private Horario horario;
+    @JoinColumn(name = "id_horario")
+    //@PrimaryKeyJoinColumn(name = "id_horario",foreignKey = @ForeignKey(name = "FK_H_HE"))
+    private Horario id_horario;
 
 
 

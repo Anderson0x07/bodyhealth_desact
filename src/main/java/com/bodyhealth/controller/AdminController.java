@@ -3,6 +3,7 @@ package com.bodyhealth.controller;
 
 import com.bodyhealth.model.Administrador;
 import com.bodyhealth.model.Cliente;
+import com.bodyhealth.model.Compra;
 import com.bodyhealth.model.Entrenador;
 import com.bodyhealth.service.AdminService;
 import com.bodyhealth.service.ClienteService;
@@ -30,7 +31,14 @@ public class AdminController {
     @Autowired
     private EntrenadorService entrenadorService;
 
+    @GetMapping("/admin/lista")
+    public List<Administrador> listarRutinas(Model model){
+        List<Administrador> administradores = adminService.listarAdministradores();
 
+        model.addAttribute("administradores",administradores);
+
+        return administradores;
+    }
     //Para acceder al dashboard
     @GetMapping("/admin/dashboard")
     public String inicio(Model model){

@@ -13,10 +13,10 @@ public class Compra implements Serializable {
     private int id_compra;
 
     @ManyToOne
-    @JoinColumn(name="documento")
-    private Cliente cliente;
+    @JoinColumn(name="id_cliente")
+    private Cliente id_cliente;
 
     @ManyToOne
     @JoinColumn(name="id_metodopago")
-    private MetodoPago metodoPago;
+    private MetodoPago id_metodopago;
 }

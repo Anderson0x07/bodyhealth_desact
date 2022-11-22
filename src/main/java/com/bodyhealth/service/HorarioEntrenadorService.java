@@ -9,10 +9,11 @@ import java.util.List;
 @Service
 public interface HorarioEntrenadorService {
 
-    public void AsignarHorarioEntrenador(HorarioEntrenador horarioEntrenador);
+    public List<HorarioEntrenador> listarHorariosEntrenador();
 
-    public void EliminarHorarioEntrenador(HorarioEntrenador horarioEntrenador);
+    public void guardar(HorarioEntrenador horarioEntrenador);
 
+    public void eliminar(HorarioEntrenador horarioEntrenador);
 
-    public List<HorarioEntrenador> BuscarHorarioEntrenador(HorarioEntrenador horarioEntrenador);
+    public HorarioEntrenador encontrarHorarioEntrenador(HorarioEntrenador horarioEntrenador);
 }
