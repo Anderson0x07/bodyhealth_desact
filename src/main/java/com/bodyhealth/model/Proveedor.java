@@ -13,10 +13,10 @@ public class Proveedor implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idProveedor;
+    private int id_proveedor;
 
 
-    private String nombreEmpresa;
+    private String nombre_empresa;
 
 
     private String telefono;

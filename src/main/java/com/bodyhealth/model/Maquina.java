@@ -14,7 +14,7 @@ public class Maquina implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int  idMaquina;
+    private int  id_maquina;
 
     private  String nombre;
 
@@ -23,6 +23,6 @@ public class Maquina implements Serializable {
     private String observacion;
 
     @ManyToOne
-    @JoinColumn(name = "idProveedor")
-    private Proveedor idProveedor;
+    @JoinColumn(name = "id_proveedor")
+    private Proveedor id_proveedor;
 }
