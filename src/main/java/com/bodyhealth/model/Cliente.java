@@ -14,7 +14,7 @@ public class Cliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int documento;
+    private int documentoC;
 
     private String tipo_documento;
 
@@ -33,4 +33,7 @@ public class Cliente implements Serializable {
     private String foto;
 
     private String jornada;
+    @ManyToOne
+    @JoinColumn(name = "id_rol")
+    private Rol id_rol;
 }

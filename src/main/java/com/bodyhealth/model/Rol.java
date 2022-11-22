@@ -12,9 +12,9 @@ public class Rol implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_rol;
 
-    private String nombre;
+    private String descripcion;
 
 
 

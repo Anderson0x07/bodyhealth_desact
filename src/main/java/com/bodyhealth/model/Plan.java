@@ -10,6 +10,6 @@ import java.io.Serializable;
 public class Plan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private int id_plan;
     private String descripcion;
 }

@@ -8,24 +8,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-@Slf4j
+@RequestMapping("/clienteD")
 public class ClienteDetalleController {
 
     @Autowired
     private ClienteDetalleService clienteDetalleService;
 
-    @GetMapping("/clientes/clienteDetalle")
+    @GetMapping("/clienteDetalle")
     public List<ClienteDetalle> listarClientes(Model model){
         List<ClienteDetalle> clientesDetalle = clienteDetalleService.listarClientesDetalles();
-        log.info(""+clientesDetalle.size());
-        log.info("entró a listar");
         model.addAttribute("clientesDetalle",clientesDetalle);
-        log.info("Pasó");
         return clientesDetalle;
     }
 

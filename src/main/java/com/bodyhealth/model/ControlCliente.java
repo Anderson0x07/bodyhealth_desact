@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+
 @Entity
 @Data
 @Table(name = "control_cliente")
@@ -11,9 +13,14 @@ import java.io.Serializable;
 public class ControlCliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int documento;
+    private int documentoC;
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "documento",foreignKey = @ForeignKey(name = "FK_C_CC"))
+    @JoinColumn(name = "documentoC",insertable = false,updatable = false)
+    //@PrimaryKeyJoinColumn(name = "documento",foreignKey = @ForeignKey(name = "FK_C_CC"))
     private Cliente cliente;
+    private double peso;
+    private double estatura;
+    @Id
+    private Date fecha;
 
 }

@@ -32,5 +32,5 @@ public class Administrador implements Serializable{
 
     @ManyToOne
     @JoinColumn(name="id")
-    private Rol id;
+    private Rol id_rol;
 }

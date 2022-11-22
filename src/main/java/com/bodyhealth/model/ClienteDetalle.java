@@ -16,7 +16,6 @@ public class ClienteDetalle implements Serializable {
     private int documentoC;
     @ManyToOne
     @JoinColumn(name = "documentoC",insertable = false,updatable = false,nullable = false)
-    //@PrimaryKeyJoinColumn(name = "documentoC",foreignKey = @ForeignKey(name = "FK_C_CD"))
     private Cliente cliente;
 
     @Id
@@ -24,7 +23,6 @@ public class ClienteDetalle implements Serializable {
     private int id_detalle;
     @ManyToOne
     @JoinColumn(name = "id_detalle",insertable = false,updatable = false,nullable = false)
-    //@PrimaryKeyJoinColumn(name = "id_detalle",foreignKey = @ForeignKey(name = "FK_D_CD"))
     private Detalle detalle;
 
     @Id
@@ -35,5 +33,5 @@ public class ClienteDetalle implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_metodopago")
-    private MetodoPago metodoPago;
+    private MetodoPago id_metodopago;
 }

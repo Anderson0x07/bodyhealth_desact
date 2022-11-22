@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Musculo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_musculo;
 
     private String descripcion;
 }

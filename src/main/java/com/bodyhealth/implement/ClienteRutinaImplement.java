@@ -1,0 +1,34 @@
+package com.bodyhealth.implement;
+
+import com.bodyhealth.model.ClienteRutina;
+import com.bodyhealth.repository.ClienteRutinaRepository;
+import com.bodyhealth.service.ClienteRutinaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class ClienteRutinaImplement implements ClienteRutinaService {
+    @Autowired
+    private ClienteRutinaRepository clienteRutinaRepository;
+    @Override
+    public List<ClienteRutina> listarClientesRutina() {
+        return (List<ClienteRutina>) clienteRutinaRepository.findAll();
+    }
+
+    @Override
+    public void guardar(ClienteRutina clienteRutina) {
+
+    }
+
+    @Override
+    public void eliminar(ClienteRutina clienteRutina) {
+
+    }
+
+    @Override
+    public ClienteRutina encontrarClienteRutina(ClienteRutina clienteRutina) {
+        return null;
+    }
+}
