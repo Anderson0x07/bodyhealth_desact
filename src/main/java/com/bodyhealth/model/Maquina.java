@@ -14,7 +14,7 @@ public class Maquina implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int  idMaquina;
+    private int  id_maquina;
 
     private  String nombre;
 
