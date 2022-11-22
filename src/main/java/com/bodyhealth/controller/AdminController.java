@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 @Slf4j
 public class AdminController {
 
@@ -50,21 +50,16 @@ public class AdminController {
     }
 
     //Lista clientes en el dashboard del admin
-    @GetMapping("/admin/usuarios")
-    public List<Cliente> listarClientes(Model model){
+    @GetMapping("/admin/dash-clientes")
+    public String listarClientes(Model model){
         log.info("entró a listar usuarios en admin");
         List<Cliente> clientes = clienteService.listarClientes();
 
         model.addAttribute("clientes",clientes);
 
-        return clientes;
+        return "/admin/dash-clientes";
     }
 
-    //prueba de dash-usuarios
-    @GetMapping("/admin/dash-usuarios")
-    public String dashUs(){
-        return "/admin/dash-usuarios";
-    }
 
     //Guarda clientes en el dashboard del admin
     @PostMapping("/admin/guardar")
@@ -93,42 +88,6 @@ public class AdminController {
     }
 
 
-    //********ENTRENADOR************
 
-    //Lista entrenadores en el dashboard del admin
-    @GetMapping("/admin/trainer/trainers")
-    public String listarTrainers(Model model){
-        List<Entrenador> entrenadores = entrenadorService.listarEntrenadores();
-
-        model.addAttribute("entrenadores",entrenadores);
-
-        return "/admin/trainers/dash-trainers";
-    }
-
-    //Guarda clientes en el dashboard del admin
-    @PostMapping("/admin/trainer/guardar")
-    public String guardarTrainers(Entrenador entrenador){
-
-        entrenadorService.guardar(entrenador);
-        return "redirect:/admin/trainer/dash-trainers";
-    }
-
-    //Editar clientes en el dashboard del admin
-    @GetMapping("/admin/trainer/editar/{documento}")
-    public String editarTrainers(Entrenador entrenador, Model model){
-
-        entrenador = entrenadorService.encontrarEntrenador(entrenador);
-
-        model.addAttribute("entrenador",entrenador);
-
-        return "/admin/trainer/editarTrainer";
-    }
-
-    //Desactiva clientes en el dashboard del admin
-    @GetMapping("/admin/trainer/eliminar")
-    public String eliminarTrainer(Entrenador entrenador){
-        entrenadorService.eliminar(entrenador);
-        return "redirect:/admin/trainer/dash-trainers";
-    }
 
 }

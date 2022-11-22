@@ -6,6 +6,7 @@ import com.bodyhealth.service.ClienteDetalleService;
 import com.bodyhealth.service.DetalleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,17 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/detalle")
+@Controller
+@RequestMapping("/admin")
 public class DetalleController {
     @Autowired
     private DetalleService detalleService;
 
-    @GetMapping("/planesDetallados")
-    public List<Detalle> listarPlanesDetallados(Model model){
-        List<Detalle> detallePlan = detalleService.listarDetalles();
-        model.addAttribute("detallePlan",detallePlan);
-        return detallePlan;
+    @GetMapping("/dash-planesD")
+    public String listarPlanesDetallados(Model model){
+        List<Detalle> planesDeta = detalleService.listarDetalles();
+        model.addAttribute("planesDeta",planesDeta);
+        return "/admin/dash-planes";
     }
 
 
