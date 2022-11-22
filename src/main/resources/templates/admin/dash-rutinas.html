@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dash-Planes</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"/>
+    <link href="/css/dataTable/buttons.dataTables.min.css" rel="stylesheet">
+
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/datatables/1.10.15/media/js/jquery.dataTables.min.js}"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/dash-style.css" />
+</head>
+<body>
+    <div class="main-container d-flex">
+        <!--SIDEBAR-->
+        <div th:replace="/layouts/sidebar :: sidebar"></div>
+
+        <div class="content">
+            <!--NAV-DASH-->
+            <nav th:replace="/layouts/nav-dash :: nav-dash"></nav>
+
+            <div class="dashboard-content px-3 pt-4">
+
+                <h2 class="fs-5">Lista de Rutinas</h2>
+                <div class="table-responsive">
+                    <table id="tablaRutinas" class="table table-bordered">
+
+                        <thead>
+                        <tr>
+                            <th>Id Rutina</th>
+                            <th>Nombre Rutina</th>
+                            <th>Descripcion</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="rutina : ${rutinas}">
+                            <td th:text="${rutina.id_rutina}"></td>
+                            <td th:text="${rutina.nombre_rutina}"></td>
+                            <td th:text="${rutina.descripcion}"></td>
+                            <td>
+                                <a th:href="@{/}" style="text-decoration: none">
+                                    <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <br><hr class="h-color mx-3"><br>
+                <h2 class="fs-5">Lista de Rutinas-Ejercicios</h2>
+                <div class="table-responsive">
+                    <table id="tablaRutinaEjercicio" class="table table-bordered">
+
+                        <thead>
+                        <tr>
+                            <th>Id Rutina Ejercicio</th>
+                            <th>Rutina</th>
+                            <th>Ejercicio</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="rutinaEjer : ${rutina_ejercicios}">
+                            <td th:text="${rutinaEjer.id_rutina_ejercicio}"></td>
+                            <td th:text="${rutinaEjer.id_rutina.nombre_rutina}"></td>
+                            <td th:text="${rutinaEjer.id_ejercicio.descripcion}"></td>
+                            <td>
+                                <a th:href="@{/}" style="text-decoration: none">
+                                    <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <br><hr class="h-color mx-3"><br>
+                <h2 class="fs-5">Lista de Ejercicios</h2>
+                <div class="table-responsive">
+                    <table id="tablaEjercicios" class="table table-bordered">
+
+                        <thead>
+                        <tr>
+                            <th>Id Ejercicio</th>
+                            <th>Musculo</th>
+                            <th>Descripcion</th>
+                            <th>Series</th>
+                            <th>Repeticiones</th>
+                            <th>URL Video</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="ejercicio : ${ejercicios}">
+                            <td th:text="${ejercicio.id_ejercicio}"></td>
+                            <td th:text="${ejercicio.id_musculo.descripcion}"></td>
+                            <td th:text="${ejercicio.descripcion}"></td>
+                            <td th:text="${ejercicio.series}"></td>
+                            <td th:text="${ejercicio.repeticiones}"></td>
+                            <td th:text="${ejercicio.url_video}"></td>
+                            <td>
+                                <a th:href="@{/}" style="text-decoration: none">
+                                    <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <br><hr class="h-color mx-3"><br>
+
+            </div>
+        </div>
+    </div>
+
+    <!--SCRIPT SIDEBAR-->
+    <script th:replace="/layouts/script-sidebar :: script-sidebar"></script>
+
+    <!--SCRIPTS BOTONES-->
+    <div th:replace="/layouts/scripts :: scripts"></div>
+
+    <!--SCRIPT DATATABLE-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tablaRutinas').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf'
+                ],
+            });
+        });
+    </script>
+
+</body>
+</html>
