@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 22, 2022 at 01:15 AM
+-- Generation Time: Nov 23, 2022 at 10:53 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.3.10
 
@@ -45,7 +45,7 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`documentoA`, `tipodocumento`, `nombre`, `apellido`, `telefono`, `fecha_nacimiento`, `email`, `password`, `id_rol`) VALUES
-(123, 'sda', 'dsad', 'dsa', 'w32322', '2022-11-03', 'dsadad', 'sada', 1);
+(123313, 'cedula', 'Androlo', 'dsdads', '34243', '2022-11-01', 'dsadsad', 'saad', 1);
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`documentoC`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `foto`, `jornada`, `id_rol`) VALUES
-(9999, 'cedula', 'Androlo', 'CAROLO', '320343433', '2022-11-01', 'amnas@gmail.com', 'adasda', NULL, NULL, 1);
+(9999, 'cedula', 'andres', 'sads', '34234', '2022-11-01', 'dsaasdsa', 'sdads', 'sadas', 'dsadsa', 2),
+(4565664, 'cedula', 'Anderson', 'dasdsd', '34534', '2022-11-09', 'dfsf', 'sfdsf', 'dsfsf', 'mañana', 2);
 
 -- --------------------------------------------------------
 
@@ -88,13 +89,6 @@ CREATE TABLE `cliente_detalle` (
   `id_metodopago` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Dumping data for table `cliente_detalle`
---
-
-INSERT INTO `cliente_detalle` (`documentoC`, `id_detalle`, `fecha_inicio`, `fecha_fin`, `id_metodopago`) VALUES
-(9999, 1, '2022-11-01', '2022-11-04', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -107,13 +101,6 @@ CREATE TABLE `cliente_rutina` (
   `id_rutina` int(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Dumping data for table `cliente_rutina`
---
-
-INSERT INTO `cliente_rutina` (`id_clienterutina`, `documentoC`, `id_rutina`) VALUES
-(1, 9999, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -125,13 +112,6 @@ CREATE TABLE `cliente_rutina_ejercicio` (
   `id_cliente_rutina` int(11) DEFAULT NULL,
   `id_rutina_ejercicio` int(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Dumping data for table `cliente_rutina_ejercicio`
---
-
-INSERT INTO `cliente_rutina_ejercicio` (`id_cliente_rutina_ejercicio`, `id_cliente_rutina`, `id_rutina_ejercicio`) VALUES
-(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -159,13 +139,6 @@ CREATE TABLE `control_cliente` (
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Dumping data for table `control_cliente`
---
-
-INSERT INTO `control_cliente` (`documentoC`, `peso`, `estatura`, `fecha`) VALUES
-(9999, 60, 1.8, '2022-11-02');
-
 -- --------------------------------------------------------
 
 --
@@ -192,24 +165,6 @@ CREATE TABLE `detalle` (
   `meses` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Dumping data for table `detalle`
---
-
-INSERT INTO `detalle` (`id_detalle`, `id_plan`, `precio`, `meses`) VALUES
-(1, 1, 567, 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `dias_semana`
---
-
-CREATE TABLE `dias_semana` (
-  `id_diasemana` int(11) NOT NULL,
-  `descripcion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -224,13 +179,6 @@ CREATE TABLE `ejercicio` (
   `repeticiones` int(2) DEFAULT NULL,
   `url_video` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Dumping data for table `ejercicio`
---
-
-INSERT INTO `ejercicio` (`id_ejercicio`, `id_musculo`, `descripcion`, `series`, `repeticiones`, `url_video`) VALUES
-(1, 1, 'dadsa', '3', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -249,45 +197,37 @@ CREATE TABLE `entrenador` (
   `password` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `experiencia` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
   `hoja_vida` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `titulo_académico` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `titulo_academico` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `jornada` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `documentoA` int(11) DEFAULT NULL,
   `id_rol` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `horario`
+-- Dumping data for table `entrenador`
 --
 
-CREATE TABLE `horario` (
-  `id_horario` int(11) NOT NULL,
-  `jornada` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `id_diasemana` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+INSERT INTO `entrenador` (`documentoE`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `experiencia`, `hoja_vida`, `titulo_academico`, `jornada`, `documentoA`, `id_rol`) VALUES
+(4535, 'cedula', 'pepito', 'perez', '546456', '2022-11-03', 'affsd', 'fssfsf', 'adsads', 'adsada', 'dadsa', 'tarde', 123313, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `horario_entrenador`
+-- Table structure for table `entrenador_cliente`
 --
 
-CREATE TABLE `horario_entrenador` (
+CREATE TABLE `entrenador_cliente` (
   `documentoE` int(15) NOT NULL,
-  `id_horario` int(15) NOT NULL
+  `documentoC` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `h_entrenadorcliente`
+-- Dumping data for table `entrenador_cliente`
 --
 
-CREATE TABLE `h_entrenadorcliente` (
-  `documentoE` int(15) NOT NULL,
-  `documentoC` int(15) NOT NULL,
-  `id_horarioentrenador` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+INSERT INTO `entrenador_cliente` (`documentoE`, `documentoC`) VALUES
+(4535, 9999),
+(4535, 4565664);
 
 -- --------------------------------------------------------
 
@@ -303,23 +243,23 @@ CREATE TABLE `maquina` (
   `id_proveedor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Dumping data for table `maquina`
+--
+
+INSERT INTO `maquina` (`id_maquina`, `nombre`, `estado`, `observacion`, `id_proveedor`) VALUES
+(1, 'Bicicleta', 'Bueno', 'adasd', 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `metodo_pago`
+-- Table structure for table `metodo _pago`
 --
 
-CREATE TABLE `metodo_pago` (
+CREATE TABLE `metodo _pago` (
   `id_metodopago` int(11) NOT NULL,
   `descripcion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Dumping data for table `metodo_pago`
---
-
-INSERT INTO `metodo_pago` (`id_metodopago`, `descripcion`) VALUES
-(1, 'efectivo');
 
 -- --------------------------------------------------------
 
@@ -331,13 +271,6 @@ CREATE TABLE `musculo` (
   `id_musculo` int(15) NOT NULL,
   `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Dumping data for table `musculo`
---
-
-INSERT INTO `musculo` (`id_musculo`, `descripcion`) VALUES
-(1, 'asdads');
 
 -- --------------------------------------------------------
 
@@ -364,13 +297,6 @@ CREATE TABLE `plan` (
   `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Dumping data for table `plan`
---
-
-INSERT INTO `plan` (`id_plan`, `descripcion`) VALUES
-(1, 'algo');
-
 -- --------------------------------------------------------
 
 --
@@ -385,6 +311,13 @@ CREATE TABLE `producto` (
   `id_proveedor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Dumping data for table `producto`
+--
+
+INSERT INTO `producto` (`id_producto`, `nombre`, `stock`, `precio`, `id_proveedor`) VALUES
+(1, 'Purina', 2, 567, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -397,6 +330,13 @@ CREATE TABLE `proveedor` (
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `direccion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Dumping data for table `proveedor`
+--
+
+INSERT INTO `proveedor` (`id_proveedor`, `nombre_empresa`, `telefono`, `direccion`) VALUES
+(1, 'Empresa', '2322', 'daa');
 
 -- --------------------------------------------------------
 
@@ -414,8 +354,8 @@ CREATE TABLE `rol` (
 --
 
 INSERT INTO `rol` (`id_rol`, `descripcion`) VALUES
-(0, NULL),
-(1, 'Admin');
+(1, 'Admin'),
+(2, 'User');
 
 -- --------------------------------------------------------
 
@@ -429,13 +369,6 @@ CREATE TABLE `rutina` (
   `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Dumping data for table `rutina`
---
-
-INSERT INTO `rutina` (`id_rutina`, `nombre_rutina`, `descripcion`) VALUES
-(1, 'asafsd', 'fvgdgfdgd');
-
 -- --------------------------------------------------------
 
 --
@@ -447,13 +380,6 @@ CREATE TABLE `rutina_ejercicio` (
   `id_rutina` int(15) DEFAULT NULL,
   `id_ejercicio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Dumping data for table `rutina_ejercicio`
---
-
-INSERT INTO `rutina_ejercicio` (`id_rutina_ejercicio`, `id_rutina`, `id_ejercicio`) VALUES
-(1, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -525,12 +451,6 @@ ALTER TABLE `detalle`
   ADD KEY `id_plan` (`id_plan`);
 
 --
--- Indexes for table `dias_semana`
---
-ALTER TABLE `dias_semana`
-  ADD PRIMARY KEY (`id_diasemana`);
-
---
 -- Indexes for table `ejercicio`
 --
 ALTER TABLE `ejercicio`
@@ -546,26 +466,12 @@ ALTER TABLE `entrenador`
   ADD KEY `id_rol` (`id_rol`);
 
 --
--- Indexes for table `horario`
+-- Indexes for table `entrenador_cliente`
 --
-ALTER TABLE `horario`
-  ADD PRIMARY KEY (`id_horario`),
-  ADD KEY `id_diasemana` (`id_diasemana`);
-
---
--- Indexes for table `horario_entrenador`
---
-ALTER TABLE `horario_entrenador`
-  ADD PRIMARY KEY (`documentoE`,`id_horario`),
-  ADD KEY `id_horario` (`id_horario`);
-
---
--- Indexes for table `h_entrenadorcliente`
---
-ALTER TABLE `h_entrenadorcliente`
-  ADD PRIMARY KEY (`documentoE`,`documentoC`,`id_horarioentrenador`),
-  ADD KEY `id_horarioentrenador` (`id_horarioentrenador`),
-  ADD KEY `documentoC` (`documentoC`);
+ALTER TABLE `entrenador_cliente`
+  ADD PRIMARY KEY (`documentoE`,`documentoC`),
+  ADD KEY `documentoC` (`documentoC`),
+  ADD KEY `documentoE` (`documentoE`);
 
 --
 -- Indexes for table `maquina`
@@ -575,9 +481,9 @@ ALTER TABLE `maquina`
   ADD KEY `id_proveedor` (`id_proveedor`);
 
 --
--- Indexes for table `metodo_pago`
+-- Indexes for table `metodo _pago`
 --
-ALTER TABLE `metodo_pago`
+ALTER TABLE `metodo _pago`
   ADD PRIMARY KEY (`id_metodopago`);
 
 --
@@ -655,7 +561,7 @@ ALTER TABLE `cliente`
 ALTER TABLE `cliente_detalle`
   ADD CONSTRAINT `cliente_detalle_ibfk_1` FOREIGN KEY (`id_detalle`) REFERENCES `detalle` (`id_detalle`),
   ADD CONSTRAINT `cliente_detalle_ibfk_2` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`),
-  ADD CONSTRAINT `cliente_detalle_ibfk_3` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`);
+  ADD CONSTRAINT `cliente_detalle_ibfk_3` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo _pago` (`id_metodopago`);
 
 --
 -- Constraints for table `cliente_rutina`
@@ -676,7 +582,7 @@ ALTER TABLE `cliente_rutina_ejercicio`
 --
 ALTER TABLE `compra`
   ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`documentoC`),
-  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`);
+  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo _pago` (`id_metodopago`);
 
 --
 -- Constraints for table `control_cliente`
@@ -710,25 +616,11 @@ ALTER TABLE `entrenador`
   ADD CONSTRAINT `entrenador_ibfk_2` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`);
 
 --
--- Constraints for table `horario`
+-- Constraints for table `entrenador_cliente`
 --
-ALTER TABLE `horario`
-  ADD CONSTRAINT `horario_ibfk_1` FOREIGN KEY (`id_diasemana`) REFERENCES `dias_semana` (`id_diasemana`);
-
---
--- Constraints for table `horario_entrenador`
---
-ALTER TABLE `horario_entrenador`
-  ADD CONSTRAINT `horario_entrenador_ibfk_1` FOREIGN KEY (`documentoE`) REFERENCES `entrenador` (`documentoE`),
-  ADD CONSTRAINT `horario_entrenador_ibfk_2` FOREIGN KEY (`id_horario`) REFERENCES `horario` (`id_horario`);
-
---
--- Constraints for table `h_entrenadorcliente`
---
-ALTER TABLE `h_entrenadorcliente`
-  ADD CONSTRAINT `h_entrenadorcliente_ibfk_1` FOREIGN KEY (`id_horarioentrenador`) REFERENCES `horario_entrenador` (`documentoE`),
-  ADD CONSTRAINT `h_entrenadorcliente_ibfk_2` FOREIGN KEY (`documentoE`) REFERENCES `entrenador` (`documentoE`),
-  ADD CONSTRAINT `h_entrenadorcliente_ibfk_3` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`);
+ALTER TABLE `entrenador_cliente`
+  ADD CONSTRAINT `entrenador_cliente_ibfk_1` FOREIGN KEY (`documentoE`) REFERENCES `entrenador` (`documentoE`),
+  ADD CONSTRAINT `entrenador_cliente_ibfk_2` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`);
 
 --
 -- Constraints for table `maquina`
