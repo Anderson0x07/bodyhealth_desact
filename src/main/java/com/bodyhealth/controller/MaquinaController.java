@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/admin")
+@RestController
+@RequestMapping("/maquina")
 public class MaquinaController {
     @Autowired
     private MaquinaService maquinaService;
-    @GetMapping("/dash-maquinas")
-    public String listarMaquinas(Model model){
+    @GetMapping("/lista")
+    public List<Maquina> listarMaquinas(Model model){
         List<Maquina> maquinas = maquinaService.listarMaquinas();
 
         model.addAttribute("maquinas",maquinas);
 
-        return "/admin/dash-maquinas";
+        return maquinas;
     }
 }

@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/admin")
+@RestController
+@RequestMapping("/proveedor")
 public class ProveedorController {
     @Autowired
     private ProveedorService proveedorService;
-    @GetMapping("/dash-proveedores")
-    public String listarProveedores(Model model){
+    @GetMapping("/lista")
+    public List<Proveedor> listarProveedores(Model model){
         List<Proveedor> proveedores = proveedorService.listarProveedores();
 
         model.addAttribute("proveedores",proveedores);
 
-        return "/admin/dash-proveedores";
+        return proveedores;
     }
 }

@@ -37,6 +37,7 @@ public class Entrenador implements Serializable {
     private String hoja_vida;
 
     private String titulo_academico;
+    private String jornada;
 
     @ManyToOne
     @JoinColumn(name="documentoA")

@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
-@RequestMapping("/admin")
+@RestController
+@RequestMapping("/producto")
 public class ProductoController {
     @Autowired
     private ProductoService productoService;
-    @GetMapping("/dash-productos")
-    public String listarProductos(Model model){
+    @GetMapping("/lista")
+    public List<Producto> listarProductos(Model model){
         List<Producto> productos = productoService.listarProductos();
 
         model.addAttribute("productos",productos);
 
-        return "/admin/dash-productos";
+        return productos;
     }
 }
