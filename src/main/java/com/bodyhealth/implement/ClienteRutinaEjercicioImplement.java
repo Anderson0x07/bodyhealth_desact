@@ -19,16 +19,16 @@ public class ClienteRutinaEjercicioImplement implements ClienteRutinaEjercicioSe
 
     @Override
     public void guardar(ClienteRutinaEjercicio clienteRutinaEjercicio) {
-
+        clienteRutinaEjercicioRepository.save(clienteRutinaEjercicio);
     }
 
     @Override
     public void eliminar(ClienteRutinaEjercicio clienteRutinaEjercicio) {
-
+        clienteRutinaEjercicioRepository.delete(clienteRutinaEjercicio);
     }
 
     @Override
     public ClienteRutinaEjercicio encontrarClienteRutinaEjercicio(ClienteRutinaEjercicio clienteRutinaEjercicio) {
-        return null;
+        return clienteRutinaEjercicioRepository.findById(clienteRutinaEjercicio.getId_cliente_rutina_ejercicio()).orElse(null);
     }
 }

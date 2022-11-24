@@ -1,7 +1,30 @@
 package com.bodyhealth.repository;
 
+import com.bodyhealth.model.Cliente;
+import com.bodyhealth.model.Entrenador;
 import com.bodyhealth.model.EntrenadorCliente;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
 
 public interface EntrenadorClienteRepository extends JpaRepository<EntrenadorCliente,Integer> {
+
+
+
+    @Query(
+            value = "SELECT * from entrenador_cliente d where d.documentoC = :cliente",
+            nativeQuery=true
+    )
+    EntrenadorCliente encontrarClientes(@Param("cliente") int document);
+    @Query(
+            value = "SELECT * from entrenador_cliente d where d.documentoE = :administrador",
+            nativeQuery = true
+    )
+    List<EntrenadorCliente> encontrarClientess(@Param("administrador") int documentE);
+
 }

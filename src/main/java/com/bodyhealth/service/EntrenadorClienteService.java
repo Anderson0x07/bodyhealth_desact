@@ -1,5 +1,6 @@
 package com.bodyhealth.service;
 
+import com.bodyhealth.model.Cliente;
 import com.bodyhealth.model.Entrenador;
 import com.bodyhealth.model.EntrenadorCliente;
 import org.springframework.stereotype.Service;
@@ -14,4 +15,5 @@ public interface EntrenadorClienteService {
     public void eliminar(EntrenadorCliente entrenadorCliente);
 
     public EntrenadorCliente encontrarEntrenadorCliente(EntrenadorCliente entrenadorCliente);
+
 }

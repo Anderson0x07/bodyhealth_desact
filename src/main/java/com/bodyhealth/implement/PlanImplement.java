@@ -19,16 +19,16 @@ public class PlanImplement implements PlanService {
 
     @Override
     public void guardar(Plan plan) {
-
+        planRepository.save(plan);
     }
 
     @Override
     public void eliminar(Plan plan) {
-
+        planRepository.delete(plan);
     }
 
     @Override
     public Plan encontrarPlan(Plan plan) {
-        return null;
+        return planRepository.findById(plan.getId_plan()).orElse(null);
     }
 }

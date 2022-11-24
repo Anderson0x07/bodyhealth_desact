@@ -15,4 +15,8 @@ public interface ClienteService {
     public void eliminar(Cliente cliente);
 
     public Cliente encontrarCliente(Cliente cliente);
+
+    public List<Cliente> listarActivos();
+
+    public List<Cliente> listarDesactivados();
 }

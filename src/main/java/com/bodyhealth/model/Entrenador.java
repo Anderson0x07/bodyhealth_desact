@@ -46,4 +46,6 @@ public class Entrenador implements Serializable {
     @ManyToOne
     @JoinColumn(name="id_rol")
     private Rol id_rol;
+
+
 }

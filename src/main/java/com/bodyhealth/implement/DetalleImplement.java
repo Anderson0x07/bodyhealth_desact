@@ -21,16 +21,17 @@ public class DetalleImplement implements DetalleService {
 
     @Override
     public void guardar(Detalle detalle) {
-
+        detalleRepository.save(detalle);
     }
 
     @Override
     public void eliminar(Detalle detalle) {
-
+        detalleRepository.delete(detalle);
     }
 
     @Override
     public Detalle encontrarDetalle(Detalle detalle) {
-        return null;
+
+        return detalleRepository.findById(detalle.getId_detalle()).orElse(null);
     }
 }

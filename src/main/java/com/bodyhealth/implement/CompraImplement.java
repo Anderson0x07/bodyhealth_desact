@@ -19,16 +19,17 @@ public class CompraImplement implements CompraService {
 
     @Override
     public void guardar(Compra compra) {
-
+        compraRepository.save(compra);
     }
 
     @Override
     public void eliminar(Compra compra) {
-
+        compraRepository.delete(compra);
     }
 
     @Override
     public Compra encontrarCompra(Compra compra) {
-        return null;
+
+        return compraRepository.findById(compra.getId_compra()).orElse(null);
     }
 }

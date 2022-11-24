@@ -19,16 +19,16 @@ public class ProveedorImplement implements ProveedorService {
 
     @Override
     public void guardar(Proveedor proveedor) {
-
+        proveedorRepository.save(proveedor);
     }
 
     @Override
     public void eliminar(Proveedor proveedor) {
-
+        proveedorRepository.delete(proveedor);
     }
 
     @Override
     public Proveedor encontrarProveedor(Proveedor proveedor) {
-        return null;
+        return proveedorRepository.findById(proveedor.getId_proveedor()).orElse(null);
     }
 }

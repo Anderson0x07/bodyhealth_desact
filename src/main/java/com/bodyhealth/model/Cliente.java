@@ -1,8 +1,10 @@
 package com.bodyhealth.model;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -24,6 +26,7 @@ public class Cliente implements Serializable {
 
     private String telefono;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fechaN;
 
     private String email;
@@ -33,6 +36,8 @@ public class Cliente implements Serializable {
     private String foto;
 
     private String jornada;
+
+    private boolean estado;
     @ManyToOne
     @JoinColumn(name = "id_rol")
     private Rol id_rol;

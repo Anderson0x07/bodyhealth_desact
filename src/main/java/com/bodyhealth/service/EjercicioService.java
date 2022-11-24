@@ -1,6 +1,5 @@
 package com.bodyhealth.service;
 
-import com.bodyhealth.model.DiasSemana;
 import com.bodyhealth.model.Ejercicio;
 import org.springframework.stereotype.Service;
 

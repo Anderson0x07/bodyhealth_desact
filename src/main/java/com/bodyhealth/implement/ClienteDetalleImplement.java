@@ -20,16 +20,17 @@ public class ClienteDetalleImplement implements ClienteDetalleService {
   
     @Override
     public void guardar(ClienteDetalle clienteDetalle) {
-
+        clienteDetalleRepository.save(clienteDetalle);
     }
 
     @Override
     public void eliminar(ClienteDetalle clienteDetalle) {
-
+        clienteDetalleRepository.delete(clienteDetalle);
     }
 
     @Override
     public ClienteDetalle encontrarClienteDetalle(ClienteDetalle clienteDetalle) {
-        return null;
+
+        return clienteDetalleRepository.findById(clienteDetalle.getId_detalle()).orElse(null);
     }
 }

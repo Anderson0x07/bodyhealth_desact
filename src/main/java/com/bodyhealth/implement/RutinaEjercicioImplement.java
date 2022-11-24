@@ -19,16 +19,16 @@ public class RutinaEjercicioImplement implements RutinaEjercicioService {
 
     @Override
     public void guardar(RutinaEjercicio rutinaEjercicio) {
-
+        rutinaEjercicioRepository.save(rutinaEjercicio);
     }
 
     @Override
     public void eliminar(RutinaEjercicio rutinaEjercicio) {
-
+        rutinaEjercicioRepository.delete(rutinaEjercicio);
     }
 
     @Override
     public RutinaEjercicio encontrarRutinaEjercicio(RutinaEjercicio rutinaEjercicio) {
-        return null;
+        return rutinaEjercicioRepository.findById(rutinaEjercicio.getId_rutina_ejercicio()).orElse(null);
     }
 }

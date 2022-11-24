@@ -19,16 +19,17 @@ public class MusculoImplement implements MusculoService {
 
     @Override
     public void guardar(Musculo musculo) {
-
+        musculoRepository.save(musculo);
     }
 
     @Override
     public void eliminar(Musculo musculo) {
-
+        musculoRepository.delete(musculo);
     }
 
     @Override
     public Musculo encontrarMusculo(Musculo musculo) {
-        return null;
+
+        return musculoRepository.findById(musculo.getId_musculo()).orElse(null);
     }
 }

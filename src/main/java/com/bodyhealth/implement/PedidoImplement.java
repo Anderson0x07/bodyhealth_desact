@@ -20,16 +20,17 @@ public class PedidoImplement implements PedidoService {
 
     @Override
     public void guardar(Pedido pedido) {
-
+        pedidoRepository.save(pedido);
     }
 
     @Override
     public void eliminar(Pedido pedido) {
-
+        pedidoRepository.delete(pedido);
     }
 
     @Override
     public Pedido encontrarPedido(Pedido pedido) {
-        return null;
+
+        return pedidoRepository.findById(pedido.getId_pedido()).orElse(null);
     }
 }

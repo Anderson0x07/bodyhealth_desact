@@ -19,16 +19,17 @@ public class EjercicioImplement implements EjercicioService {
 
     @Override
     public void guardar(Ejercicio ejercicio) {
-
+        ejercicioRepository.save(ejercicio);
     }
 
     @Override
     public void eliminar(Ejercicio ejercicio) {
-
+        ejercicioRepository.delete(ejercicio);
     }
 
     @Override
     public Ejercicio encontrarEjercicio(Ejercicio ejercicio) {
-        return null;
+
+        return ejercicioRepository.findById(ejercicio.getId_ejercicio()).orElse(null);
     }
 }

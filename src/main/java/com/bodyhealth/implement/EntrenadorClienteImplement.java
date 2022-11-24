@@ -18,16 +18,17 @@ public class EntrenadorClienteImplement implements EntrenadorClienteService {
 
     @Override
     public void guardar(EntrenadorCliente entrenadorCliente) {
-
+        entrenadorClienteRepository.save(entrenadorCliente);
     }
 
     @Override
     public void eliminar(EntrenadorCliente entrenadorCliente) {
-
+        entrenadorClienteRepository.delete(entrenadorCliente);
     }
 
     @Override
     public EntrenadorCliente encontrarEntrenadorCliente(EntrenadorCliente entrenadorCliente) {
-        return null;
+
+        return entrenadorClienteRepository.findById(entrenadorCliente.getDocumentoC()).orElse(null);
     }
 }

@@ -19,16 +19,17 @@ public class MetodoPagoImplement implements MetodoPagoService {
 
     @Override
     public void guardar(MetodoPago metodoPago) {
-
+        metodoPagoRepository.save(metodoPago);
     }
 
     @Override
     public void eliminar(MetodoPago metodoPago) {
-
+        metodoPagoRepository.delete(metodoPago);
     }
 
     @Override
     public MetodoPago encontrarMetodoPago(MetodoPago metodoPago) {
-        return null;
+
+        return metodoPagoRepository.findById(metodoPago.getId_metodopago()).orElse(null);
     }
 }

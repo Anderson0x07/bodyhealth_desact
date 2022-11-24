@@ -19,16 +19,16 @@ public class RolImplement implements RolService {
 
     @Override
     public void guardar(Rol rol) {
-
+        rolRepository.save(rol);
     }
 
     @Override
     public void eliminar(Rol rol) {
-
+        rolRepository.delete(rol);
     }
 
     @Override
     public Rol encontrarRol(Rol rol) {
-        return null;
+        return rolRepository.findById(rol.getId_rol()).orElse(null);
     }
 }

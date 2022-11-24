@@ -19,16 +19,17 @@ public class ControlClienteImplement implements ControlClienteService {
 
     @Override
     public void guardar(ControlCliente controlCliente) {
-
+        controlClienteRepository.save(controlCliente);
     }
 
     @Override
     public void eliminar(ControlCliente controlCliente) {
-
+        controlClienteRepository.delete(controlCliente);
     }
 
     @Override
-    public ControlCliente encontrarControlCliente(ControlCliente controlCliente) {
-        return null;
+    public ControlCliente encontrarControlCliente(ControlCliente controClliente) {
+
+        return controlClienteRepository.findById(controClliente.getDocumentoC()).orElse(null);
     }
 }

@@ -19,16 +19,17 @@ public class MaquinaImplement implements MaquinaService {
 
     @Override
     public void guardar(Maquina maquina) {
-
+        maquinaRepository.save(maquina);
     }
 
     @Override
     public void eliminar(Maquina maquina) {
-
+        maquinaRepository.delete(maquina);
     }
 
     @Override
     public Maquina encontrarMaquina(Maquina maquina) {
-        return null;
+
+        return maquinaRepository.findById(maquina.getId_maquina()).orElse(null);
     }
 }

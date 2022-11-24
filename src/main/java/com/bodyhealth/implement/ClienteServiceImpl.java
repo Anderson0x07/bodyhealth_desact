@@ -38,4 +38,15 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente encontrarCliente(Cliente cliente) {
         return clienteRepo.findById(cliente.getDocumentoC()).orElse(null);
     }
+
+    @Transactional(readOnly = true)
+    public List<Cliente> listarActivos(){
+        return (List<Cliente>) clienteRepo.findByEstado(true);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Cliente> listarDesactivados(){
+        return (List<Cliente>) clienteRepo.findByEstado(false);
+    }
+
 }

@@ -14,28 +14,28 @@ import java.util.List;
 public class AdminServiceImpl implements AdminService {
 
     @Autowired
-    private AdminRepository adminRepo;
+    private AdminRepository adminRepository;
 
     @Override
     public List<Administrador> listarAdministradores() {
-        return (List<Administrador>) adminRepo.findAll();
+        return (List<Administrador>) adminRepository.findAll();
     }
 
     @Override
     public void guardar(Administrador administrador) {
-
+        adminRepository.save(administrador);
     }
 
     @Override
     public void eliminar(Administrador administrador) {
-
+        adminRepository.delete(administrador);
     }
 
     @Override
     public Administrador encontrarAdministrador(Administrador administrador) {
-        return null;
-    }
 
+        return adminRepository.findById(administrador.getDocumentoA()).orElse(null);
+    }
 
     /*@Override
     @Transactional(readOnly = true)

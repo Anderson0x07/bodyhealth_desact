@@ -19,16 +19,17 @@ public class ClienteRutinaImplement implements ClienteRutinaService {
 
     @Override
     public void guardar(ClienteRutina clienteRutina) {
-
+        clienteRutinaRepository.save(clienteRutina);
     }
 
     @Override
     public void eliminar(ClienteRutina clienteRutina) {
-
+        clienteRutinaRepository.delete(clienteRutina);
     }
 
     @Override
     public ClienteRutina encontrarClienteRutina(ClienteRutina clienteRutina) {
-        return null;
+
+        return clienteRutinaRepository.findById(clienteRutina.getId_clienterutina()).orElse(null);
     }
 }

@@ -18,16 +18,16 @@ public class RutinaImplement implements RutinaService {
 
     @Override
     public void guardar(Rutina rutina) {
-
+        rutinaRepository.save(rutina);
     }
 
     @Override
     public void eliminar(Rutina rutina) {
-
+        rutinaRepository.delete(rutina);
     }
 
     @Override
     public Rutina encontrarRutina(Rutina rutina) {
-        return null;
+        return rutinaRepository.findById(rutina.getId_rutina()).orElse(null);
     }
 }

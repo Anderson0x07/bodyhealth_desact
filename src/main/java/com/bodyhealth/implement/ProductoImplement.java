@@ -19,16 +19,16 @@ public class ProductoImplement implements ProductoService {
 
     @Override
     public void guardar(Producto producto) {
-
+        productoRepository.save(producto);
     }
 
     @Override
     public void eliminar(Producto producto) {
-
+        productoRepository.delete(producto);
     }
 
     @Override
     public Producto encontrarProducto(Producto producto) {
-        return null;
+        return productoRepository.findById(producto.getId_producto()).orElse(null);
     }
 }
