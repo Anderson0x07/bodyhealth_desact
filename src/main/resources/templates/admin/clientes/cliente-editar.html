@@ -14,6 +14,9 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script th:src="@{/webjars/datatables/1.10.15/media/js/jquery.dataTables.min.js}"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/css/dash-style.css" />
 </head>
 <body>
@@ -37,7 +40,7 @@
                         <form th:action="@{/admin/dash-clientes/expand/guardar}" th:object="${cliente}" method="POST">
                             <input type="hidden" name="documentoC" th:field="*{documentoC}"/>
                             <input type="hidden" name="tipo_documento" th:field="*{tipo_documento}"/>
-                            <input type="hidden" name="id_rol" th:field="*{id_rol}"/>
+                            <input type="hidden" name="rol" th:field="*{id_rol}"/>
 
                             <div class="container">
                                 <div class="row">
@@ -103,6 +106,24 @@
                                                            required="true" th:field="*{jornada}"/>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <label for="trainer">Entrenador: </label>
+                                                    <input type="text" class="form-control" name="trainer" id="trainer"
+                                                           readonly th:value="${trainer.documentoE+' - '+trainer.entrenador.nombre+' '+trainer.entrenador.apellido}"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                        <label for="plan">Plan: </label>
+                                                    <input type="text" class="form-control" name="plan" id="plan"
+                                                           readonly th:value="${'Plan '+plan.id_detalle.id_plan.descripcion+' - '+plan.id_detalle.meses+' Meses'}"/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="rutina">Rutina: </label>
+                                                    <input type="text" class="form-control" name="rutina" id="rutina"
+                                                           readonly th:value="${'Rutina '+plan.id_detalle.id_plan.descripcion}"/>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -133,12 +154,108 @@
                 </div>
 
             </div>
+            <div class="dashboard-content px-3 pt-4">
+                <div class="card border-light">
+                    <div class="card-header">
+                        <h3 class="card-title">Cambio de entrenador</h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/admin/dash-clientes/expand/guardar-trainer}" th:object="${trainer}" method="POST">
+                            <input type="text" readonly name="documentoC" th:field="*{cliente}"/>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label for="entrenador" class="form-label">Entrenador: *</label>
+                                        <select name="entrenador" id="entrenador" required class="form-control mi-selector ">
+
+                                            <div th:each="entrenador : ${trainers}">
+                                                <option th:value="${entrenador.documentoE}" th:text="${entrenador.documentoE+' - '+entrenador.nombre+' '+entrenador.apellido}"></option>
+                                            </div>
+                                        </select> <br>
+
+                                    </div>
+                                </div>
+                                <div class="col-2"></div>
+                            </div><br>
+
+
+
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-8"></div>
+                                    <div class="col-2"></div>
+                                    <div class="col-2">
+                                        <button type="submit" class="btn btn-success btn-block">
+                                            <i class="fas fa-check"></i> Guardar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-content px-3 pt-4">
+                <div class="card border-light">
+                    <div class="card-header">
+                        <h3 class="card-title">Actualización de Plan</h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/admin/dash-clientes/expand/guardar-plan}" th:object="${plan}" method="POST">
+                            <input type="text" readonly name="id_detalle" th:field="*{id_detalle}"/>
+                            <input type="text" readonly name="documentoC" th:field="*{documentoC}"/>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label for="plann" class="form-label">Plan: *</label>
+                                        <select name="plann" id="plann"  required class=" mi-selector form-control ">
+
+                                            <div th:each="plann : ${planes}">
+                                                <option th:value="${plann.id_detalle}" th:text="${plann.id_detalle.id_detalle+' - '+plann.id_detalle.id_plan.descripcion+' - '+plann.id_detalle.meses+' meses - $'+plann.id_detalle.precio}"></option>
+                                            </div>
+                                        </select> <br>
+
+                                    </div>
+                                </div>
+                                <div class="col-2"></div>
+                            </div><br>
+
+
+
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-8"></div>
+                                    <div class="col-2"></div>
+                                    <div class="col-2">
+                                        <button type="submit" class="btn btn-success btn-block">
+                                            <i class="fas fa-check"></i> Guardar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 
     <!--SCRIPT SIDEBAR-->
     <script th:replace="/layouts/script-sidebar :: script-sidebar"></script>
-
+    <script>
+        jQuery(document).ready(function($){
+            $(document).ready(function() {
+                $('.mi-selector').select2();
+            });
+        });
+    </script>
 
 </body>
 </html>

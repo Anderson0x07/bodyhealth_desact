@@ -83,7 +83,12 @@
 
                                         <tr>
                                             <th>Entrenador</th>
-                                            <td th:text="${entrenadorcliente.entrenador.nombre}"></td>
+                                            <td th:text="${entrenadorcliente.entrenador.documentoE+' - '+entrenadorcliente.entrenador.nombre+' '+entrenadorcliente.entrenador.apellido}"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Plan</th>
+                                            <td th:text="${'Plan '+clientedetalle.id_detalle.id_plan.descripcion+' por '+clientedetalle.id_detalle.meses+' meses'}"></td>
                                         </tr>
 
                                     </table>

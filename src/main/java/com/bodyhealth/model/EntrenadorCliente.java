@@ -1,6 +1,5 @@
 package com.bodyhealth.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;

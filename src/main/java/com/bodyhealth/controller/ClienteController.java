@@ -1,14 +1,12 @@
 package com.bodyhealth.controller;
 
 
-import com.bodyhealth.model.Cliente;
-import com.bodyhealth.model.EntrenadorCliente;
-import com.bodyhealth.model.Rol;
+import com.bodyhealth.model.*;
+import com.bodyhealth.repository.ClienteDetalleRepository;
 import com.bodyhealth.repository.ClienteRepository;
 import com.bodyhealth.repository.EntrenadorClienteRepository;
-import com.bodyhealth.service.ClienteService;
-import com.bodyhealth.service.EntrenadorClienteService;
-import com.bodyhealth.service.RolService;
+import com.bodyhealth.repository.EntrenadorRepository;
+import com.bodyhealth.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +30,19 @@ public class ClienteController {
     @Autowired
     private EntrenadorClienteRepository entrenadorClienteRepository;
     @Autowired
-    private RolService rolService;
+    private ClienteDetalleRepository clienteDetalleRepository;
+
+    @Autowired
+    private EntrenadorClienteService entrenadorClienteService;
+    @Autowired
+    private EntrenadorRepository entrenadorRepository;
+
+    @Autowired
+    private EntrenadorService entrenadorService;
+
+    @Autowired
+    private ClienteDetalleService clienteDetalleService;
+
 
 
     //Lista clientes en el dashboard del admin
@@ -55,7 +65,8 @@ public class ClienteController {
 
 
         model.addAttribute("cliente",cliente);
-        model.addAttribute("entrenadorcliente",entrenadorClienteRepository.encontrarClientes(cliente.getDocumentoC()));
+        model.addAttribute("entrenadorcliente",entrenadorClienteRepository.encontrarEntrenador(cliente.getDocumentoC()));
+        model.addAttribute("clientedetalle",clienteDetalleRepository.encontrarPlan(cliente.getDocumentoC()));
 
         return "/admin/clientes/cliente-expand";
     }
@@ -65,7 +76,40 @@ public class ClienteController {
     public String guardarCliente(Cliente cliente){
 
         clienteService.guardar(cliente);
+
         return "redirect:/admin/dash-clientes/expand/"+cliente.getDocumentoC();
+    }
+
+    //ACTUALIZA ENTRENADOR A CLIENTE
+    @PostMapping("/admin/dash-clientes/expand/guardar-trainer")
+    public String cambioEntrenador(EntrenadorCliente entrenadorCliente, Model model){
+
+        log.info(entrenadorCliente.toString());
+        EntrenadorCliente copia = entrenadorClienteRepository.encontrarEntrenador(entrenadorCliente.getCliente().getDocumentoC());
+        int documentoC = entrenadorCliente.getCliente().getDocumentoC();
+
+        entrenadorCliente.setDocumentoE(entrenadorCliente.getEntrenador().getDocumentoE());
+        entrenadorCliente.setDocumentoC(entrenadorCliente.getCliente().getDocumentoC());
+
+        entrenadorClienteService.eliminar(copia);
+        entrenadorClienteService.guardar(entrenadorCliente);
+
+        model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(entrenadorCliente.getDocumentoC()));
+
+        return "redirect:/admin/dash-clientes/expand/editar/"+documentoC;
+    }
+
+    //ACTUALIZA PLAN DEL CLIENTE
+    @PostMapping("/admin/dash-clientes/expand/guardar-plan")
+    public String cambioPlan(ClienteDetalle clienteDetalle, Model model){
+
+        log.info(clienteDetalle.toString());
+
+        clienteDetalleService.encontrarClienteDetalle(clienteDetalle)
+
+
+
+        return "redirect:/admin/dash-clientes/expand/editar/"+clienteDetalleRepository.encontrarPlan(clienteDetalle.getDocumentoC());
     }
 
     //Editar clientes en el dashboard del admin
@@ -75,7 +119,13 @@ public class ClienteController {
         cliente = clienteService.encontrarCliente(cliente);
 
         model.addAttribute("cliente",cliente);
-        model.addAttribute("roles",rolService.listarRoles());
+        model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(cliente.getDocumentoC()));
+        model.addAttribute("plan", clienteDetalleRepository.encontrarPlan(cliente.getDocumentoC()));
+
+        //PARA MOSTRAR TODOS LOS ENTRENADORES
+        model.addAttribute("trainers",entrenadorRepository.findAll());
+        model.addAttribute("planes",clienteDetalleRepository.findAll());
+
 
         return "/admin/clientes/cliente-editar";
     }

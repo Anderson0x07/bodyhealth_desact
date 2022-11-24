@@ -37,7 +37,7 @@ public class EntrenadorImplement implements EntrenadorService {
 
     @Override
     @Transactional(readOnly = true)
-    public Entrenador encontrarEntrenador(Entrenador entrenador) {
-        return entrenadorRepo.findById(entrenador.getDocumentoE()).orElse(null);
+    public Entrenador encontrarEntrenador(int documentoE) {
+        return entrenadorRepo.findById(documentoE).orElse(null);
     }
 }
