@@ -43,6 +43,9 @@ public class ClienteController {
     @Autowired
     private ClienteDetalleService clienteDetalleService;
 
+    @Autowired
+    private ClienteRutinaRepository clienteRutinaRepository;
+
 
 
     //Lista clientes en el dashboard del admin
@@ -67,6 +70,7 @@ public class ClienteController {
         model.addAttribute("cliente",cliente);
         model.addAttribute("entrenadorcliente",entrenadorClienteRepository.encontrarEntrenador(cliente.getDocumentoC()));
         model.addAttribute("clientedetalle",clienteDetalleRepository.encontrarPlan(cliente.getDocumentoC()));
+        model.addAttribute("rutinacliente", clienteRutinaRepository.encontrarRutina(cliente.getDocumentoC()));
 
         return "/admin/clientes/cliente-expand";
     }
@@ -132,11 +136,14 @@ public class ClienteController {
         model.addAttribute("cliente",cliente);
         model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(cliente.getDocumentoC()));
         model.addAttribute("plancliente", clienteDetalleRepository.encontrarPlan(cliente.getDocumentoC()));
+        model.addAttribute("rutinacliente", clienteRutinaRepository.encontrarRutina(cliente.getDocumentoC()));
 
         //PARA MOSTRAR TODOS LOS ENTRENADORES
         model.addAttribute("trainers",entrenadorService.listarEntrenadores());
         //PARA MOSTRAR TODOS LOS PLANES
         model.addAttribute("planesdetallados",detalleRepository.findAll());
+        //PARA MOSTRAR TODOS LOS PLANES
+        model.addAttribute("rutinas",clienteRutinaRepository.findAll());
 
 
         return "/admin/clientes/cliente-editar";

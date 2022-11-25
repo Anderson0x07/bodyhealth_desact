@@ -34,11 +34,13 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-5"></div>
+                            <div class="col-5">
+                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="80%" height="90%">
+                            </div>
                             <div class="col-7">
 
                                 <div class="table-responsive">
-                                    <table id="tablaUsuarios" class="table table-bordered table-striped">
+                                    <table  class="table table-bordered table-striped">
 
                                         <tr>
                                             <th>Tipo documento</th>
@@ -88,7 +90,12 @@
 
                                         <tr>
                                             <th>Plan</th>
-                                            <td th:text="${'Plan '+clientedetalle.detalle.id_plan.descripcion+' por '+clientedetalle.detalle.meses+' meses'}"></td>
+                                            <td th:text="${'Plan '+clientedetalle.detalle.id_plan+' por '+clientedetalle.detalle.meses+' meses'}"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Rutina</th>
+                                            <td th:text="${rutinacliente.id_rutina.nombre_rutina}"></td>
                                         </tr>
 
                                     </table>

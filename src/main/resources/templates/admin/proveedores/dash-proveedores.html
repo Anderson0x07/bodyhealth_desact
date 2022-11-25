@@ -50,14 +50,11 @@
                             <td th:text="${proveedor.direccion}"></td>
 
                             <td>
-                                <a th:href="@{/}" style="text-decoration: none">
+
+                                <a th:href="@{/admin/dash-proveedores/expand/} + ${proveedor.id_proveedor}" style="text-decoration: none">
                                     <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
                                 </a>
-                                <!--
-                                <a th:href="@{/admin/eliminar(documentoC=${usuario.documentoC})}" class="btn btn-danger">
-                                    <i class="fas fa-angle-double-right"></i> Eliminar
-                                </a>
-                                -->
+
                             </td>
                         </tr>
                         </tbody>

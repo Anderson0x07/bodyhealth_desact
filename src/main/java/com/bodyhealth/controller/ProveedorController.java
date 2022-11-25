@@ -1,16 +1,15 @@
 package com.bodyhealth.controller;
 
 import com.bodyhealth.model.Cliente;
-import com.bodyhealth.model.Plan;
+import com.bodyhealth.model.ClienteDetalle;
 import com.bodyhealth.model.Proveedor;
-import com.bodyhealth.model.Rutina;
 import com.bodyhealth.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,7 +24,43 @@ public class ProveedorController {
 
         model.addAttribute("proveedores",proveedores);
 
-        return "/admin/dash-proveedores";
+        return "/admin/proveedores/dash-proveedores";
     }
+    @GetMapping("/dash-proveedores/expand/{id_proveedor}")
+    public String mostrarCliente(Proveedor proveedor, Model model){
+
+        proveedor = proveedorService.encontrarProveedor(proveedor);
+
+        model.addAttribute("proveedor",proveedor);
+
+        return "/admin/proveedores/proveedor-expand";
+    }
+
+    //Guarda clientes en el dashboard del admin
+    @PostMapping("/dash-proveedores/expand/guardar")
+    public String guardarProveedor(Proveedor proveedor){
+
+        proveedorService.guardar(proveedor);
+
+        return "redirect:/admin/dash-proveedores/expand/"+proveedor.getId_proveedor();
+    }
+
+
+    @GetMapping("/dash-proveedores/expand/editar/{id_proveedor}")
+    public String editar(Proveedor proveedor, Model model){
+
+        proveedor = proveedorService.encontrarProveedor(proveedor);
+
+        model.addAttribute("proveedor",proveedor);
+
+        return "/admin/proveedores/proveedor-editar";
+    }
+
+    @GetMapping("/dash-proveedores/eliminar")
+    public String eliminarProveedor(Proveedor proveedor){
+        proveedorService.eliminar(proveedor);
+        return "redirect:/admin/dash-proveedores";
+    }
+
 
 }

@@ -120,8 +120,8 @@
 
                                                 <div class="form-group">
                                                     <label for="rutina">Rutina: </label>
-                                                    <input type="text" class="form-control" name="rutina" id="rutina"
-                                                           readonly th:value="${'Rutina '+plancliente.detalle.id_plan.descripcion}"/>
+                                                    <input type="text" class="form-control" name="rutina"
+                                                           readonly th:value="${rutinacliente.id_rutina.nombre_rutina}"/>
                                                 </div>
 
                                             </div>
@@ -206,6 +206,7 @@
                         <form th:action="@{/admin/dash-clientes/expand/guardar-plan}" th:object="${plancliente}" method="POST">
 
                             <input type="text" readonly name="documentoC" th:field="*{cliente}"/>
+                            <input type="text" disabled name="fecha_inicio" th:field="*{detalle.id_plan}"/>
                             <input type="text" readonly name="fecha_inicio" th:field="*{fecha_inicio}"/>
 
                             <div class="row">
@@ -216,7 +217,55 @@
                                         <select name="plann" id="plann"  required class=" mi-selector form-control ">
 
                                             <div th:each="plane : ${planesdetallados}">
-                                                <option th:value="${plane.id_detalle}" th:text="${plane}"></option>
+                                                <option th:value="${plane}" th:text="${plane}"></option>
+
+                                            </div>
+                                        </select> <br>
+
+                                    </div>
+                                </div>
+                                <div class="col-2"></div>
+                            </div><br>
+
+
+
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-8"></div>
+                                    <div class="col-2"></div>
+                                    <div class="col-2">
+                                        <button type="submit" class="btn btn-success btn-block">
+                                            <i class="fas fa-check"></i> Guardar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-content px-3 pt-4">
+                <div class="card border-light">
+                    <div class="card-header">
+                        <h3 class="card-title">Actualización de Rutinas</h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/admin/dash-clientes/expand/guardar-rutina}" th:object="${rutinacliente}" method="POST">
+
+                            <input type="text" readonly name="cliente" th:field="*{documentoC}"/>
+                            <input type="text" readonly name="rut" th:field="*{id_rutina.nombre_rutina}"/>
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        <label for="rutina" class="form-label">Rutina: </label>
+                                        <select name="rutina" id="rutina"  required class=" mi-selector form-control ">
+
+                                            <div th:each="rutina : ${rutinas}">
+                                                <option th:value="${rutina}" th:text="${rutina}"></option>
 
                                             </div>
                                         </select> <br>

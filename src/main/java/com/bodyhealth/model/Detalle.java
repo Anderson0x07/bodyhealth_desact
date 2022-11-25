@@ -16,9 +16,9 @@ public class Detalle implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_detalle;
 
-    @ManyToOne
-    @JoinColumn(name = "id_plan")
-    private Plan id_plan;
+    /*@ManyToOne
+    @JoinColumn(name = "id_plan")*/
+    private int id_plan;
 
     private double precio;
     private int meses;
