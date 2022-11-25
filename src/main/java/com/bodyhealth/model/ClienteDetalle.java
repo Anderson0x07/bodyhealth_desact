@@ -1,6 +1,7 @@
 package com.bodyhealth.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,17 +19,19 @@ public class ClienteDetalle implements Serializable {
     @JoinColumn(name = "documentoC",insertable = false,updatable = false,nullable = false)
     private Cliente cliente;
 
-    /*@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_detalle;*/
+    private int id_detalle;
     @ManyToOne
-    @JoinColumn(name = "id_detalle"/*,insertable = false,updatable = false,nullable = false*/)
-    private Detalle id_detalle;
+    @JoinColumn(name = "id_detalle",insertable = false,updatable = false,nullable = false)
+    private Detalle detalle;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_inicio;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_fin;
 
     @ManyToOne

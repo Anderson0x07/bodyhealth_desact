@@ -1,6 +1,7 @@
 package com.bodyhealth.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,7 +21,8 @@ public class ControlCliente implements Serializable {
     private Cliente cliente;
     private double peso;
     private double estatura;
-    @Id
+    //@Id
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha;
 
 }

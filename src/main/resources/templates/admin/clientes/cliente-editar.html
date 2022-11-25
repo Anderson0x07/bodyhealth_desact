@@ -115,13 +115,13 @@
                                                 <div class="form-group">
                                                         <label for="plan">Plan: </label>
                                                     <input type="text" class="form-control" name="plan" id="plan"
-                                                           readonly th:value="${'Plan '+plan.id_detalle.id_plan.descripcion+' - '+plan.id_detalle.meses+' Meses'}"/>
+                                                           readonly th:value="${'Plan '+plancliente.detalle.id_detalle+' - '+plancliente.detalle+' Meses'}"/>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="rutina">Rutina: </label>
                                                     <input type="text" class="form-control" name="rutina" id="rutina"
-                                                           readonly th:value="${'Rutina '+plan.id_detalle.id_plan.descripcion}"/>
+                                                           readonly th:value="${'Rutina '+plancliente.detalle.id_plan.descripcion}"/>
                                                 </div>
 
                                             </div>
@@ -203,9 +203,11 @@
                         <h3 class="card-title">Actualización de Plan</h3>
                     </div>
                     <div class="card-body">
-                        <form th:action="@{/admin/dash-clientes/expand/guardar-plan}" th:object="${plan}" method="POST">
-                            <input type="text" readonly name="id_detalle" th:field="*{id_detalle}"/>
-                            <input type="text" readonly name="documentoC" th:field="*{documentoC}"/>
+                        <form th:action="@{/admin/dash-clientes/expand/guardar-plan}" th:object="${plancliente}" method="POST">
+
+                            <input type="text" readonly name="documentoC" th:field="*{cliente}"/>
+                            <input type="text" readonly name="fecha_inicio" th:field="*{fecha_inicio}"/>
+
                             <div class="row">
                                 <div class="col-2"></div>
                                 <div class="col-8">
@@ -213,8 +215,9 @@
                                         <label for="plann" class="form-label">Plan: *</label>
                                         <select name="plann" id="plann"  required class=" mi-selector form-control ">
 
-                                            <div th:each="plann : ${planes}">
-                                                <option th:value="${plann.id_detalle}" th:text="${plann.id_detalle.id_detalle+' - '+plann.id_detalle.id_plan.descripcion+' - '+plann.id_detalle.meses+' meses - $'+plann.id_detalle.precio}"></option>
+                                            <div th:each="plane : ${planesdetallados}">
+                                                <option th:value="${plane.id_detalle}" th:text="${plane}"></option>
+
                                             </div>
                                         </select> <br>
 

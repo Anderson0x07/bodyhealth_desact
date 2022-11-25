@@ -1,6 +1,7 @@
 package com.bodyhealth.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,7 +23,8 @@ public class ControlEntrenador implements Serializable {
     private double peso;
     private double estatura;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    /*@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha;
 }

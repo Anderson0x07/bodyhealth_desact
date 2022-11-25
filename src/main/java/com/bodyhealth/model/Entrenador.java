@@ -1,6 +1,7 @@
 package com.bodyhealth.model;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Entrenador implements Serializable {
 
     private String telefono;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fechaN;
 
     private String email;

@@ -1,5 +1,7 @@
 package com.bodyhealth.controller;
 
+import com.bodyhealth.model.Cliente;
+import com.bodyhealth.model.Plan;
 import com.bodyhealth.model.Proveedor;
 import com.bodyhealth.model.Rutina;
 import com.bodyhealth.service.ProveedorService;
@@ -12,17 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/proveedor")
+@Controller
+@RequestMapping("/admin")
 public class ProveedorController {
     @Autowired
     private ProveedorService proveedorService;
-    @GetMapping("/lista")
-    public List<Proveedor> listarProveedores(Model model){
+    @GetMapping("/dash-proveedores")
+    public String listarProveedores(Model model){
         List<Proveedor> proveedores = proveedorService.listarProveedores();
 
         model.addAttribute("proveedores",proveedores);
 
-        return proveedores;
+        return "/admin/dash-proveedores";
     }
+
 }

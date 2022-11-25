@@ -46,8 +46,10 @@ public class AdminController {
         return "/admin/dashboard";
     }
 
-
-
+    @GetMapping("/admin/dash-horarios")
+    public String listarHorarios(){
+        return "/admin/dash-horarios";
+    }
 
 
 

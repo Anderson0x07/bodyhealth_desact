@@ -10,5 +10,6 @@ import java.util.Date;
 public class ControlClientePK implements Serializable {
     @Column(name = "documentoC")
     private int documentoC;
-    private Date fecha;
+
+    //private Date fecha;
 }

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sidebar</title>
+</head>
+<body>
+    <div th:fragment="horario-manana"  class="table-responsive">
+        <table id="horario" class="table table-bordered table-striped text-center">
+            <thead>
+            <th>HORA</th>
+            <th>LUNES</th>
+            <th>MARTES</th>
+            <th>MIERCOLES</th>
+            <th>JUEVES</th>
+            <th>VIERNES</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>5:00 AM - 7:00 AM</td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+            </tr>
+            <tr>
+                <td>7:00 AM - 9:00 AM</td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+            </tr>
+            <tr>
+                <td>9:00 AM - 11:00 AM</td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+            </tr>
+            <tr>
+                <td>11:00 AM - 12:00 PM</td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+                <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="6">📢 Este horario solo aplica para 1002 📢</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>

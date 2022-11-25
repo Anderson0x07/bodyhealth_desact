@@ -2,10 +2,7 @@ package com.bodyhealth.controller;
 
 
 import com.bodyhealth.model.*;
-import com.bodyhealth.repository.ClienteDetalleRepository;
-import com.bodyhealth.repository.ClienteRepository;
-import com.bodyhealth.repository.EntrenadorClienteRepository;
-import com.bodyhealth.repository.EntrenadorRepository;
+import com.bodyhealth.repository.*;
 import com.bodyhealth.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +28,9 @@ public class ClienteController {
     private EntrenadorClienteRepository entrenadorClienteRepository;
     @Autowired
     private ClienteDetalleRepository clienteDetalleRepository;
+
+    @Autowired
+    private DetalleRepository detalleRepository;
 
     @Autowired
     private EntrenadorClienteService entrenadorClienteService;
@@ -84,7 +84,7 @@ public class ClienteController {
     @PostMapping("/admin/dash-clientes/expand/guardar-trainer")
     public String cambioEntrenador(EntrenadorCliente entrenadorCliente, Model model){
 
-        log.info(entrenadorCliente.toString());
+        log.info("ENTRENADOR ENTRANTE: "+entrenadorCliente.toString());
         EntrenadorCliente copia = entrenadorClienteRepository.encontrarEntrenador(entrenadorCliente.getCliente().getDocumentoC());
         int documentoC = entrenadorCliente.getCliente().getDocumentoC();
 
@@ -96,6 +96,7 @@ public class ClienteController {
 
         model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(entrenadorCliente.getDocumentoC()));
 
+
         return "redirect:/admin/dash-clientes/expand/editar/"+documentoC;
     }
 
@@ -103,28 +104,39 @@ public class ClienteController {
     @PostMapping("/admin/dash-clientes/expand/guardar-plan")
     public String cambioPlan(ClienteDetalle clienteDetalle, Model model){
 
-        log.info(clienteDetalle.toString());
+        log.info("LO QUE LLEGA: "+clienteDetalle.toString());
+        ClienteDetalle copia = clienteDetalleRepository.encontrarPlan(clienteDetalle.getCliente().getDocumentoC());
 
-        clienteDetalleService.encontrarClienteDetalle(clienteDetalle)
+        log.info("COPIA: "+copia);
+        int documentoC = clienteDetalle.getCliente().getDocumentoC();
+
+        clienteDetalle.setId_detalle(clienteDetalle.getId_detalle());
+
+        //clienteDetalleService.eliminar(copia);
+        clienteDetalleService.guardar(clienteDetalle);
 
 
+        model.addAttribute("plancliente",clienteDetalleRepository.encontrarPlan(clienteDetalle.getCliente().getDocumentoC()));
 
-        return "redirect:/admin/dash-clientes/expand/editar/"+clienteDetalleRepository.encontrarPlan(clienteDetalle.getDocumentoC());
+        return "redirect:/admin/dash-clientes/expand/editar/"+documentoC;
     }
+
+
 
     //Editar clientes en el dashboard del admin
     @GetMapping("/admin/dash-clientes/expand/editar/{documentoC}")
     public String editarCliente(Cliente cliente, Model model){
-
+    log.info("entre...");
         cliente = clienteService.encontrarCliente(cliente);
 
         model.addAttribute("cliente",cliente);
         model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(cliente.getDocumentoC()));
-        model.addAttribute("plan", clienteDetalleRepository.encontrarPlan(cliente.getDocumentoC()));
+        model.addAttribute("plancliente", clienteDetalleRepository.encontrarPlan(cliente.getDocumentoC()));
 
         //PARA MOSTRAR TODOS LOS ENTRENADORES
-        model.addAttribute("trainers",entrenadorRepository.findAll());
-        model.addAttribute("planes",clienteDetalleRepository.findAll());
+        model.addAttribute("trainers",entrenadorService.listarEntrenadores());
+        //PARA MOSTRAR TODOS LOS PLANES
+        model.addAttribute("planesdetallados",detalleRepository.findAll());
 
 
         return "/admin/clientes/cliente-editar";
@@ -158,6 +170,5 @@ public class ClienteController {
 
         return "redirect:/admin/dash-clientes";
     }
-
 
 }
