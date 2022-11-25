@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dash-Trainers</title>
+    <title>Dash-Planes</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"/>
@@ -26,50 +26,39 @@
             <nav th:replace="/layouts/nav-dash :: nav-dash"></nav>
 
             <div class="dashboard-content px-3 pt-4">
-                <h2 class="fs-5">Lista de Entrenadores</h2>
+                <h2 class="fs-3">Lista de Planes Detallados</h2> <br>
 
+                <a href="#" class="btn btn-secondary"
+                   data-bs-toggle="modal" data-bs-target="#agregar-plan">
+                    <i class="fas fa-plus"></i> Agregar Plan
+                </a>
+
+                <section th:replace="/layouts/agregar-plan :: agregar-plan"></section> <br>
 
                 <div class="table-responsive">
-                    <table id="tablaTrainers" class="table table-bordered">
+                    <table id="tablaPlanesDetallados" class="table table-bordered">
 
                         <thead>
                         <tr>
-                            <th>Documento</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>Telefono</th>
-                            <th>Fecha Nacimiento</th>
-                            <th>Email</th>
-                            <th>Experiencia</th>
-                            <th>Hoja de Vida</th>
-                            <th>Titulo Académico</th>
-                            <th>Creador</th>
+                            <th>Id Detalle</th>
+                            <th>Plan</th>
+                            <th>Precio</th>
+                            <th>Meses</th>
                             <th>Acciones</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="trainer : ${trainers}">
-                            <td th:text="${trainer.tipo_documento}+' - '+${trainer.documentoE}"></td>
-                            <td th:text="${trainer.nombre}"></td>
-                            <td th:text="${trainer.apellido}"></td>
-                            <td th:text="${trainer.telefono}"></td>
-                            <td th:text="${trainer.fechaN}"></td>
-                            <td th:text="${trainer.email}"></td>
-                            <td th:text="${trainer.experiencia}"></td>
-                            <td th:text="${trainer.hoja_vida}"></td>
-                            <td th:text="${trainer.titulo_academico}"></td>
-                            <td th:text="${trainer.documentoA.nombre}+' '+${trainer.documentoA.apellido}"></td>
+                        <tr th:each="planDeta : ${planesDeta}">
+                            <td th:text="${planDeta.id_detalle}"></td>
+                            <td th:text="${planDeta.plan}"></td>
+                            <td th:text="'$' + ${planDeta.precio}"></td>
+                            <td th:text="${planDeta.meses}"></td>
 
                             <td>
-                                <a th:href="@{/}" style="text-decoration: none">
+                                <a th:href="@{/admin/dash-planes/expand/} + ${planDeta.id_detalle}" style="text-decoration: none">
                                     <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
                                 </a>
-                                <!--
-                                <a th:href="@{/admin/eliminar(documentoC=${usuario.documentoC})}" class="btn btn-danger">
-                                    <i class="fas fa-angle-double-right"></i> Eliminar
-                                </a>
-                                -->
                             </td>
                         </tr>
                         </tbody>
@@ -90,7 +79,7 @@
     <!--SCRIPT DATATABLE-->
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#tablaTrainers').DataTable({
+            $('#tablaPlanesDetallados').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     'excel', 'pdf'

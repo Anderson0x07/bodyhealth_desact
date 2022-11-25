@@ -12,55 +12,51 @@
             <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <h1 th:text="${hola}"></h1>
         <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
             <div class="container">
-                <a th:href="@{/}" class="navbar-brand">BRAND</a>
+                <a th:href="@{/}" class="navbar-brand">LOGO</a>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav">
                         <li class="nav-item px-2">
                             <a th:href="@{/}" class="nav-link active">Inicio</a>
                         </li>
                     </ul>
-                    <u sec:authorize="isAuthenticated()" class="navbar-nav ml-auto">
+                    <ul  class="navbar-nav ml-auto">
                         <li class="nav-item mr-3">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user"></i>
                                 <span>BIENVENIDO</span>
-                                <span sec:authentication="name">Muestra nombre de usuario logueado</span>
-                                <span sec:authentication="authorities"></span>
+                                <span >Username Login</span>
+
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mr-8">
                                 <form method="POST" th:Action="@{/logout}">
-                                    <a href="#" onclick="this.parentNode.submit();" class="nav-link">
-                                        <i class="fas fa-user-times"></i> SALIR
-                                    </a>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit">Salirr</button>
+                                    <button class="btn btn-primary" type="submit">Salirr</button>
                                 </form>
                         </li>
-                    </u>
+                        <li class="nav-item mr-8">
+                            <a th:href="@{/admin/dashboard}" class="btn btn-secondary">
+                                <i class="fas fa-angle-double-right"></i> Admins
+                            </a>
+                        </li>
+                        <li class="nav-item mr-8">
+                            <a th:href="@{/trainer/trainer}" class="btn btn-secondary">
+                                <i class="fas fa-angle-double-right"></i> Trainers
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
         
-        <h1 th:text="${total}"></h1>
+        <h1 th:text="${'Este es el index'}"></h1>
         
         <a th:href="@{/prueba}" class="btn btn-secondary">
-            <i class="fas fa-angle-double-right"></i> Prueba
+            <i class="fas fa-angle-double-right"></i> Prueba Logs
         </a>
         <br><br>
 
-        <div sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/administradores}" class="btn btn-secondary">
-                <i class="fas fa-angle-double-right"></i> Admins
-            </a>
-        </div>
 
-        <div sec:authorize="hasRole('TRAINER')">
-            <a th:href="@{/trainer/trainer}" class="btn btn-secondary">
-                <i class="fas fa-angle-double-right"></i> Trainers
-            </a>
-        </div>
     </body>
 </html>

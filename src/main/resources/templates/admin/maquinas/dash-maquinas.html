@@ -26,40 +26,42 @@
             <nav th:replace="/layouts/nav-dash :: nav-dash"></nav>
 
             <div class="dashboard-content px-3 pt-4">
-                <h2 class="fs-5">Lista de Entrenadores</h2>
+                <h2 class="fs-3">Lista de Maquinas</h2> <br>
+
+                <a href="#" class="btn btn-secondary"
+                   data-bs-toggle="modal" data-bs-target="#agregar-maquina">
+                    <i class="fas fa-plus"></i> Agregar Maquina
+                </a>
+
+                <section th:replace="/layouts/agregar-maquina :: agregar-maquina"></section> <br>
 
 
                 <div class="table-responsive">
-                    <table id="tablaProductos" class="table table-bordered">
+                    <table id="tablaMaquinas" class="table table-bordered">
 
                         <thead>
                         <tr>
-                            <th>Id Producto</th>
+                            <th>Id Maquina</th>
                             <th>Nombre</th>
-                            <th>Stock</th>
-                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Observación</th>
                             <th>Proveedor</th>
                             <th>Acciones</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="producto : ${productos}">
-                            <td th:text="${producto.id_producto}"></td>
-                            <td th:text="${producto.nombre}"></td>
-                            <td th:text="${producto.stock}"></td>
-                            <td th:text="${producto.precio}"></td>
-                            <td th:text="${producto.id_proveedor.nombre_empresa}"></td>
+                        <tr th:each="maquina : ${maquinas}">
+                            <td th:text="${maquina.id_maquina}"></td>
+                            <td th:text="${maquina.nombre}"></td>
+                            <td th:text="${maquina.estado}"></td>
+                            <td th:text="${maquina.observacion}"></td>
+                            <td th:text="${maquina.id_proveedor.nombre_empresa}"></td>
 
                             <td>
-                                <a th:href="@{/}" style="text-decoration: none">
+                                <a th:href="@{/admin/dash-maquinas/expand/} + ${maquina.id_maquina}" style="text-decoration: none">
                                     <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
                                 </a>
-                                <!--
-                                <a th:href="@{/admin/eliminar(documentoC=${usuario.documentoC})}" class="btn btn-danger">
-                                    <i class="fas fa-angle-double-right"></i> Eliminar
-                                </a>
-                                -->
                             </td>
                         </tr>
                         </tbody>
@@ -80,7 +82,7 @@
     <!--SCRIPT DATATABLE-->
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#tablaProductos').DataTable({
+            $('#tablaMaquinas').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     'excel', 'pdf'

@@ -18,7 +18,7 @@ public class Detalle implements Serializable {
 
     /*@ManyToOne
     @JoinColumn(name = "id_plan")*/
-    private int id_plan;
+    private String plan;
 
     private double precio;
     private int meses;

@@ -30,7 +30,7 @@
 
                 <div class="card border-light">
                     <div class="card-header">
-                        <h3 class="card-title">Datos del proveedor</h3>
+                        <h3 class="card-title">Datos de Maquina</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -43,20 +43,24 @@
                                     <table class="table table-bordered table-striped">
 
                                         <tr>
-                                            <th>Id Proveedor</th>
-                                            <td th:text="${proveedor.id_proveedor}"></td>
+                                            <th>Id Maquina</th>
+                                            <td th:text="${maquina.id_maquina}"></td>
                                         </tr>
                                         <tr>
-                                            <th>Nombre Empresa</th>
-                                            <td th:text="${proveedor.nombre_empresa}"></td>
+                                            <th>Nombre</th>
+                                            <td th:text="${maquina.nombre}"></td>
                                         </tr>
                                         <tr>
-                                            <th>Telefono</th>
-                                            <td th:text="${proveedor.telefono}"></td>
+                                            <th>Estado</th>
+                                            <td th:text="${maquina.estado}"></td>
                                         </tr>
                                         <tr>
-                                            <th>Dirección</th>
-                                            <td th:text="${proveedor.direccion}"></td>
+                                            <th>Observación</th>
+                                            <td th:text="${maquina.observacion}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Proveedor</th>
+                                            <td th:text="${maquina.id_proveedor.nombre_empresa}"></td>
                                         </tr>
 
                                     </table>
@@ -68,18 +72,18 @@
                         <div class="row">
                             <div class="col-6"></div>
                             <div class="col-2">
-                                <a th:href="@{/admin/dash-proveedores}" class="btn btn-dark btn-block">
+                                <a th:href="@{/admin/dash-maquinas}" class="btn btn-dark btn-block">
                                     <i class="fas fa-arrow-left"></i> Regresar
                                 </a>
                             </div>
                             <div class="col-2">
-                                <a th:href="@{/admin/dash-proveedores/expand/editar/} + ${proveedor.id_proveedor}" class="btn btn-secondary">
+                                <a th:href="@{/admin/dash-maquinas/expand/editar/} + ${maquina.id_maquina}" class="btn btn-secondary">
                                     <i class="fas fa-angle-double-right"></i> Editar
                                 </a>
                             </div>
                             <div  class="col-2">
 
-                                <a th:href="@{/admin/dash-proveedores/eliminar(id_proveedor=${proveedor.id_proveedor})}" class="btn btn-danger">
+                                <a th:href="@{/admin/dash-maquinas/eliminar(id_maquina=${maquina.id_maquina})}" class="btn btn-danger">
                                     <i class="fas fa-angle-double-right"></i> Eliminar
                                 </a>
 

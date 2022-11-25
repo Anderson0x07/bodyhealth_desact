@@ -2,10 +2,10 @@
 -- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 23, 2022 at 10:53 PM
--- Server version: 8.0.17
--- PHP Version: 7.3.10
+-- Servidor: localhost
+-- Tiempo de generación: 25-11-2022 a las 22:21:51
+-- Versión del servidor: 8.0.17
+-- Versión de PHP: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,29 +19,29 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bodyhealth`
+-- Base de datos: `bodyhealth`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `administrador`
+-- Estructura de tabla para la tabla `administrador`
 --
 
 CREATE TABLE `administrador` (
   `documentoA` int(11) NOT NULL,
-  `tipodocumento` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nombre` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `apellido` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `telefono` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipodocumento` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `apellido` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `fecha_nacimiento` date DEFAULT NULL,
-  `email` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `password` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `id_rol` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `administrador`
+-- Volcado de datos para la tabla `administrador`
 --
 
 INSERT INTO `administrador` (`documentoA`, `tipodocumento`, `nombre`, `apellido`, `telefono`, `fecha_nacimiento`, `email`, `password`, `id_rol`) VALUES
@@ -50,35 +50,38 @@ INSERT INTO `administrador` (`documentoA`, `tipodocumento`, `nombre`, `apellido`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente`
+-- Estructura de tabla para la tabla `cliente`
 --
 
 CREATE TABLE `cliente` (
   `documentoC` int(15) NOT NULL,
-  `tipo_documento` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `apellido` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `telefono` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipo_documento` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `apellido` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `fechaN` date DEFAULT NULL,
-  `email` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `password` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `foto` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `jornada` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `foto` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `jornada` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estado` tinyint(1) NOT NULL,
   `id_rol` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `cliente`
+-- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`documentoC`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `foto`, `jornada`, `id_rol`) VALUES
-(9999, 'cedula', 'andres', 'sads', '34234', '2022-11-01', 'dsaasdsa', 'sdads', 'sadas', 'dsadsa', 2),
-(4565664, 'cedula', 'Anderson', 'dasdsd', '34534', '2022-11-09', 'dfsf', 'sfdsf', 'dsfsf', 'mañana', 2);
+INSERT INTO `cliente` (`documentoC`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `foto`, `jornada`, `estado`, `id_rol`) VALUES
+(999, 'CC', 'Anderson', 'Perez', '3219238493', '2003-07-07', 'mg@gmail.com', '1234', 'foto', 'mañana', 1, 2),
+(1004, 'CC', 'PRUEBA1', 'DOS1', '1234', '2003-10-15', 'ande@gmail.com', '123', 'foto', 'mañana', 1, 2),
+(9991, 'CC', 'Miguel Perez', 'Perez', '3219238493', '2022-11-02', 'mg@gmail.com', '1234', 'foto', 'mañana', 0, 2),
+(9992, 'CC', 'Miguel Perez', 'Perez', '3219238493', '2022-11-02', 'mg@gmail.com', '1234', 'foto', 'mañana', 0, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente_detalle`
+-- Estructura de tabla para la tabla `cliente_detalle`
 --
 
 CREATE TABLE `cliente_detalle` (
@@ -89,10 +92,17 @@ CREATE TABLE `cliente_detalle` (
   `id_metodopago` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `cliente_detalle`
+--
+
+INSERT INTO `cliente_detalle` (`documentoC`, `id_detalle`, `fecha_inicio`, `fecha_fin`, `id_metodopago`) VALUES
+(1004, 2, '2022-11-24', '2022-12-24', 3);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente_rutina`
+-- Estructura de tabla para la tabla `cliente_rutina`
 --
 
 CREATE TABLE `cliente_rutina` (
@@ -101,10 +111,17 @@ CREATE TABLE `cliente_rutina` (
   `id_rutina` int(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `cliente_rutina`
+--
+
+INSERT INTO `cliente_rutina` (`id_clienterutina`, `documentoC`, `id_rutina`) VALUES
+(1, 999, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente_rutina_ejercicio`
+-- Estructura de tabla para la tabla `cliente_rutina_ejercicio`
 --
 
 CREATE TABLE `cliente_rutina_ejercicio` (
@@ -113,10 +130,17 @@ CREATE TABLE `cliente_rutina_ejercicio` (
   `id_rutina_ejercicio` int(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `cliente_rutina_ejercicio`
+--
+
+INSERT INTO `cliente_rutina_ejercicio` (`id_cliente_rutina_ejercicio`, `id_cliente_rutina`, `id_rutina_ejercicio`) VALUES
+(1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `compra`
+-- Estructura de tabla para la tabla `compra`
 --
 
 CREATE TABLE `compra` (
@@ -129,7 +153,7 @@ CREATE TABLE `compra` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `control_cliente`
+-- Estructura de tabla para la tabla `control_cliente`
 --
 
 CREATE TABLE `control_cliente` (
@@ -139,10 +163,17 @@ CREATE TABLE `control_cliente` (
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `control_cliente`
+--
+
+INSERT INTO `control_cliente` (`documentoC`, `peso`, `estatura`, `fecha`) VALUES
+(1004, 80, 180, '2022-11-25');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `control_entrenador`
+-- Estructura de tabla para la tabla `control_entrenador`
 --
 
 CREATE TABLE `control_entrenador` (
@@ -155,65 +186,85 @@ CREATE TABLE `control_entrenador` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detalle`
+-- Estructura de tabla para la tabla `detalle`
 --
 
 CREATE TABLE `detalle` (
   `id_detalle` int(11) NOT NULL,
-  `id_plan` int(11) DEFAULT NULL,
+  `plan` varchar(60) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `precio` double DEFAULT NULL,
   `meses` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `detalle`
+--
+
+INSERT INTO `detalle` (`id_detalle`, `plan`, `precio`, `meses`) VALUES
+(2, 'Plan Intermedio', 80000, 3),
+(3, 'Plan Avanzado', 80000, 1);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ejercicio`
+-- Estructura de tabla para la tabla `ejercicio`
 --
 
 CREATE TABLE `ejercicio` (
   `id_ejercicio` int(11) NOT NULL,
   `id_musculo` int(11) DEFAULT NULL,
-  `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `series` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descripcion` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `series` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `repeticiones` int(2) DEFAULT NULL,
-  `url_video` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL
+  `url_video` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `ejercicio`
+--
+
+INSERT INTO `ejercicio` (`id_ejercicio`, `id_musculo`, `descripcion`, `series`, `repeticiones`, `url_video`) VALUES
+(1, 1, 'Ejercicios para biceps- bla bla', '4', 12, 'VIDEO EXPLICATIVO'),
+(2, 2, 'Ejercicios para Cuadriceps - BLA BLA', '4', 15, 'VIDEO EXPLICATIVO'),
+(3, 1, 'Ejercicios para biceps 2', '4', 12, 'VIDEO 2');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `entrenador`
+-- Estructura de tabla para la tabla `entrenador`
 --
 
 CREATE TABLE `entrenador` (
   `documentoE` int(15) NOT NULL,
-  `tipo_documento` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `apellido` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipo_documento` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `apellido` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `fechaN` date DEFAULT NULL,
-  `email` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `password` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `experiencia` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `hoja_vida` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `experiencia` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `hoja_vida` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `titulo_academico` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `jornada` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `jornada` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `documentoA` int(11) DEFAULT NULL,
   `id_rol` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `entrenador`
+-- Volcado de datos para la tabla `entrenador`
 --
 
 INSERT INTO `entrenador` (`documentoE`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `experiencia`, `hoja_vida`, `titulo_academico`, `jornada`, `documentoA`, `id_rol`) VALUES
-(4535, 'cedula', 'pepito', 'perez', '546456', '2022-11-03', 'affsd', 'fssfsf', 'adsads', 'adsada', 'dadsa', 'tarde', 123313, 2);
+(4535, 'cedula', 'trainer pepito', 'perez', '546456', '2022-11-03', 'affsd', 'fssfsf', 'adsads', 'adsada', 'dadsa', 'tarde', 123313, 2),
+(9589, 'CC', 'Trainer', 'Dos', '3212323322', '2003-10-15', 'trainer2@gmail.com', '123', '3', 'hoja', 'full', 'Tarde', 123313, 3),
+(95892, 'CC', 'Trainer', 'Tres', '3212323322', '2003-10-15', 'trainer2@gmail.com', '123', '3', 'hoja', 'full', 'Tarde', 123313, 3),
+(95894, 'CC', 'Trainer', 'Cuatro', '3212323322', '2003-10-15', 'trainer4@gmail.com', '123', '3', 'hoja', 'full', 'Mañana', 123313, 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `entrenador_cliente`
+-- Estructura de tabla para la tabla `entrenador_cliente`
 --
 
 CREATE TABLE `entrenador_cliente` (
@@ -222,60 +273,80 @@ CREATE TABLE `entrenador_cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `entrenador_cliente`
+-- Volcado de datos para la tabla `entrenador_cliente`
 --
 
 INSERT INTO `entrenador_cliente` (`documentoE`, `documentoC`) VALUES
-(4535, 9999),
-(4535, 4565664);
+(95892, 999),
+(95892, 1004),
+(4535, 9991),
+(4535, 9992);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `maquina`
+-- Estructura de tabla para la tabla `maquina`
 --
 
 CREATE TABLE `maquina` (
   `id_maquina` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `estado` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `observacion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estado` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `observacion` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `id_proveedor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `maquina`
+-- Volcado de datos para la tabla `maquina`
 --
 
 INSERT INTO `maquina` (`id_maquina`, `nombre`, `estado`, `observacion`, `id_proveedor`) VALUES
-(1, 'Bicicleta', 'Bueno', 'adasd', 1);
+(1, 'Maquina A', 'Bueno', 'N/A', 2),
+(3, 'prueba', 'Bien', 'SI', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `metodo _pago`
+-- Estructura de tabla para la tabla `metodo_pago`
 --
 
-CREATE TABLE `metodo _pago` (
+CREATE TABLE `metodo_pago` (
   `id_metodopago` int(11) NOT NULL,
-  `descripcion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
+  `descripcion` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `metodo_pago`
+--
+
+INSERT INTO `metodo_pago` (`id_metodopago`, `descripcion`) VALUES
+(1, 'PSE'),
+(2, 'Efectivo'),
+(3, 'Tarjeta de Credito');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `musculo`
+-- Estructura de tabla para la tabla `musculo`
 --
 
 CREATE TABLE `musculo` (
   `id_musculo` int(15) NOT NULL,
-  `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+  `descripcion` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `musculo`
+--
+
+INSERT INTO `musculo` (`id_musculo`, `descripcion`) VALUES
+(1, 'Biceps'),
+(2, 'Cuadriceps');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pedido`
+-- Estructura de tabla para la tabla `pedido`
 --
 
 CREATE TABLE `pedido` (
@@ -289,90 +360,91 @@ CREATE TABLE `pedido` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `plan`
---
-
-CREATE TABLE `plan` (
-  `id_plan` int(11) NOT NULL,
-  `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `producto`
+-- Estructura de tabla para la tabla `producto`
 --
 
 CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `stock` int(4) DEFAULT NULL,
   `precio` int(15) DEFAULT NULL,
   `id_proveedor` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `producto`
+-- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `stock`, `precio`, `id_proveedor`) VALUES
-(1, 'Purina', 2, 567, 1);
+(1, 'Producto 1', 50, 15000, 1),
+(3, 'prueba2', 12, 80000, 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `proveedor`
+-- Estructura de tabla para la tabla `proveedor`
 --
 
 CREATE TABLE `proveedor` (
   `id_proveedor` int(11) NOT NULL,
-  `nombre_empresa` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `direccion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
+  `nombre_empresa` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `direccion` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `proveedor`
+-- Volcado de datos para la tabla `proveedor`
 --
 
 INSERT INTO `proveedor` (`id_proveedor`, `nombre_empresa`, `telefono`, `direccion`) VALUES
-(1, 'Empresa', '2322', 'daa');
+(1, 'Empresa Gimnasio2', '3219238493', 'Av 3A #12-22 La Playa'),
+(2, 'Empresa4', '23223', 'sdsd'),
+(5, 'UFPS2', '3219238493', 'Calle 1 #4-49 CECI');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rol`
+-- Estructura de tabla para la tabla `rol`
 --
 
 CREATE TABLE `rol` (
   `id_rol` int(11) NOT NULL,
-  `descripcion` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL
+  `descripcion` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Dumping data for table `rol`
+-- Volcado de datos para la tabla `rol`
 --
 
 INSERT INTO `rol` (`id_rol`, `descripcion`) VALUES
 (1, 'Admin'),
-(2, 'User');
+(2, 'User'),
+(3, 'Trainer');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rutina`
+-- Estructura de tabla para la tabla `rutina`
 --
 
 CREATE TABLE `rutina` (
   `id_rutina` int(15) NOT NULL,
-  `nombre_rutina` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+  `nombre_rutina` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descripcion` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `rutina`
+--
+
+INSERT INTO `rutina` (`id_rutina`, `nombre_rutina`, `descripcion`) VALUES
+(1, 'Rutina para Biceps', 'A continuacion se enseñará una rutina completa para biceps'),
+(2, 'Rutina para Cuadriceps', 'A continuacion se enseñará una rutina completa para cuadriceps');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rutina_ejercicio`
+-- Estructura de tabla para la tabla `rutina_ejercicio`
 --
 
 CREATE TABLE `rutina_ejercicio` (
@@ -382,33 +454,42 @@ CREATE TABLE `rutina_ejercicio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Indexes for dumped tables
+-- Volcado de datos para la tabla `rutina_ejercicio`
+--
+
+INSERT INTO `rutina_ejercicio` (`id_rutina_ejercicio`, `id_rutina`, `id_ejercicio`) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 1, 3);
+
+--
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `administrador`
+-- Indices de la tabla `administrador`
 --
 ALTER TABLE `administrador`
   ADD PRIMARY KEY (`documentoA`),
   ADD KEY `id_rol` (`id_rol`);
 
 --
--- Indexes for table `cliente`
+-- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`documentoC`),
   ADD KEY `id_rol` (`id_rol`);
 
 --
--- Indexes for table `cliente_detalle`
+-- Indices de la tabla `cliente_detalle`
 --
 ALTER TABLE `cliente_detalle`
-  ADD PRIMARY KEY (`documentoC`,`id_detalle`,`fecha_inicio`),
+  ADD PRIMARY KEY (`documentoC`,`fecha_inicio`,`id_detalle`) USING BTREE,
   ADD KEY `id_detalle` (`id_detalle`),
   ADD KEY `id_metodopago` (`id_metodopago`);
 
 --
--- Indexes for table `cliente_rutina`
+-- Indices de la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
   ADD PRIMARY KEY (`id_clienterutina`),
@@ -416,7 +497,7 @@ ALTER TABLE `cliente_rutina`
   ADD KEY `id_rutina` (`id_rutina`);
 
 --
--- Indexes for table `cliente_rutina_ejercicio`
+-- Indices de la tabla `cliente_rutina_ejercicio`
 --
 ALTER TABLE `cliente_rutina_ejercicio`
   ADD PRIMARY KEY (`id_cliente_rutina_ejercicio`),
@@ -424,7 +505,7 @@ ALTER TABLE `cliente_rutina_ejercicio`
   ADD KEY `id_rutina_ejercicio` (`id_rutina_ejercicio`);
 
 --
--- Indexes for table `compra`
+-- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`id_compra`),
@@ -432,33 +513,32 @@ ALTER TABLE `compra`
   ADD KEY `id_metodopago` (`id_metodopago`);
 
 --
--- Indexes for table `control_cliente`
+-- Indices de la tabla `control_cliente`
 --
 ALTER TABLE `control_cliente`
   ADD PRIMARY KEY (`documentoC`,`fecha`);
 
 --
--- Indexes for table `control_entrenador`
+-- Indices de la tabla `control_entrenador`
 --
 ALTER TABLE `control_entrenador`
   ADD PRIMARY KEY (`documentoE`,`fecha`);
 
 --
--- Indexes for table `detalle`
+-- Indices de la tabla `detalle`
 --
 ALTER TABLE `detalle`
-  ADD PRIMARY KEY (`id_detalle`),
-  ADD KEY `id_plan` (`id_plan`);
+  ADD PRIMARY KEY (`id_detalle`);
 
 --
--- Indexes for table `ejercicio`
+-- Indices de la tabla `ejercicio`
 --
 ALTER TABLE `ejercicio`
   ADD PRIMARY KEY (`id_ejercicio`),
   ADD KEY `id_musculo` (`id_musculo`);
 
 --
--- Indexes for table `entrenador`
+-- Indices de la tabla `entrenador`
 --
 ALTER TABLE `entrenador`
   ADD PRIMARY KEY (`documentoE`),
@@ -466,7 +546,7 @@ ALTER TABLE `entrenador`
   ADD KEY `id_rol` (`id_rol`);
 
 --
--- Indexes for table `entrenador_cliente`
+-- Indices de la tabla `entrenador_cliente`
 --
 ALTER TABLE `entrenador_cliente`
   ADD PRIMARY KEY (`documentoE`,`documentoC`),
@@ -474,26 +554,26 @@ ALTER TABLE `entrenador_cliente`
   ADD KEY `documentoE` (`documentoE`);
 
 --
--- Indexes for table `maquina`
+-- Indices de la tabla `maquina`
 --
 ALTER TABLE `maquina`
   ADD PRIMARY KEY (`id_maquina`),
   ADD KEY `id_proveedor` (`id_proveedor`);
 
 --
--- Indexes for table `metodo _pago`
+-- Indices de la tabla `metodo_pago`
 --
-ALTER TABLE `metodo _pago`
+ALTER TABLE `metodo_pago`
   ADD PRIMARY KEY (`id_metodopago`);
 
 --
--- Indexes for table `musculo`
+-- Indices de la tabla `musculo`
 --
 ALTER TABLE `musculo`
   ADD PRIMARY KEY (`id_musculo`);
 
 --
--- Indexes for table `pedido`
+-- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`id_pedido`,`id_producto`,`id_compra`),
@@ -501,38 +581,32 @@ ALTER TABLE `pedido`
   ADD KEY `id_producto` (`id_producto`);
 
 --
--- Indexes for table `plan`
---
-ALTER TABLE `plan`
-  ADD PRIMARY KEY (`id_plan`);
-
---
--- Indexes for table `producto`
+-- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_producto`),
   ADD KEY `id_proveedor` (`id_proveedor`);
 
 --
--- Indexes for table `proveedor`
+-- Indices de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
   ADD PRIMARY KEY (`id_proveedor`);
 
 --
--- Indexes for table `rol`
+-- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`id_rol`);
 
 --
--- Indexes for table `rutina`
+-- Indices de la tabla `rutina`
 --
 ALTER TABLE `rutina`
   ADD PRIMARY KEY (`id_rutina`);
 
 --
--- Indexes for table `rutina_ejercicio`
+-- Indices de la tabla `rutina_ejercicio`
 --
 ALTER TABLE `rutina_ejercicio`
   ADD PRIMARY KEY (`id_rutina_ejercicio`),
@@ -540,113 +614,141 @@ ALTER TABLE `rutina_ejercicio`
   ADD KEY `id_rutina` (`id_rutina`);
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- Constraints for table `administrador`
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `documentoC` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9994;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle`
+--
+ALTER TABLE `detalle`
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `maquina`
+--
+ALTER TABLE `maquina`
+  MODIFY `id_maquina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedor`
+--
+ALTER TABLE `proveedor`
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  ADD CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`);
+  ADD CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `cliente`
+-- Filtros para la tabla `cliente`
 --
 ALTER TABLE `cliente`
   ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`);
 
 --
--- Constraints for table `cliente_detalle`
+-- Filtros para la tabla `cliente_detalle`
 --
 ALTER TABLE `cliente_detalle`
-  ADD CONSTRAINT `cliente_detalle_ibfk_1` FOREIGN KEY (`id_detalle`) REFERENCES `detalle` (`id_detalle`),
-  ADD CONSTRAINT `cliente_detalle_ibfk_2` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`),
-  ADD CONSTRAINT `cliente_detalle_ibfk_3` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo _pago` (`id_metodopago`);
+  ADD CONSTRAINT `cliente_detalle_ibfk_1` FOREIGN KEY (`id_detalle`) REFERENCES `detalle` (`id_detalle`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cliente_detalle_ibfk_2` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cliente_detalle_ibfk_3` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `cliente_rutina`
+-- Filtros para la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
-  ADD CONSTRAINT `cliente_rutina_ibfk_1` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`),
-  ADD CONSTRAINT `cliente_rutina_ibfk_2` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`);
+  ADD CONSTRAINT `cliente_rutina_ibfk_1` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cliente_rutina_ibfk_2` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `cliente_rutina_ejercicio`
+-- Filtros para la tabla `cliente_rutina_ejercicio`
 --
 ALTER TABLE `cliente_rutina_ejercicio`
-  ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk_1` FOREIGN KEY (`id_cliente_rutina`) REFERENCES `cliente_rutina` (`id_clienterutina`),
-  ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk_2` FOREIGN KEY (`id_rutina_ejercicio`) REFERENCES `rutina_ejercicio` (`id_rutina_ejercicio`);
+  ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk_1` FOREIGN KEY (`id_cliente_rutina`) REFERENCES `cliente_rutina` (`id_clienterutina`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk_2` FOREIGN KEY (`id_rutina_ejercicio`) REFERENCES `rutina_ejercicio` (`id_rutina_ejercicio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `compra`
+-- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`documentoC`),
-  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo _pago` (`id_metodopago`);
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `control_cliente`
+-- Filtros para la tabla `control_cliente`
 --
 ALTER TABLE `control_cliente`
-  ADD CONSTRAINT `control_cliente_ibfk_1` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`);
+  ADD CONSTRAINT `control_cliente_fk` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `control_entrenador`
+-- Filtros para la tabla `control_entrenador`
 --
 ALTER TABLE `control_entrenador`
   ADD CONSTRAINT `control_entrenador_ibfk_1` FOREIGN KEY (`documentoE`) REFERENCES `entrenador` (`documentoE`);
 
 --
--- Constraints for table `detalle`
---
-ALTER TABLE `detalle`
-  ADD CONSTRAINT `detalle_ibfk_1` FOREIGN KEY (`id_plan`) REFERENCES `plan` (`id_plan`);
-
---
--- Constraints for table `ejercicio`
+-- Filtros para la tabla `ejercicio`
 --
 ALTER TABLE `ejercicio`
-  ADD CONSTRAINT `ejercicio_ibfk_1` FOREIGN KEY (`id_musculo`) REFERENCES `musculo` (`id_musculo`);
+  ADD CONSTRAINT `ejercicio_ibfk_1` FOREIGN KEY (`id_musculo`) REFERENCES `musculo` (`id_musculo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `entrenador`
+-- Filtros para la tabla `entrenador`
 --
 ALTER TABLE `entrenador`
-  ADD CONSTRAINT `entrenador_ibfk_1` FOREIGN KEY (`documentoA`) REFERENCES `administrador` (`documentoA`),
-  ADD CONSTRAINT `entrenador_ibfk_2` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`);
+  ADD CONSTRAINT `entrenador_ibfk_1` FOREIGN KEY (`documentoA`) REFERENCES `administrador` (`documentoA`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `entrenador_ibfk_2` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `entrenador_cliente`
+-- Filtros para la tabla `entrenador_cliente`
 --
 ALTER TABLE `entrenador_cliente`
-  ADD CONSTRAINT `entrenador_cliente_ibfk_1` FOREIGN KEY (`documentoE`) REFERENCES `entrenador` (`documentoE`),
-  ADD CONSTRAINT `entrenador_cliente_ibfk_2` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`);
+  ADD CONSTRAINT `entrenador_cliente_ibfk_1` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `entrenador_cliente_ibfk_2` FOREIGN KEY (`documentoE`) REFERENCES `entrenador` (`documentoE`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `maquina`
+-- Filtros para la tabla `maquina`
 --
 ALTER TABLE `maquina`
-  ADD CONSTRAINT `maquina_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`);
+  ADD CONSTRAINT `maquina_proveedor_fk` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `pedido`
+-- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compra` (`id_compra`),
-  ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`);
+  ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compra` (`id_compra`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `pedido_producto_fk` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `producto`
+-- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`);
+  ADD CONSTRAINT `producto_proveedor_fk` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `rutina_ejercicio`
+-- Filtros para la tabla `rutina_ejercicio`
 --
 ALTER TABLE `rutina_ejercicio`
-  ADD CONSTRAINT `rutina_ejercicio_ibfk_1` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id_ejercicio`),
-  ADD CONSTRAINT `rutina_ejercicio_ibfk_2` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`);
+  ADD CONSTRAINT `rutina_ejercicio_ibfk_1` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id_ejercicio`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rutina_ejercicio_ibfk_2` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

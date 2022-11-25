@@ -1,8 +1,6 @@
 package com.bodyhealth.controller;
 
 import com.bodyhealth.model.MetodoPago;
-import com.bodyhealth.model.Plan;
-import com.bodyhealth.repository.MetodoPagoRepository;
 import com.bodyhealth.service.MetodoPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

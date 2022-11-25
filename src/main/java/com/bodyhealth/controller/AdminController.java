@@ -21,21 +21,6 @@ public class AdminController {
 
     //redirect: Hace peticion a un getMapping
 
-    @Autowired
-    private ClienteService clienteService;
-    @Autowired
-    private AdminService adminService;
-    @Autowired
-    private EntrenadorService entrenadorService;
-
-    @GetMapping("/admin/lista")
-    public List<Administrador> listarRutinas(Model model){
-        List<Administrador> administradores = adminService.listarAdministradores();
-
-        model.addAttribute("administradores",administradores);
-
-        return administradores;
-    }
     //Para acceder al dashboard
     @GetMapping("/admin/dashboard")
     public String inicio(Model model){

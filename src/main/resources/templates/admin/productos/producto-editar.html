@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dash-Clientes</title>
+    <title>Dash-Planes</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"/>
@@ -30,12 +30,11 @@
 
                 <div class="card border-light">
                     <div class="card-header">
-                        <h3 class="card-title">Datos del proveedor</h3>
+                        <h3 class="card-title">Datos del Producto</h3>
                     </div>
                     <div class="card-body">
 
-                        <form th:action="@{/admin/dash-proveedores/expand/guardar}" th:object="${proveedor}" method="POST">
-
+                        <form th:action="@{/admin/dash-productos/expand/guardar}" th:object="${producto}" method="POST">
 
                             <div class="container">
                                 <div class="row">
@@ -45,25 +44,36 @@
                                             <div class="card-body">
 
                                                 <div class="form-group">
-                                                    <label for="id_proveedor">Id Proveedor: </label>
-                                                    <input type="text" class="form-control" name="id_proveedor" id="id_proveedor"
-                                                           readonly th:field="*{id_proveedor}"/>
+                                                    <label for="id_producto">Id Producto: </label>
+                                                    <input type="text" class="form-control" name="id_producto" id="id_producto"
+                                                           readonly th:field="*{id_producto}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="empresa">Nombre de Empresa: *</label>
-                                                    <input type="text" class="form-control" name="empresa" id="empresa"
-                                                           required="true" th:field="*{nombre_empresa}"/>
+                                                    <label for="nombre">Nombre: </label>
+                                                    <input type="text" class="form-control" name="nombre" id="nombre"
+                                                           required="true" th:field="*{nombre}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="telefono">Telefono: *</label>
-                                                    <input type="text" class="form-control" name="telefono" id="telefono"
-                                                           required="true" th:field="*{telefono}"/>
+                                                    <label for="stock">Stock: </label>
+                                                    <input type="number" class="form-control" name="stock" id="stock"
+                                                           required="true" th:field="*{stock}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="direccion">Dirección: *</label>
-                                                    <input type="text" class="form-control" name="direccion" id="direccion"
-                                                           required="true" th:field="*{direccion}"/>
+                                                    <label for="precio">Precio: </label>
+                                                    <input type="number" class="form-control" name="precio" id="precio"
+                                                           required="true" th:field="*{precio}"/>
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label for="id_proveedor" class="form-label">Proveedor: </label>
+                                                    <select name="id_proveedor" id="id_proveedor" required class="form-control mi-selector ">
+
+                                                        <div th:each="proveedor : ${proveedores}">
+                                                            <option th:value="${proveedor.id_proveedor}" th:text="${proveedor.nombre_empresa}"></option>
+                                                        </div>
+                                                    </select> <br>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +87,7 @@
                                 <div class="row">
                                     <div class="col-8"></div>
                                     <div class="col-2">
-                                        <a th:href="@{/admin/dash-proveedores/expand/}+${proveedor.id_proveedor}" class="btn btn-dark btn-block">
+                                        <a th:href="@{/admin/dash-productos/expand/}+${producto.id_producto}" class="btn btn-dark btn-block">
                                             <i class="fas fa-arrow-left"></i> Regresar
                                         </a>
                                     </div>

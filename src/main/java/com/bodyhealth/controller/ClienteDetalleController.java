@@ -13,21 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/clienteD")
+@Controller
+@RequestMapping("/admin")
 public class ClienteDetalleController {
 
     @Autowired
     private ClienteDetalleService clienteDetalleService;
 
-    @GetMapping("/clienteDetalle")
-    public List<ClienteDetalle> listarClientes(Model model){
+    @GetMapping("/dash-fact-planes")
+    public String listarFacturacionPlan(Model model){
         List<ClienteDetalle> clientesDetalle = clienteDetalleService.listarClientesDetalles();
-        model.addAttribute("clientesDetalle",clientesDetalle);
-        return clientesDetalle;
+        model.addAttribute("factPlan",clientesDetalle);
+        return "/admin/fact-planes/dash-fact-planes";
     }
 
 
+
+    /* SOLO SE NECESITA MOSTRAR INFORMACION DE FACTURAS
     @PostMapping("/clientes/guardar")
     public String guardar(ClienteDetalle clienteDetalle){
 
@@ -51,4 +53,6 @@ public class ClienteDetalleController {
         clienteDetalleService.eliminar(clienteDetalle);
         return "redirect:/clientes/clienteDetalle";
     }
+
+    */
 }

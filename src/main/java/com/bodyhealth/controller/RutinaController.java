@@ -1,11 +1,9 @@
 package com.bodyhealth.controller;
 
 import com.bodyhealth.model.Ejercicio;
-import com.bodyhealth.model.Musculo;
 import com.bodyhealth.model.Rutina;
 import com.bodyhealth.model.RutinaEjercicio;
 import com.bodyhealth.service.EjercicioService;
-import com.bodyhealth.service.MusculoService;
 import com.bodyhealth.service.RutinaEjercicioService;
 import com.bodyhealth.service.RutinaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

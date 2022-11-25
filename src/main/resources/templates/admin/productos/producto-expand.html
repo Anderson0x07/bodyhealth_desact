@@ -30,7 +30,7 @@
 
                 <div class="card border-light">
                     <div class="card-header">
-                        <h3 class="card-title">Datos del proveedor</h3>
+                        <h3 class="card-title">Datos del Producto</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -43,20 +43,24 @@
                                     <table class="table table-bordered table-striped">
 
                                         <tr>
-                                            <th>Id Proveedor</th>
-                                            <td th:text="${proveedor.id_proveedor}"></td>
+                                            <th>Id Producto</th>
+                                            <td th:text="${producto.id_producto}"></td>
                                         </tr>
                                         <tr>
-                                            <th>Nombre Empresa</th>
-                                            <td th:text="${proveedor.nombre_empresa}"></td>
+                                            <th>Nombre</th>
+                                            <td th:text="${producto.nombre}"></td>
                                         </tr>
                                         <tr>
-                                            <th>Telefono</th>
-                                            <td th:text="${proveedor.telefono}"></td>
+                                            <th>Stock</th>
+                                            <td th:text="${producto.stock}"></td>
                                         </tr>
                                         <tr>
-                                            <th>Dirección</th>
-                                            <td th:text="${proveedor.direccion}"></td>
+                                            <th>Precio</th>
+                                            <td th:text="${producto.precio}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Proveedor</th>
+                                            <td th:text="${producto.id_proveedor.nombre_empresa}"></td>
                                         </tr>
 
                                     </table>
@@ -68,18 +72,18 @@
                         <div class="row">
                             <div class="col-6"></div>
                             <div class="col-2">
-                                <a th:href="@{/admin/dash-proveedores}" class="btn btn-dark btn-block">
+                                <a th:href="@{/admin/dash-productos}" class="btn btn-dark btn-block">
                                     <i class="fas fa-arrow-left"></i> Regresar
                                 </a>
                             </div>
                             <div class="col-2">
-                                <a th:href="@{/admin/dash-proveedores/expand/editar/} + ${proveedor.id_proveedor}" class="btn btn-secondary">
+                                <a th:href="@{/admin/dash-productos/expand/editar/} + ${producto.id_producto}" class="btn btn-secondary">
                                     <i class="fas fa-angle-double-right"></i> Editar
                                 </a>
                             </div>
                             <div  class="col-2">
 
-                                <a th:href="@{/admin/dash-proveedores/eliminar(id_proveedor=${proveedor.id_proveedor})}" class="btn btn-danger">
+                                <a th:href="@{/admin/dash-productos/eliminar(id_producto=${producto.id_producto})}" class="btn btn-danger">
                                     <i class="fas fa-angle-double-right"></i> Eliminar
                                 </a>
 
