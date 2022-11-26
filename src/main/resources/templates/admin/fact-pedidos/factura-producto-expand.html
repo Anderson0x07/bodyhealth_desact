@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dash-Clientes</title>
+    <title>Dash-Facturacion</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css"/>
@@ -30,7 +30,7 @@
 
                 <div class="card border-light">
                     <div class="card-header">
-                        <h3 class="card-title">Datos de Maquina</h3>
+                        <h3 class="card-title">Información de compra</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -40,30 +40,52 @@
                             <div class="col-7">
 
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-striped">
+                                    <table  class="table table-bordered table-striped " id="facturas">
 
                                         <tr>
-                                            <th>Id Maquina</th>
-                                            <td th:text="${maquina.id_maquina}"></td>
+                                            <th>Factura #</th>
+                                            <td th:text="${pedido.id_pedido}"></td>
                                         </tr>
                                         <tr>
-                                            <th>Nombre</th>
-                                            <td th:text="${maquina.nombre}"></td>
+                                            <th>Fecha</th>
+                                            <td th:text="${#dates.format(pedido.compra.fecha_compra, 'dd-MMM-yyyy')}"></td>
+
                                         </tr>
                                         <tr>
-                                            <th>Estado</th>
-                                            <td th:text="${maquina.estado}"></td>
+                                            <th rowspan="3">Información del Producto</th>
+                                            <td th:text="'Nombre: '+${pedido.producto.nombre}"></td>
                                         </tr>
                                         <tr>
-                                            <th>Observación</th>
-                                            <td th:text="${maquina.observacion}"></td>
+                                            <td th:text="'Proveedor: '+${pedido.producto.id_proveedor.nombre_empresa}"></td>
                                         </tr>
                                         <tr>
-                                            <th>Proveedor</th>
-                                            <td th:text="${maquina.id_proveedor.nombre_empresa}"></td>
+                                            <td th:text="'Precio Unitario: $'+${pedido.producto.precio}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="3">Información del Cliente</th>
+                                            <td th:text="'Identificación: '+${pedido.compra.id_cliente.tipo_documento+' - '+ pedido.compra.id_cliente.documentoC}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="'Nombre: '+${pedido.compra.id_cliente.nombre}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td th:text="'Telefono: '+${pedido.compra.id_cliente.telefono}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Cantidad</th>
+                                            <td th:text="${pedido.cantidad}+' Unidades'"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <td th:text="'$'+${(pedido.cantidad*pedido.producto.precio)}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Método de Pago</th>
+                                            <td th:text="${pedido.compra.id_metodopago.descripcion}"></td>
                                         </tr>
 
                                     </table>
+
                                 </div>
                             </div>
                         </div>
@@ -72,21 +94,14 @@
                         <div class="row">
                             <div class="col-6"></div>
                             <div class="col-2">
-                                <a th:href="@{/admin/dash-maquinas}" class="btn btn-dark btn-block">
+                                <a th:href="@{/admin/dash-fact-productos}" class="btn btn-dark btn-block">
                                     <i class="fas fa-arrow-left"></i> Regresar
                                 </a>
                             </div>
                             <div class="col-2">
-                                <a th:href="@{/admin/dash-maquinas/expand/editar/} + ${maquina.id_maquina}" class="btn btn-secondary">
-                                    <i class="fas fa-angle-double-right"></i> Editar
+                                <a th:href="@{/admin/dash-fact-productos/expand/pdf/} + ${pedido.id_pedido}" class="btn btn-secondary">
+                                    <i class="fas fa-angle-double-right"></i> Generar PDF
                                 </a>
-                            </div>
-                            <div  class="col-2">
-
-                                <a th:href="@{/admin/dash-maquinas/eliminar(id_maquina=${maquina.id_maquina})}" class="btn btn-danger">
-                                    <i class="fas fa-angle-double-right"></i> Eliminar
-                                </a>
-
                             </div>
                         </div>
                     </div>

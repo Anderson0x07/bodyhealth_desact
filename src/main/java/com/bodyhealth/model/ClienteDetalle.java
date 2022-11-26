@@ -10,24 +10,20 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "cliente_detalle")
-@IdClass(ClienteDetallePK.class)
+//@IdClass(ClienteDetallePK.class)
 public class ClienteDetalle implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int documentoC;
+    private int id_factura;
+
     @ManyToOne
-    @JoinColumn(name = "documentoC",insertable = false,updatable = false,nullable = false)
+    @JoinColumn(name = "documentoC")
     private Cliente cliente;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_detalle;
     @ManyToOne
-    @JoinColumn(name = "id_detalle",insertable = false,updatable = false,nullable = false)
+    @JoinColumn(name = "id_detalle")
     private Detalle detalle;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_inicio;
 
@@ -36,5 +32,5 @@ public class ClienteDetalle implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_metodopago")
-    private MetodoPago id_metodopago;
+    private MetodoPago metodoPago;
 }

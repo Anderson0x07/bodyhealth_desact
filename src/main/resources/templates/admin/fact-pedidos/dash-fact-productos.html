@@ -12,7 +12,7 @@
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/webjars/datatables/1.10.15/media/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/webjars/datatables/1.10.20/media/js/jquery.dataTables.min.js}"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/dash-style.css" />
 </head>
@@ -26,45 +26,42 @@
             <nav th:replace="/layouts/nav-dash :: nav-dash"></nav>
 
             <div class="dashboard-content px-3 pt-4">
-                <h2 class="fs-5">Lista de Clientes</h2>
+                <h2 class="fs-5">Facturación de Pedidos</h2>
 
                 <div class="table-responsive">
-                    <table id="tablaUsuarios" class="table table-bordered">
+                    <table id="tablaPedidos" class="table table-bordered">
 
                         <thead>
                         <tr>
-                            <th>Documento</th>
-                            <th>Nombres</th>
-                            <th>Apellido</th>
-                            <th>Telefono</th>
-                            <th>Fecha Nacimiento</th>
-                            <th>Email</th>
-                            <th>Foto</th>
-                            <th>Jornada</th>
+                            <th>Id Pedido</th>
+                            <th>Fecha</th>
+                            <th>ID Cliente</th>
+                            <th>Nombre de Cliente</th>
+                            <th>Producto</th>
+                            <th>Precio Unitario</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                            <th>Método de Pago</th>
                             <th>Acciones</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="cliente : ${clientes}">
-                            <td th:text="${cliente.tipo_documento}+' - '+${cliente.documentoC}"></td>
-                            <td th:text="${cliente.nombre}"></td>
-                            <td th:text="${cliente.apellido}"></td>
-                            <td th:text="${cliente.telefono}"></td>
-                            <td th:text="${cliente.fechaN}"></td>
-                            <td th:text="${cliente.email}"></td>
-                            <td th:text="${cliente.foto}"></td>
-                            <td th:text="${cliente.jornada}"></td>
+                        <tr th:each="pedido : ${pedidos}">
+                            <td th:text="${pedido.id_pedido}"></td>
+                            <td th:text="${#dates.format(pedido.compra.fecha_compra, 'dd-MMM-yyyy')}"></td>
+                            <td th:text="${pedido.compra.id_cliente.tipo_documento+' - '+pedido.compra.id_cliente.documentoC}"></td>
+                            <td th:text="${pedido.compra.id_cliente.nombre+' '+pedido.compra.id_cliente.apellido}"></td>
+                            <td th:text="${pedido.producto.nombre}"></td>
+                            <td th:text="${pedido.producto.precio}"></td>
+                            <td th:text="${pedido.cantidad}"></td>
+                            <td th:text="${(pedido.cantidad*pedido.producto.precio)}"></td>
+                            <td th:text="${pedido.compra.id_metodopago.descripcion}"></td>
 
                             <td>
-                                <a th:href="@{/admin/editar/}+${cliente.documentoC}" style="text-decoration: none">
+                                <a th:href="@{/admin/dash-fact-productos/expand/}+${pedido.id_pedido}" style="text-decoration: none">
                                     <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
                                 </a>
-                                <!--
-                                <a th:href="@{/admin/eliminar(documentoC=${usuario.documentoC})}" class="btn btn-danger">
-                                    <i class="fas fa-angle-double-right"></i> Eliminar
-                                </a>
-                                -->
                             </td>
                         </tr>
                         </tbody>
@@ -84,7 +81,7 @@
     <!--SCRIPT DATATABLE-->
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#tablaUsuarios').DataTable({
+            $('#tablaPedidos').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
                     'excel', 'pdf'

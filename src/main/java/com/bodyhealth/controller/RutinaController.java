@@ -32,7 +32,7 @@ public class RutinaController {
         model.addAttribute("rutina_ejercicios",listarRutinaEjercicio());
         model.addAttribute("ejercicios",listarEjercicios());
 
-        return "/admin/dash-rutinas";
+        return "/admin/rutinas/dash-rutinas";
     }
 
     public List<RutinaEjercicio> listarRutinaEjercicio(){

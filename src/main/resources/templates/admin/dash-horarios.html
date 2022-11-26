@@ -12,7 +12,7 @@
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/webjars/datatables/1.10.15/media/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/webjars/datatables/1.10.20/media/js/jquery.dataTables.min.js}"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/dash-style.css" />
 </head>
@@ -26,9 +26,9 @@
             <nav th:replace="/layouts/nav-dash :: nav-dash"></nav>
 
             <div class="dashboard-content px-3 pt-4">
-                <h2 class="fs-5">Lista de Horarios</h2>
+                <h2 class="fs-3">Horarios Por Jornada</h2>
+                <h2 class="fs-5">Jornada de la mañana</h2>
 
-                <!-- CONTENIDO ACA -->
                 <div class="table-responsive">
                     <table id="horario" class="table table-bordered table-striped text-center">
                         <thead>
@@ -82,6 +82,92 @@
                         </tr>
                         <tr>
                             <td>3:00 PM - 5:00 PM</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>5:00 PM - 7:00 PM</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>7:00 PM - 9:00 PM</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="6">📢 Este horario solo aplica para jornada de la mañana 📢</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <br>
+                <h2 class="fs-5">Jornada de la Tarde</h2>
+                <div class="table-responsive">
+                    <table id="horarioTarde" class="table table-bordered table-striped text-center">
+                        <thead>
+                        <th>HORA</th>
+                        <th>LUNES</th>
+                        <th>MARTES</th>
+                        <th>MIERCOLES</th>
+                        <th>JUEVES</th>
+                        <th>VIERNES</th>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>5:00 AM - 7:00 AM</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>7:00 AM - 9:00 AM</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>9:00 AM - 11:00 AM</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>11:00 AM - 12:00 PM</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Descanso</td>
+                            <td><i class="fa-solid fa-utensils"></i></td>
+                            <td><i class="fa-solid fa-utensils"></i></td>
+                            <td><i class="fa-solid fa-utensils"></i></td>
+                            <td><i class="fa-solid fa-utensils"></i></td>
+                            <td><i class="fa-solid fa-utensils"></i></td>
+                        </tr>
+                        <tr>
+                            <td>3:00 PM - 5:00 PM</td>
                             <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
                             <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
                             <td><i class="fa-solid fa-square-check" style="color: darkgreen"></i></td>
@@ -107,7 +193,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="6">📢 Este horario solo aplica para 1002 📢</td>
+                            <td colspan="6">📢 Este horario solo aplica para la jornada de la tarde 📢</td>
                         </tr>
                         </tfoot>
                     </table>
@@ -124,17 +210,6 @@
     <!--SCRIPTS BOTONES-->
     <div th:replace="/layouts/scripts :: scripts"></div>
 
-    <!--SCRIPT DATATABLE-->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#horarios').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'excel', 'pdf'
-                ],
-            });
-        });
-    </script>
 
 </body>
 </html>

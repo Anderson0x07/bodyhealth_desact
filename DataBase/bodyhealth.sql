@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-11-2022 a las 22:21:51
+-- Tiempo de generación: 26-11-2022 a las 22:10:04
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -54,6 +54,7 @@ INSERT INTO `administrador` (`documentoA`, `tipodocumento`, `nombre`, `apellido`
 --
 
 CREATE TABLE `cliente` (
+  `id_cliente` int(15) NOT NULL,
   `documentoC` int(15) NOT NULL,
   `tipo_documento` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -72,11 +73,8 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`documentoC`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `foto`, `jornada`, `estado`, `id_rol`) VALUES
-(999, 'CC', 'Anderson', 'Perez', '3219238493', '2003-07-07', 'mg@gmail.com', '1234', 'foto', 'mañana', 1, 2),
-(1004, 'CC', 'PRUEBA1', 'DOS1', '1234', '2003-10-15', 'ande@gmail.com', '123', 'foto', 'mañana', 1, 2),
-(9991, 'CC', 'Miguel Perez', 'Perez', '3219238493', '2022-11-02', 'mg@gmail.com', '1234', 'foto', 'mañana', 0, 2),
-(9992, 'CC', 'Miguel Perez', 'Perez', '3219238493', '2022-11-02', 'mg@gmail.com', '1234', 'foto', 'mañana', 0, 2);
+INSERT INTO `cliente` (`id_cliente`, `documentoC`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `foto`, `jornada`, `estado`, `id_rol`) VALUES
+(10, 999, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-17', 'anderson07rolon@gmail.com', '12345', NULL, 'mañana', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -85,6 +83,7 @@ INSERT INTO `cliente` (`documentoC`, `tipo_documento`, `nombre`, `apellido`, `te
 --
 
 CREATE TABLE `cliente_detalle` (
+  `id_factura` int(11) NOT NULL,
   `documentoC` int(11) NOT NULL,
   `id_detalle` int(11) NOT NULL,
   `fecha_inicio` date NOT NULL,
@@ -96,8 +95,8 @@ CREATE TABLE `cliente_detalle` (
 -- Volcado de datos para la tabla `cliente_detalle`
 --
 
-INSERT INTO `cliente_detalle` (`documentoC`, `id_detalle`, `fecha_inicio`, `fecha_fin`, `id_metodopago`) VALUES
-(1004, 2, '2022-11-24', '2022-12-24', 3);
+INSERT INTO `cliente_detalle` (`id_factura`, `documentoC`, `id_detalle`, `fecha_inicio`, `fecha_fin`, `id_metodopago`) VALUES
+(0, 1004, 2, '2022-11-24', '2022-12-24', 3);
 
 -- --------------------------------------------------------
 
@@ -149,6 +148,13 @@ CREATE TABLE `compra` (
   `id_metodopago` int(15) DEFAULT NULL,
   `fecha_compra` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`id_compra`, `id_cliente`, `id_metodopago`, `fecha_compra`) VALUES
+(1, 999, 3, '2022-11-26');
 
 -- --------------------------------------------------------
 
@@ -302,7 +308,11 @@ CREATE TABLE `maquina` (
 
 INSERT INTO `maquina` (`id_maquina`, `nombre`, `estado`, `observacion`, `id_proveedor`) VALUES
 (1, 'Maquina A', 'Bueno', 'N/A', 2),
-(3, 'prueba', 'Bien', 'SI', 1);
+(3, 'prueba', 'Bien', 'SI', 1),
+(4, 'Anderson', 'Bien', 'no', 1),
+(5, 'prueba', 'Bien', 'no', 1),
+(6, 'Anderson', 'Bien', 'no', 1),
+(7, 'Anderson', 'Bien', 'no', 1);
 
 -- --------------------------------------------------------
 
@@ -353,9 +363,16 @@ CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
   `id_producto` int(11) NOT NULL,
   `id_compra` int(11) NOT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  `subtotal` double DEFAULT NULL
+  `cantidad` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`id_pedido`, `id_producto`, `id_compra`, `cantidad`) VALUES
+(99, 1, 1, 3),
+(100, 3, 1, 15);
 
 -- --------------------------------------------------------
 
@@ -399,7 +416,8 @@ CREATE TABLE `proveedor` (
 INSERT INTO `proveedor` (`id_proveedor`, `nombre_empresa`, `telefono`, `direccion`) VALUES
 (1, 'Empresa Gimnasio2', '3219238493', 'Av 3A #12-22 La Playa'),
 (2, 'Empresa4', '23223', 'sdsd'),
-(5, 'UFPS2', '3219238493', 'Calle 1 #4-49 CECI');
+(5, 'UFPS2', '3219238493', 'Calle 1 #4-49 CECI'),
+(6, 'UFPS 2', '3219238493', 'Calle 1 #4-49');
 
 -- --------------------------------------------------------
 
@@ -477,16 +495,18 @@ ALTER TABLE `administrador`
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`documentoC`),
+  ADD PRIMARY KEY (`id_cliente`) USING BTREE,
+  ADD UNIQUE KEY `documentoC` (`documentoC`),
   ADD KEY `id_rol` (`id_rol`);
 
 --
 -- Indices de la tabla `cliente_detalle`
 --
 ALTER TABLE `cliente_detalle`
-  ADD PRIMARY KEY (`documentoC`,`fecha_inicio`,`id_detalle`) USING BTREE,
+  ADD PRIMARY KEY (`id_factura`) USING BTREE,
   ADD KEY `id_detalle` (`id_detalle`),
-  ADD KEY `id_metodopago` (`id_metodopago`);
+  ADD KEY `id_metodopago` (`id_metodopago`),
+  ADD KEY `cliente_detalle_ibfk_2` (`documentoC`);
 
 --
 -- Indices de la tabla `cliente_rutina`
@@ -576,7 +596,7 @@ ALTER TABLE `musculo`
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  ADD PRIMARY KEY (`id_pedido`,`id_producto`,`id_compra`),
+  ADD PRIMARY KEY (`id_pedido`) USING BTREE,
   ADD KEY `id_compra` (`id_compra`),
   ADD KEY `id_producto` (`id_producto`);
 
@@ -621,7 +641,7 @@ ALTER TABLE `rutina_ejercicio`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `documentoC` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9994;
+  MODIFY `id_cliente` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle`
@@ -633,7 +653,13 @@ ALTER TABLE `detalle`
 -- AUTO_INCREMENT de la tabla `maquina`
 --
 ALTER TABLE `maquina`
-  MODIFY `id_maquina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_maquina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `pedido`
+--
+ALTER TABLE `pedido`
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -645,7 +671,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -668,15 +694,13 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `cliente_detalle`
   ADD CONSTRAINT `cliente_detalle_ibfk_1` FOREIGN KEY (`id_detalle`) REFERENCES `detalle` (`id_detalle`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cliente_detalle_ibfk_2` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `cliente_detalle_ibfk_3` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
-  ADD CONSTRAINT `cliente_rutina_ibfk_1` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cliente_rutina_ibfk_2` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `cliente_rutina_ibfk_2` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Filtros para la tabla `cliente_rutina_ejercicio`
@@ -689,14 +713,7 @@ ALTER TABLE `cliente_rutina_ejercicio`
 -- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `control_cliente`
---
-ALTER TABLE `control_cliente`
-  ADD CONSTRAINT `control_cliente_fk` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `control_entrenador`
@@ -721,8 +738,7 @@ ALTER TABLE `entrenador`
 -- Filtros para la tabla `entrenador_cliente`
 --
 ALTER TABLE `entrenador_cliente`
-  ADD CONSTRAINT `entrenador_cliente_ibfk_1` FOREIGN KEY (`documentoC`) REFERENCES `cliente` (`documentoC`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `entrenador_cliente_ibfk_2` FOREIGN KEY (`documentoE`) REFERENCES `entrenador` (`documentoE`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `entrenador_cliente_ibfk_2` FOREIGN KEY (`documentoE`) REFERENCES `entrenador` (`documentoE`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Filtros para la tabla `maquina`

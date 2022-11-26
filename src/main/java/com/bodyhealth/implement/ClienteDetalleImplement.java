@@ -31,6 +31,6 @@ public class ClienteDetalleImplement implements ClienteDetalleService {
     @Override
     public ClienteDetalle encontrarClienteDetalle(ClienteDetalle clienteDetalle) {
 
-        return clienteDetalleRepository.findById(clienteDetalle.getDocumentoC()).orElse(null);
+        return clienteDetalleRepository.findById(clienteDetalle.getId_factura()).orElse(null);
     }
 }

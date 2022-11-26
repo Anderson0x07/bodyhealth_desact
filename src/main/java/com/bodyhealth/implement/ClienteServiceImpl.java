@@ -36,7 +36,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     @Transactional(readOnly = true)
     public Cliente encontrarCliente(Cliente cliente) {
-        return clienteRepo.findById(cliente.getDocumentoC()).orElse(null);
+        return clienteRepo.findById(cliente.getId_cliente()).orElse(null);
     }
 
     @Transactional(readOnly = true)

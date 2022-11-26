@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface ClienteRutinaRepository extends JpaRepository<ClienteRutina,Integer> {
     @Query(
-            value = "SELECT * FROM cliente_rutina cr where cr.documentoC = :cliente",
+            value = "SELECT * FROM cliente_rutina cr where cr.id_cliente = :cliente",
             nativeQuery=true
     )
-    ClienteRutina encontrarRutina(@Param("cliente") int document);
+    ClienteRutina encontrarRutina(@Param("cliente") int id_cliente);
 }

@@ -45,6 +45,8 @@ public class ClienteController {
 
     @Autowired
     private ClienteRutinaRepository clienteRutinaRepository;
+    @Autowired
+    private RolRepository rolRepository;
 
 
 
@@ -56,21 +58,33 @@ public class ClienteController {
         List<Cliente> desactivados = clienteService.listarDesactivados();
         model.addAttribute("clientes",activos);
         model.addAttribute("clientesDesactivados",desactivados);
+        model.addAttribute("rol",rolRepository.getReferenceById(2));
 
         return "/admin/clientes/dash-clientes";
     }
 
-    @GetMapping("/admin/dash-clientes/expand/{documentoC}")
+    @GetMapping("/admin/dash-clientes/expand/{id_cliente}")
     public String mostrarCliente(Cliente cliente, Model model){
 
+        log.info("CLIENTE QUE LLEGA: "+cliente.toString());
 
-        cliente = clienteService.encontrarCliente(cliente);
+        Cliente cnuevo = clienteService.encontrarCliente(cliente);
+        model.addAttribute("cliente",cnuevo);
 
 
-        model.addAttribute("cliente",cliente);
-        model.addAttribute("entrenadorcliente",entrenadorClienteRepository.encontrarEntrenador(cliente.getDocumentoC()));
-        model.addAttribute("clientedetalle",clienteDetalleRepository.encontrarPlan(cliente.getDocumentoC()));
-        model.addAttribute("rutinacliente", clienteRutinaRepository.encontrarRutina(cliente.getDocumentoC()));
+        if(entrenadorClienteRepository.encontrarEntrenador(cnuevo.getId_cliente())!=null){
+            model.addAttribute("entrenadorcliente",entrenadorClienteRepository.encontrarEntrenador(cnuevo.getDocumentoC()));
+        }
+
+        if(clienteDetalleRepository.encontrarPlan(cnuevo.getId_cliente())!=null){
+            model.addAttribute("clientedetalle",clienteDetalleRepository.encontrarPlan(cnuevo.getDocumentoC()));
+        }
+
+        if(clienteRutinaRepository.encontrarRutina(cnuevo.getId_cliente()) != null){
+            model.addAttribute("rutinacliente", clienteRutinaRepository.encontrarRutina(cnuevo.getDocumentoC()));
+        }
+
+
 
         return "/admin/clientes/cliente-expand";
     }
@@ -79,10 +93,12 @@ public class ClienteController {
     @PostMapping("/admin/dash-clientes/expand/guardar")
     public String guardarCliente(Cliente cliente){
 
+        log.info("LLEGÓ: "+cliente.getDocumentoC());
         clienteService.guardar(cliente);
 
-        return "redirect:/admin/dash-clientes/expand/"+cliente.getDocumentoC();
+        return "redirect:/admin/dash-clientes";
     }
+
 
     //ACTUALIZA ENTRENADOR A CLIENTE
     @PostMapping("/admin/dash-clientes/expand/guardar-trainer")
@@ -114,7 +130,7 @@ public class ClienteController {
         log.info("COPIA: "+copia);
         int documentoC = clienteDetalle.getCliente().getDocumentoC();
 
-        clienteDetalle.setId_detalle(clienteDetalle.getId_detalle());
+        clienteDetalle.setDetalle(clienteDetalle.getDetalle());
 
         //clienteDetalleService.eliminar(copia);
         clienteDetalleService.guardar(clienteDetalle);
@@ -151,7 +167,7 @@ public class ClienteController {
 
 
     //Desactiva clientes en el dashboard del admin
-    @GetMapping("/admin/dash-clientes/expand/desactivar/{documentoC}")
+    @GetMapping("/admin/dash-clientes/expand/desactivar/{id_cliente}")
     public String desactivarCliente(Cliente cliente){
 
         cliente = clienteService.encontrarCliente(cliente);
@@ -165,7 +181,7 @@ public class ClienteController {
     }
 
     //Desactiva clientes en el dashboard del admin
-    @GetMapping("/admin/dash-clientes/expand/activar/{documentoC}")
+    @GetMapping("/admin/dash-clientes/expand/activar/{id_cliente}")
     public String activarCliente(Cliente cliente){
 
         cliente = clienteService.encontrarCliente(cliente);

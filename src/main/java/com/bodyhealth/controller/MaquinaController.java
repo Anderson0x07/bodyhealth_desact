@@ -5,6 +5,7 @@ import com.bodyhealth.model.Maquina;
 import com.bodyhealth.service.DetalleService;
 import com.bodyhealth.service.MaquinaService;
 import com.bodyhealth.service.ProveedorService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequestMapping("/admin")
 public class MaquinaController {
     @Autowired
@@ -34,6 +36,9 @@ public class MaquinaController {
     //Guarda nueva maquina
     @PostMapping("/dash-maquinas/guardar")
     public String guardarNuevaMaquina(Maquina maquina){
+
+        log.info("MAQUINA: "+maquina.toString());
+
 
         maquinaService.guardar(maquina);
 

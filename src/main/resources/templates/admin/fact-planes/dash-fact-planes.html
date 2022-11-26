@@ -12,7 +12,7 @@
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/webjars/datatables/1.10.15/media/js/jquery.dataTables.min.js}"></script>
+    <script th:src="@{/webjars/datatables/1.10.20/media/js/jquery.dataTables.min.js}"></script>
 
     <link rel="stylesheet" type="text/css" href="/css/dash-style.css" />
 </head>
@@ -26,17 +26,21 @@
             <nav th:replace="/layouts/nav-dash :: nav-dash"></nav>
 
             <div class="dashboard-content px-3 pt-4">
-                <h2 class="fs-5">Facturas de Planes</h2>
+                <h2 class="fs-5">Facturación de Planes</h2>
 
                 <div class="table-responsive">
                     <table id="tablaFactPlan" class="table table-bordered">
 
                         <thead>
                         <tr>
-                            <th>Cliente</th>
+                            <th>Factura #</th>
+                            <th>Fecha</th>
+                            <th>Nombre de Cliente</th>
                             <th>Detalle de Plan</th>
+                            <th>Suscripción</th>
                             <th>Fecha Inicio</th>
                             <th>Fecha Finalizacion</th>
+                            <th>Total</th>
                             <th>Método de Pago</th>
 
                             <th>Acciones</th>
@@ -45,14 +49,18 @@
                         </thead>
                         <tbody>
                         <tr th:each="factura : ${factPlan}">
-                            <td th:text="${factura.cliente.documentoC}"></td>
-                            <td th:text="${factura.id_detalle}"></td>
-                            <td th:text="${factura.fecha_inicio}"></td>
-                            <td th:text="${factura.fecha_fin}"></td>
-                            <td th:text="${factura.id_metodopago.descripcion}"></td>
+                            <td th:text="${factura.id_factura}"></td>
+                            <td th:text="${#dates.format(factura.fecha_inicio, 'dd-MMM-yyyy')}"></td>
+                            <td th:text="${factura.cliente.nombre}"></td>
+                            <td th:text="${factura.detalle.plan}"></td>
+                            <td th:text="'Por '+${factura.detalle.meses}+' Meses'"></td>
+                            <td th:text="${#dates.format(factura.fecha_inicio, 'dd-MMM-yyyy')}"></td>
+                            <td th:text="${#dates.format(factura.fecha_fin, 'dd-MMM-yyyy')}"></td>
+                            <td th:text="'$'+${factura.detalle.meses}"></td>
+                            <td th:text="${factura.metodoPago.descripcion}"></td>
 
                             <td>
-                                <a th:href="@{/admin/dash-fact-planes/expand/} + ${factura.id_detalle}" style="text-decoration: none">
+                                <a th:href="@{/admin/dash-fact-planes/expand/} + ${factura.id_factura}" style="text-decoration: none">
                                     <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
                                 </a>
                             </td>

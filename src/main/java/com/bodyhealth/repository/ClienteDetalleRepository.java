@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface ClienteDetalleRepository extends JpaRepository<ClienteDetalle,Integer> {
     @Query(
-            value = "SELECT * from cliente_detalle cd where cd.documentoC = :cliente",
+            value = "SELECT * from cliente_detalle cd where cd.id_cliente = :cliente",
             nativeQuery=true
     )
-    ClienteDetalle encontrarPlan(@Param("cliente") int document);
+    ClienteDetalle encontrarPlan(@Param("cliente") int id_cliente);
 }
