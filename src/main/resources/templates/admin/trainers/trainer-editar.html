@@ -38,13 +38,20 @@
                     <div class="card-body">
 
                         <form th:action="@{/admin/dash-trainers/expand/guardar}" th:object="${trainer}" method="POST">
-
+                            <input type="hidden" name="estado" th:field="*{estado}"/>
+                            <input type="hidden" name="id_admin" th:field="*{id_admin}"/>
+                            <input type="hidden" name="id_rol" th:field="*{id_rol}"/>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="card">
                                             <div class="card-body">
 
+                                                <div class="form-group">
+                                                    <label for="id_entrenador">Id Entrenador: </label>
+                                                    <input type="text" class="form-control" name="id_entrenador" id="id_entrenador"
+                                                           readonly th:field="*{id_entrenador}"/>
+                                                </div>
                                                 <div class="form-group">
                                                     <label for="tipo_documento">Tipo de Documento: </label>
                                                     <input type="text" class="form-control" name="tipo_documento" id="tipo_documento"
@@ -123,6 +130,7 @@
 
                                                     </select> <br>
                                                 </div>
+
 
 
                                             </div>

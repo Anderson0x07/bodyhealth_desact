@@ -14,7 +14,7 @@ public interface EntrenadorService {
 
     public void eliminar(Entrenador entrenador);
 
-    public Entrenador encontrarEntrenador(int id_entrenador);
+    public Entrenador encontrarEntrenador(Entrenador entrenador);
 
     public List<Entrenador> listarActivos();
 

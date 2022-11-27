@@ -38,7 +38,7 @@ public class EntrenadorController {
     public String mostrarEntrenador(Entrenador entrenador, Model model){
 
 
-        Entrenador trainer = entrenadorService.encontrarEntrenador(entrenador.getId_entrenador());
+        Entrenador trainer = entrenadorService.encontrarEntrenador(entrenador);
         model.addAttribute("trainer",trainer);
 
 
@@ -48,7 +48,7 @@ public class EntrenadorController {
     @GetMapping("/dash-trainers/expand/editar/{id_entrenador}")
     public String editar(Entrenador entrenador, Model model){
 
-        entrenador = entrenadorService.encontrarEntrenador(entrenador.getId_entrenador());
+        entrenador = entrenadorService.encontrarEntrenador(entrenador);
 
         model.addAttribute("trainer",entrenador);
 
@@ -69,7 +69,7 @@ public class EntrenadorController {
     @GetMapping("/dash-trainers/expand/desactivar/{id_entrenador}")
     public String desactivarEntrenador(Entrenador entrenador){
 
-        entrenador = entrenadorService.encontrarEntrenador(entrenador.getId_entrenador());
+        entrenador = entrenadorService.encontrarEntrenador(entrenador);
 
         entrenador.setEstado(false);
 
@@ -83,7 +83,7 @@ public class EntrenadorController {
     @GetMapping("/dash-trainers/expand/activar/{id_entrenador}")
     public String activarEntrenador(Entrenador entrenador){
 
-        entrenador = entrenadorService.encontrarEntrenador(entrenador.getId_entrenador());
+        entrenador = entrenadorService.encontrarEntrenador(entrenador);
 
         entrenador.setEstado(true);
 
