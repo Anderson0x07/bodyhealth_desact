@@ -12,7 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,8 +98,17 @@ public class ClienteController {
 
     //Guarda clientes en el dashboard del admin
     @PostMapping("/admin/dash-clientes/expand/guardar")
-    public String guardarCliente(Cliente cliente){
-
+    public String guardarCliente(Cliente cliente,@RequestParam("file") MultipartFile imagen){
+        Path directorioImagenes = Paths.get("src//main//resources//static/images");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+            Files.write(rutaCompleta, bytesImg);
+            cliente.setFoto(imagen.getOriginalFilename());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         log.info("LLEGÓ: "+cliente.getDocumentoC());
         clienteService.guardar(cliente);
 
