@@ -108,13 +108,13 @@ public class ClienteController {
         EntrenadorCliente copia = entrenadorClienteRepository.encontrarEntrenador(entrenadorCliente.getCliente().getDocumentoC());
         int documentoC = entrenadorCliente.getCliente().getDocumentoC();
 
-        entrenadorCliente.setDocumentoE(entrenadorCliente.getEntrenador().getDocumentoE());
-        entrenadorCliente.setDocumentoC(entrenadorCliente.getCliente().getDocumentoC());
+        entrenadorCliente.setId_entrenador(entrenadorCliente.getEntrenador().getDocumentoE());
+        entrenadorCliente.setId_cliente(entrenadorCliente.getCliente().getDocumentoC());
 
         entrenadorClienteService.eliminar(copia);
         entrenadorClienteService.guardar(entrenadorCliente);
 
-        model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(entrenadorCliente.getDocumentoC()));
+        model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(entrenadorCliente.getId_cliente()));
 
 
         return "redirect:/admin/dash-clientes/expand/editar/"+documentoC;
@@ -171,7 +171,7 @@ public class ClienteController {
     public String desactivarCliente(Cliente cliente){
 
         cliente = clienteService.encontrarCliente(cliente);
-
+        log.info(cliente.toString());
         cliente.setEstado(false);
 
         clienteService.guardar(cliente);

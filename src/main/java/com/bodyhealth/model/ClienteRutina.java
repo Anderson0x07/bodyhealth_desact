@@ -12,8 +12,8 @@ public class ClienteRutina implements Serializable {
     @Id
     private int id_clienterutina;
     @ManyToOne
-    @JoinColumn(name = "documentoC")
-    private Cliente documentoC;
+    @JoinColumn(name = "id_cliente")
+    private Cliente id_cliente;
     @ManyToOne
     @JoinColumn(name = "id_rutina")
     private Rutina id_rutina;

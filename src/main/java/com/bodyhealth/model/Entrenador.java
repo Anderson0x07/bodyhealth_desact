@@ -17,6 +17,8 @@ public class Entrenador implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_entrenador;
+
     private int documentoE;
 
     private String tipo_documento;
@@ -42,8 +44,8 @@ public class Entrenador implements Serializable {
     private String jornada;
 
     @ManyToOne
-    @JoinColumn(name="documentoA")
-    private Administrador documentoA;
+    @JoinColumn(name="id_admin")
+    private Administrador id_admin;
 
     @ManyToOne
     @JoinColumn(name="id_rol")

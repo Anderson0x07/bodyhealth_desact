@@ -17,7 +17,7 @@ public class ClienteDetalle implements Serializable {
     private int id_factura;
 
     @ManyToOne
-    @JoinColumn(name = "documentoC")
+    @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
     @ManyToOne

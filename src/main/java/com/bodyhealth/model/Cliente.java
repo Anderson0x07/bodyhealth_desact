@@ -38,6 +38,8 @@ public class Cliente implements Serializable {
 
     private String jornada;
 
+    private String comentario;
+
     private boolean estado;
     @ManyToOne
     @JoinColumn(name = "id_rol")

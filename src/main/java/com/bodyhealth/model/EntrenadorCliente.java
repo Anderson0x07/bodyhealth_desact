@@ -11,14 +11,14 @@ import java.io.Serializable;
 public class EntrenadorCliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int documentoE;
+    private int id_entrenador;
     @ManyToOne
-    @JoinColumn(name = "documentoE",insertable = false,updatable = false,nullable = false)
+    @JoinColumn(name = "id_entrenador",insertable = false,updatable = false,nullable = false)
     private Entrenador entrenador;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int documentoC;
+    private int id_cliente;
     @ManyToOne
-    @JoinColumn(name = "documentoC",insertable = false,updatable = false,nullable = false)
+    @JoinColumn(name = "id_cliente",insertable = false,updatable = false,nullable = false)
     private Cliente cliente;
 }

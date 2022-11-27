@@ -25,6 +25,8 @@ public class Producto implements Serializable{
 
     private double precio;
 
+    private boolean estado;
+
     @ManyToOne
     @JoinColumn(name = "id_proveedor")
     private Proveedor id_proveedor;

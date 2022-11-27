@@ -104,10 +104,10 @@
                                 </a>
                             </div>
                             <div  class="col-2">
-                                <a th:if="${cliente.estado == true}" th:href="@{/admin/dash-clientes/expand/desactivar/} + ${cliente.documentoC}" class="btn btn-danger btn-block">
+                                <a th:if="${cliente.estado == true}" th:href="@{/admin/dash-clientes/expand/desactivar/} + ${cliente.id_cliente}" class="btn btn-danger btn-block">
                                     <i class="fa-solid fa-xmark"></i> Desactivar
                                 </a>
-                                <a th:if="${cliente.estado == false}" th:href="@{/admin/dash-clientes/expand/activar/} + ${cliente.documentoC}" class="btn btn-success btn-block">
+                                <a th:if="${cliente.estado == false}" th:href="@{/admin/dash-clientes/expand/activar/} + ${cliente.id_cliente}" class="btn btn-success btn-block">
                                     <i class="fas fa-check"></i> Activar
                                 </a>
                             </div>

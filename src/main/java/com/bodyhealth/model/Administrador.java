@@ -14,6 +14,8 @@ public class Administrador implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_admin;
+
     private int documentoA;
 
     private String tipodocumento;
