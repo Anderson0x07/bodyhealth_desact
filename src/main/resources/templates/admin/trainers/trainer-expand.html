@@ -30,7 +30,7 @@
 
                 <div class="card border-light">
                     <div class="card-header">
-                        <h3 class="card-title">Datos del cliente</h3>
+                        <h3 class="card-title">Datos del Entrenador</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -44,47 +44,61 @@
 
                                         <tr>
                                             <th>Tipo documento</th>
-                                            <td th:text="${cliente.tipo_documento}"></td>
+                                            <td th:text="${trainer.tipo_documento}"></td>
                                         </tr>
                                         <tr>
                                             <th>Documento</th>
-                                            <td th:text="${cliente.documentoC}"></td>
+                                            <td th:text="${trainer.documentoE}"></td>
                                         </tr>
                                         <tr>
                                             <th>Nombres</th>
-                                            <td th:text="${cliente.nombre}"></td>
+                                            <td th:text="${trainer.nombre}"></td>
                                         </tr>
                                         <tr>
                                             <th>Apellido</th>
-                                            <td th:text="${cliente.apellido}"></td>
+                                            <td th:text="${trainer.apellido}"></td>
                                         </tr>
                                         <tr>
                                             <th>Telefono</th>
-                                            <td th:text="${cliente.telefono}"></td>
+                                            <td th:text="${trainer.telefono}"></td>
                                         </tr>
                                         <tr>
                                             <th>Fecha de Nacimiento</th>
-                                            <td th:text="${#dates.format(cliente.fechaN, 'dd-MMM-yyyy')}"></td>
+                                            <td th:text="${#dates.format(trainer.fechaN, 'dd-MMM-yyyy')}"></td>
                                         </tr>
                                         <tr>
                                             <th>Email</th>
-                                            <td th:text="${cliente.email}"></td>
+                                            <td th:text="${trainer.email}"></td>
                                         </tr>
                                         <tr>
                                             <th>Contraseña</th>
-                                            <td th:text="${cliente.password}"></td>
+                                            <td th:text="${trainer.password}"></td>
                                         </tr>
                                         <tr>
                                             <th>Foto</th>
-                                            <td th:text="${cliente.foto}"></td>
+                                            <td th:text="${trainer.foto}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Experiencia</th>
+                                            <td th:text="${trainer.experiencia}+' Años'"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hoja de Vida</th>
+                                            <td th:if="${trainer.hoja_vida!=null}" th:text="${trainer.hoja_vida}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Título Académico</th>
+                                            <td th:text="${trainer.titulo_academico}"></td>
                                         </tr>
                                         <tr>
                                             <th>Jornada</th>
-                                            <td th:text="${cliente.jornada}"></td>
+                                            <td th:text="${trainer.jornada}"></td>
                                         </tr>
-
-
-
+                                        <tr>
+                                            <th>Creador</th>
+                                            <td th:text="${trainer.id_admin.nombre+' '+trainer.id_admin.apellido}"></td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
@@ -94,20 +108,20 @@
                         <div class="row">
                             <div class="col-6"></div>
                             <div class="col-2">
-                                <a th:href="@{/admin/dash-clientes}" class="btn btn-dark btn-block">
+                                <a th:href="@{/admin/dash-trainers}" class="btn btn-dark btn-block">
                                     <i class="fas fa-arrow-left"></i> Regresar
                                 </a>
                             </div>
                             <div class="col-2">
-                                <a th:href="@{/admin/dash-clientes/expand/editar/} + ${cliente.id_cliente}" class="btn btn-secondary">
+                                <a th:href="@{/admin/dash-trainers/expand/editar/} + ${trainer.id_entrenador}" class="btn btn-secondary">
                                     <i class="fas fa-angle-double-right"></i> Editar
                                 </a>
                             </div>
                             <div  class="col-2">
-                                <a th:if="${cliente.estado == true}" th:href="@{/admin/dash-clientes/expand/desactivar/} + ${cliente.id_cliente}" class="btn btn-danger btn-block">
+                                <a th:if="${trainer.estado == true}" th:href="@{/admin/dash-trainers/expand/desactivar/} + ${trainer.id_entrenador}" class="btn btn-danger btn-block">
                                     <i class="fa-solid fa-xmark"></i> Desactivar
                                 </a>
-                                <a th:if="${cliente.estado == false}" th:href="@{/admin/dash-clientes/expand/activar/} + ${cliente.id_cliente}" class="btn btn-success btn-block">
+                                <a th:if="${trainer.estado == false}" th:href="@{/admin/dash-trainers/expand/activar/} + ${trainer.id_entrenador}" class="btn btn-success btn-block">
                                     <i class="fas fa-check"></i> Activar
                                 </a>
                             </div>

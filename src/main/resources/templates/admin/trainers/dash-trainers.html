@@ -26,7 +26,14 @@
             <nav th:replace="/layouts/nav-dash :: nav-dash"></nav>
 
             <div class="dashboard-content px-3 pt-4">
-                <h2 class="fs-5">Lista de Entrenadores</h2>
+                <h2 class="fs-3">Lista de Entrenadores Activos</h2>
+                <br>
+                <a href="#" class="btn btn-secondary"
+                   data-bs-toggle="modal" data-bs-target="#agregar-entrenador">
+                    <i class="fas fa-plus"></i> Agregar Entrenador
+                </a>
+                <section th:replace="/layouts/agregar-entrenador :: agregar-entrenador"></section>
+                <br> <br>
 
 
                 <div class="table-responsive">
@@ -54,22 +61,63 @@
                             <td th:text="${trainer.nombre}"></td>
                             <td th:text="${trainer.apellido}"></td>
                             <td th:text="${trainer.telefono}"></td>
+                            <td th:text="${#dates.format(trainer.fechaN, 'dd-MMM-yyyy')}"></td>
+                            <td th:text="${trainer.email}"></td>
+                            <td th:text="${trainer.experiencia}"></td>
+                            <td th:text="${trainer.hoja_vida}"></td>
+                            <td th:text="${trainer.titulo_academico}"></td>
+                            <td th:text="${trainer.id_admin.nombre}+' '+${trainer.id_admin.apellido}"></td>
+
+                            <td>
+                                <a th:href="@{/admin/dash-trainers/expand/} + ${trainer.id_entrenador}" style="text-decoration: none">
+                                    <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+
+                <h2 class="fs-3">Lista de Entrenadores Desactivados</h2>
+
+                <div class="table-responsive">
+                    <table id="tablaTrainersDesactivados" class="table table-bordered">
+
+                        <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Telefono</th>
+                            <th>Fecha Nacimiento</th>
+                            <th>Email</th>
+                            <th>Experiencia</th>
+                            <th>Hoja de Vida</th>
+                            <th>Titulo Académico</th>
+                            <th>Creador</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="trainer : ${trainersDesactivados}">
+                            <td th:text="${trainer.tipo_documento}+' - '+${trainer.documentoE}"></td>
+                            <td th:text="${trainer.nombre}"></td>
+                            <td th:text="${trainer.apellido}"></td>
+                            <td th:text="${trainer.telefono}"></td>
                             <td th:text="${trainer.fechaN}"></td>
                             <td th:text="${trainer.email}"></td>
                             <td th:text="${trainer.experiencia}"></td>
                             <td th:text="${trainer.hoja_vida}"></td>
                             <td th:text="${trainer.titulo_academico}"></td>
-                            <td th:text="${trainer.documentoA.nombre}+' '+${trainer.documentoA.apellido}"></td>
+                            <td th:text="${trainer.id_admin.nombre}+' '+${trainer.id_admin.apellido}"></td>
 
                             <td>
-                                <a th:href="@{/static}" style="text-decoration: none">
+                                <a th:href="@{/admin/dash-trainers/expand/} + ${trainer.id_entrenador}" style="text-decoration: none">
                                     <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
                                 </a>
-                                <!--
-                                <a th:href="@{/admin/eliminar(documentoC=${usuario.documentoC})}" class="btn btn-danger">
-                                    <i class="fas fa-angle-double-right"></i> Eliminar
-                                </a>
-                                -->
                             </td>
                         </tr>
                         </tbody>
@@ -98,6 +146,19 @@
             });
         });
     </script>
+
+    <!--SCRIPT DATATABLE-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tablaTrainersDesactivados').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel', 'pdf'
+                ],
+            });
+        });
+    </script>
+
 
 </body>
 </html>

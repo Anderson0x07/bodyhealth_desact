@@ -1,5 +1,6 @@
 package com.bodyhealth.implement;
 
+import com.bodyhealth.model.Cliente;
 import com.bodyhealth.model.Entrenador;
 import com.bodyhealth.repository.ClienteRepository;
 import com.bodyhealth.repository.EntrenadorRepository;
@@ -37,7 +38,17 @@ public class EntrenadorImplement implements EntrenadorService {
 
     @Override
     @Transactional(readOnly = true)
-    public Entrenador encontrarEntrenador(int documentoE) {
-        return entrenadorRepo.findById(documentoE).orElse(null);
+    public Entrenador encontrarEntrenador(int id_entrenador) {
+        return entrenadorRepo.findById(id_entrenador).orElse(null);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Entrenador> listarActivos(){
+        return (List<Entrenador>) entrenadorRepo.findByEstado(true);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Entrenador> listarDesactivados(){
+        return (List<Entrenador>) entrenadorRepo.findByEstado(false);
     }
 }

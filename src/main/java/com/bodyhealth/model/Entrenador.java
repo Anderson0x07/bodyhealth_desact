@@ -36,12 +36,16 @@ public class Entrenador implements Serializable {
 
     private String password;
 
+    private String foto;
+
     private String experiencia;
 
     private String hoja_vida;
 
     private String titulo_academico;
     private String jornada;
+
+    private boolean estado;
 
     @ManyToOne
     @JoinColumn(name="id_admin")
