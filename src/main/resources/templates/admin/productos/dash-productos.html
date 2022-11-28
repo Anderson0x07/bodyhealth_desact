@@ -26,7 +26,7 @@
             <nav th:replace="/layouts/nav-dash :: nav-dash"></nav>
 
             <div class="dashboard-content px-3 pt-4">
-                <h2 class="fs-3">Lista de Productos</h2> <br>
+                <h2 class="fs-3">Lista de Productos Activos</h2> <br>
 
                 <a href="#" class="btn btn-secondary"
                    data-bs-toggle="modal" data-bs-target="#agregar-producto">
@@ -71,6 +71,55 @@
                 </div>
 
             </div>
+
+            <div class="dashboard-content px-3 pt-4">
+                <h2 class="fs-3">Lista de Productos Desactivados</h2> <br>
+
+                <a href="#" class="btn btn-secondary"
+                   data-bs-toggle="modal" data-bs-target="#agregar-producto">
+                    <i class="fas fa-plus"></i> Agregar Producto
+                </a>
+
+                <section th:replace="/layouts/agregar-producto :: agregar-producto"></section> <br>
+
+
+                <div class="table-responsive">
+                    <table id="tablaProductosDesactivados" class="table table-bordered">
+
+                        <thead>
+                        <tr>
+                            <th>Id Producto</th>
+                            <th>Nombre</th>
+                            <th>Stock</th>
+                            <th>Precio</th>
+                            <th>Proveedor</th>
+                            <th>Acciones</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="producto : ${productossDesactivados}">
+                            <td th:text="${producto.id_producto}"></td>
+                            <td th:text="${producto.nombre}"></td>
+                            <td th:text="${producto.stock}"></td>
+                            <td th:text="${producto.precio}"></td>
+                            <td th:text="${producto.id_proveedor.nombre_empresa}"></td>
+
+                            <td>
+                                <a th:href="@{/admin/dash-productos/expand/} + ${producto.id_producto}" style="text-decoration: none">
+                                    <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+
         </div>
     </div>
 

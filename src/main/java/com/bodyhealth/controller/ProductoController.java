@@ -1,5 +1,6 @@
 package com.bodyhealth.controller;
 
+import com.bodyhealth.model.Entrenador;
 import com.bodyhealth.model.Maquina;
 import com.bodyhealth.model.Producto;
 import com.bodyhealth.model.Proveedor;
@@ -9,11 +10,13 @@ import com.bodyhealth.service.ProveedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -28,7 +31,10 @@ public class ProductoController {
     public String listarProductos(Model model){
         List<Producto> productos = productoService.listarProductos();
 
-        model.addAttribute("productos",productos);
+        List<Producto> activos = productoService.listarActivos();
+        List<Producto> desactivados = productoService.listarDesactivados();
+        model.addAttribute("productos",activos);
+        model.addAttribute("productossDesactivados",desactivados);
         model.addAttribute("proveedores",proveedorService.listarProveedores());
 
         return "/admin/productos/dash-productos";
@@ -36,7 +42,17 @@ public class ProductoController {
 
     //Guarda nuevo producto
     @PostMapping("/dash-productos/guardar")
-    public String guardarNuevoProducto(Producto producto){
+    public String guardarNuevoProducto(Producto producto,@RequestParam("file") MultipartFile imagen){
+        Path directorioImagenes = Paths.get("src//main//resources//static/images");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+            Files.write(rutaCompleta, bytesImg);
+            producto.setFoto(imagen.getOriginalFilename());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         productoService.guardar(producto);
 
@@ -55,8 +71,20 @@ public class ProductoController {
 
     //Guarda edición de producto en el dashboard del admin
     @PostMapping("/dash-productos/expand/guardar")
-    public String guardarEdicionProducto(Producto producto){
+    public String guardarEdicionProducto(Producto producto,@RequestParam("file") MultipartFile imagen){
 
+        Path directorioImagenes = Paths.get("src//main//resources//static/images");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+            //Path rutaCompleta1 = Paths.get(rutaAbsoluta + "//" + "Anime5.jpg");
+            //Files.delete(rutaCompleta1);
+            Files.write(rutaCompleta, bytesImg);
+            producto.setFoto(imagen.getOriginalFilename());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         productoService.guardar(producto);
 
         return "redirect:/admin/dash-productos/expand/"+producto.getId_producto();
@@ -78,6 +106,33 @@ public class ProductoController {
     @GetMapping("/dash-productos/eliminar")
     public String eliminarProducto(Producto producto){
         productoService.eliminar(producto);
+        return "redirect:/admin/dash-productos";
+    }
+
+    @GetMapping("/dash-productos/expand/desactivar/{id_producto}")
+    public String desactivarProducto(Producto producto){
+
+        producto = productoService.encontrarProducto(producto);
+
+        producto.setEstado(false);
+
+        productoService.guardar(producto);
+
+
+        return "redirect:/admin/dash-productos";
+    }
+
+    //Desactiva entrenadores en el dashboard del admin
+    @GetMapping("/dash-productos/expand/activar/{id_producto}")
+    public String activarProducto(Producto producto){
+
+        producto = productoService.encontrarProducto(producto);
+
+        producto.setEstado(true);
+
+        productoService.guardar(producto);
+
+
         return "redirect:/admin/dash-productos";
     }
 }

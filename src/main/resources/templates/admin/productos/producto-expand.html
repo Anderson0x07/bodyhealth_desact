@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-5">
-                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="80%" height="90%">
+                                <img th:src="@{'/images/' + ${producto.foto}}" width="500" height="450">
                             </div>
                             <div class="col-7">
 
@@ -82,11 +82,12 @@
                                 </a>
                             </div>
                             <div  class="col-2">
-
-                                <a th:href="@{/admin/dash-productos/eliminar(id_producto=${producto.id_producto})}" class="btn btn-danger">
-                                    <i class="fas fa-angle-double-right"></i> Eliminar
+                                <a th:if="${producto.estado == true}" th:href="@{/admin/dash-productos/expand/desactivar/} + ${producto.id_producto}" class="btn btn-danger btn-block">
+                                    <i class="fa-solid fa-xmark"></i> Desactivar
                                 </a>
-
+                                <a th:if="${producto.estado == false}" th:href="@{/admin/dash-productos/expand/activar/} + ${producto.id_producto}" class="btn btn-success btn-block">
+                                    <i class="fas fa-check"></i> Activar
+                                </a>
                             </div>
                         </div>
                     </div>

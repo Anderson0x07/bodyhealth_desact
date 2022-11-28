@@ -38,6 +38,7 @@
                     <div class="card-body">
 
                         <form th:action="@{/admin/dash-clientes/expand/guardar}" th:object="${cliente}" method="POST">
+                            <input type="hidden" name="id_cliente" th:field="*{id_cliente}"/>
                             <input type="hidden" name="documentoC" th:field="*{documentoC}"/>
                             <input type="hidden" name="tipo_documento" th:field="*{tipo_documento}"/>
                             <input type="hidden" name="rol" th:field="*{id_rol}"/>

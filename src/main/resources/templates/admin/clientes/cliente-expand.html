@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-5">
-                                <img th:src="@{'/images/' + ${cliente.foto}}" width="80%" height="90%">
+                                <img th:src="@{'/images/' + ${cliente.foto}}" width="500" height="450">
                             </div>
                             <div class="col-7">
 
@@ -99,7 +99,7 @@
                                 </a>
                             </div>
                             <div class="col-2">
-                                <a th:href="@{/admin/dash-clientes/expand/editar/} + ${cliente.id_cliente}" class="btn btn-secondary">
+                                <a th:href="@{/admin/dash-clientes/expand/editar/ } + ${cliente.id_cliente}" class="btn btn-secondary">
                                     <i class="fas fa-angle-double-right"></i> Editar
                                 </a>
                             </div>

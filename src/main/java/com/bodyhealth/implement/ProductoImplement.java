@@ -1,5 +1,6 @@
 package com.bodyhealth.implement;
 
+import com.bodyhealth.model.Entrenador;
 import com.bodyhealth.model.Producto;
 import com.bodyhealth.repository.ProductoRepository;
 import com.bodyhealth.service.ProductoService;
@@ -30,5 +31,15 @@ public class ProductoImplement implements ProductoService {
     @Override
     public Producto encontrarProducto(Producto producto) {
         return productoRepository.findById(producto.getId_producto()).orElse(null);
+    }
+
+    @Override
+    public List<Producto> listarActivos() {
+        return (List<Producto>) productoRepository.findByEstado(true);
+    }
+
+    @Override
+    public List<Producto> listarDesactivados() {
+        return (List<Producto>) productoRepository.findByEstado(false);
     }
 }

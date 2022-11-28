@@ -12,7 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -47,6 +53,7 @@ public class EntrenadorController {
 
     @GetMapping("/dash-trainers/expand/editar/{id_entrenador}")
     public String editar(Entrenador entrenador, Model model){
+        
 
         entrenador = entrenadorService.encontrarEntrenador(entrenador);
 
@@ -58,7 +65,17 @@ public class EntrenadorController {
 
     //Guarda edición de entrenador en el dashboard del admin
     @PostMapping("/dash-trainers/expand/guardar")
-    public String guardarEdicionEntrenador(Entrenador entrenador){
+    public String guardarEdicionEntrenador(Entrenador entrenador,@RequestParam("file") MultipartFile imagen){
+        Path directorioImagenes = Paths.get("src//main//resources//static/images");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+            Files.write(rutaCompleta, bytesImg);
+            entrenador.setFoto(imagen.getOriginalFilename());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         entrenadorService.guardar(entrenador);
 

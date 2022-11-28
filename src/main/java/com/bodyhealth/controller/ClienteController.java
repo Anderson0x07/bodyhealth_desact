@@ -166,9 +166,9 @@ public class ClienteController {
         cliente = clienteService.encontrarCliente(cliente);
 
         model.addAttribute("cliente",cliente);
-        model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(cliente.getDocumentoC()));
-        model.addAttribute("plancliente", clienteDetalleRepository.encontrarPlan(cliente.getDocumentoC()));
-        model.addAttribute("rutinacliente", clienteRutinaRepository.encontrarRutina(cliente.getDocumentoC()));
+        model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(cliente.getId_cliente()));
+        model.addAttribute("plancliente", clienteDetalleRepository.encontrarPlan(cliente.getId_cliente()));
+        model.addAttribute("rutinacliente", clienteRutinaRepository.encontrarRutina(cliente.getId_cliente()));
 
         //PARA MOSTRAR TODOS LOS ENTRENADORES
         model.addAttribute("trainers",entrenadorService.listarEntrenadores());
