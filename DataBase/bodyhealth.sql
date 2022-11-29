@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-11-2022 a las 07:21:39
+-- Tiempo de generación: 29-11-2022 a las 17:49:06
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -105,9 +105,16 @@ CREATE TABLE `cliente_detalle` (
 
 CREATE TABLE `cliente_rutina` (
   `id_clienterutina` int(11) NOT NULL,
-  `id_cliente` int(15) DEFAULT NULL,
-  `id_rutina` int(15) DEFAULT NULL
+  `id_cliente` int(11) NOT NULL,
+  `id_rutina` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `cliente_rutina`
+--
+
+INSERT INTO `cliente_rutina` (`id_clienterutina`, `id_cliente`, `id_rutina`) VALUES
+(1, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -205,7 +212,7 @@ INSERT INTO `detalle` (`id_detalle`, `plan`, `precio`, `meses`) VALUES
 CREATE TABLE `ejercicio` (
   `id_ejercicio` int(11) NOT NULL,
   `id_musculo` int(11) DEFAULT NULL,
-  `descripcion` varchar(100) DEFAULT NULL,
+  `descripcion` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `series` varchar(50) DEFAULT NULL,
   `repeticiones` int(2) DEFAULT NULL,
   `url_video` varchar(200) DEFAULT NULL
@@ -216,12 +223,11 @@ CREATE TABLE `ejercicio` (
 --
 
 INSERT INTO `ejercicio` (`id_ejercicio`, `id_musculo`, `descripcion`, `series`, `repeticiones`, `url_video`) VALUES
-(1, 4, 'PRUEBA', '12', 12, 'www'),
+(1, 4, 'a', '12', 12, 'www'),
 (2, 4, '123', '12', 12, '1222'),
 (3, 5, 'HOLA', '5', 5, 'HOLA'),
 (4, 4, 'asd', '1', 1, '1'),
-(5, 4, 'asd', '12', 12, '1'),
-(6, 2, '11111', '11', 11, '1111');
+(5, 4, 'asd', '12', 12, '1');
 
 -- --------------------------------------------------------
 
@@ -438,7 +444,7 @@ INSERT INTO `rol` (`id_rol`, `descripcion`) VALUES
 CREATE TABLE `rutina` (
   `id_rutina` int(15) NOT NULL,
   `nombre_rutina` varchar(100) DEFAULT NULL,
-  `descripcion` varchar(100) DEFAULT NULL
+  `descripcion` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -453,11 +459,12 @@ INSERT INTO `rutina` (`id_rutina`, `nombre_rutina`, `descripcion`) VALUES
 (5, 'asd', 'asd'),
 (6, 'asd', 'asd'),
 (7, '55555', 'asd'),
-(8, 'asd', 'asd'),
+(8, 'asd', 'XD'),
 (9, 'asd', 'asd'),
 (10, 'TTTTT', 'asd'),
 (11, 'asd', 'asd'),
-(12, 'asdasdasdasd', 'asdasdasdasd');
+(12, 'asdasdasdasd', 'asdasdasdasd'),
+(13, 'Hola', '.ll.');
 
 -- --------------------------------------------------------
 
@@ -470,6 +477,14 @@ CREATE TABLE `rutina_ejercicio` (
   `id_rutina` int(15) DEFAULT NULL,
   `id_ejercicio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `rutina_ejercicio`
+--
+
+INSERT INTO `rutina_ejercicio` (`id_rutina_ejercicio`, `id_rutina`, `id_ejercicio`) VALUES
+(1, 10, 3),
+(4, 10, 1);
 
 --
 -- Índices para tablas volcadas
@@ -653,13 +668,13 @@ ALTER TABLE `cliente_detalle`
 -- AUTO_INCREMENT de la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
-  MODIFY `id_clienterutina` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_clienterutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente_rutina_ejercicio`
 --
 ALTER TABLE `cliente_rutina_ejercicio`
-  MODIFY `id_cliente_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
@@ -689,7 +704,7 @@ ALTER TABLE `detalle`
 -- AUTO_INCREMENT de la tabla `ejercicio`
 --
 ALTER TABLE `ejercicio`
-  MODIFY `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `entrenador`
@@ -743,13 +758,13 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `rutina`
 --
 ALTER TABLE `rutina`
-  MODIFY `id_rutina` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_rutina` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `rutina_ejercicio`
 --
 ALTER TABLE `rutina_ejercicio`
-  MODIFY `id_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
@@ -779,15 +794,15 @@ ALTER TABLE `cliente_detalle`
 -- Filtros para la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
-  ADD CONSTRAINT `cliente_rutina_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
-  ADD CONSTRAINT `cliente_rutina_ibfk_2` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`);
+  ADD CONSTRAINT `cliente_fk` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `rutina_fk` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `cliente_rutina_ejercicio`
 --
 ALTER TABLE `cliente_rutina_ejercicio`
-  ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk_1` FOREIGN KEY (`id_cliente_rutina`) REFERENCES `cliente_rutina` (`id_clienterutina`),
-  ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk_2` FOREIGN KEY (`id_rutina_ejercicio`) REFERENCES `rutina_ejercicio` (`id_rutina_ejercicio`);
+  ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk` FOREIGN KEY (`id_cliente_rutina`) REFERENCES `cliente_rutina` (`id_clienterutina`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk_2` FOREIGN KEY (`id_rutina_ejercicio`) REFERENCES `rutina_ejercicio` (`id_rutina_ejercicio`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `compra`

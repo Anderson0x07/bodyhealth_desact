@@ -82,11 +82,12 @@
                               <input type="text" class="form-control" name="nombre_rutina" id="nombre_rutina"
                                      required="true" th:value="${rutina.nombre_rutina}">
                             </div>
+
                             <div class="form-group">
-                              <label for="descripcion">Descripcion: *</label>
-                              <input type="text" class="form-control" name="descripcion" id="descripcion"
-                                     required="true" th:value="${rutina.descripcion}">
+                              <label for="descripcion">Descripcion: </label>
+                              <textarea class="form-control" name="descripcion" id="descripcion" maxlength="250" rows="5" th:text="${rutina.descripcion}"></textarea>
                             </div>
+
                           </div>
 
                           <div class="modal-footer">
@@ -110,6 +111,7 @@
         </div>
 
         <div class="col-6">
+          <!--MODAL PARA AGREGAR EJERCICIOS-->
           <a href="#" class="btn btn-secondary"
              data-bs-toggle="modal" data-bs-target="#agregar-ejercicio">
             <i class="fas fa-plus"></i> Crear Ejercicio
@@ -136,7 +138,7 @@
                     </div>
                     <div class="form-group">
                       <label for="descripcionE">Descripcion: </label>
-                      <input type="text" class="form-control" name="descripcion" id="descripcionE" required="true">
+                      <textarea class="form-control" name="descripcion" id="descripcionE" maxlength="250" rows="5"></textarea>
                     </div>
                     <div class="form-group">
                       <label for="series">Series: *</label>
@@ -219,12 +221,9 @@
                                      readonly th:value="${ejercicio.id_musculo.id_musculo}">
                             </div>
 
-
-
                             <div class="form-group">
-                              <label for="descripcion2">Descripcion: *</label>
-                              <input type="text" class="form-control" name="descripcion" id="descripcion2"
-                                     required="true" th:value="${ejercicio.descripcion}">
+                              <label for="descripcion2">Descripcion: </label>
+                              <textarea class="form-control" name="descripcion" id="descripcion2" maxlength="250" rows="5" th:text="${ejercicio.descripcion}"></textarea>
                             </div>
                             <div class="form-group">
                               <label for="series2">Series: *</label>
@@ -264,6 +263,55 @@
 
       <br><hr class="h-color mx-3"><br>
 
+      <!--MODAL PARA CREAR RUTINAS CON EJERCICIOS-->
+      <a href="#" class="btn btn-secondary"
+         data-bs-toggle="modal" data-bs-target="#agregar-rutina-ejercicio">
+        <i class="fas fa-plus"></i> Crear Rutina con Ejercicios
+      </a>
+      <div class="modal fade" id="agregar-rutina-ejercicio" tabindex="-1" aria-labelledby="rutina-ejercicio" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="rutina-ejercicio">Agregar Ejercicio</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/trainer/dash-rutinas/guardar-rutina-ejercicio}" th:object="${rutina_ejercicio}"
+                  method="POST" class="was-validated">
+              <div class="modal-body">
+
+                <div class="form-group">
+                  <label for="rutina-eje" class="form-label">Rutina: *</label>
+                  <select name="id_rutina" id="rutina-eje" required class="form-control">
+
+                    <div th:each="rutina : ${rutinas}">
+                      <option th:value="${rutina.id_rutina}" th:text="${rutina.nombre_rutina}"></option>
+                    </div>
+                  </select> <br>
+                </div>
+                <div class="form-group">
+                  <label for="ejercicio" class="form-label">Ejercicio: *</label>
+                  <select name="id_ejercicio" id="ejercicio" required class="form-control">
+
+                    <div th:each="ejercicio : ${ejercicios}">
+                      <option th:value="${ejercicio.id_ejercicio}" th:text="${ejercicio.id_musculo.descripcion+' - '+ejercicio.descripcion}"></option>
+                    </div>
+                  </select> <br>
+                </div>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="submit">Guardar</button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <br> <br>
+
       <h2 class="fs-5">Lista de Rutinas con Ejercicios</h2>
       <div class="table-responsive">
         <table id="tablaRutinaEjercicio" class="table table-bordered">
@@ -281,11 +329,60 @@
           <tr th:each="rutinaEjer : ${rutina_ejercicios}">
             <td th:text="${rutinaEjer.id_rutina_ejercicio}"></td>
             <td th:text="${rutinaEjer.id_rutina.nombre_rutina}"></td>
-            <td th:text="${rutinaEjer.id_ejercicio.descripcion}"></td>
+            <td th:text="${rutinaEjer.id_ejercicio.id_musculo.descripcion+' - '+rutinaEjer.id_ejercicio.descripcion}"></td>
             <td>
-              <a th:href="@{/static}" style="text-decoration: none">
-                <i class="fa-solid fa-arrow-up-right-from-square" style="color:black"></i>
+              <a href="#" style="text-decoration: none; color: black"
+                 data-bs-toggle="modal" th:data-bs-target="${'#editar-rutina-ejercicio-'+rutinaEjer.id_rutina_ejercicio}">
+                <i class="fa-solid fa-pencil"></i>
               </a>
+
+              <div class="modal fade" th:id="${'editar-rutina-ejercicio-'+rutinaEjer.id_rutina_ejercicio}" tabindex="-1" aria-labelledby="edi-ruteje" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="edi-ruteje">Editar Rutina Ejercicio</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form th:action="@{/trainer/dash-rutinas/guardar-rutina-ejercicio}"
+                          method="POST" class="was-validated">
+                      <div class="modal-body">
+
+                        <div class="form-group">
+                          <label for="id_rutejer">Id Rutina Ejercicio: </label>
+                          <input type="number" class="form-control" name="id_rutina_ejercicio" id="id_rutejer"
+                                 readonly th:value="${rutinaEjer.id_rutina_ejercicio}"/>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="rutina-eje2" class="form-label">Rutina: *</label>
+                          <select name="id_rutina" id="rutina-eje2" required class="form-control" th:selected="${rutinaEjer.id_rutina.id_rutina}">
+
+                            <div th:each="rutina : ${rutinas}">
+                              <option th:value="${rutina.id_rutina}" th:text="${rutina.nombre_rutina}"></option>
+                            </div>
+                          </select> <br>
+                        </div>
+                        <div class="form-group">
+                          <label for="ejercicio2" class="form-label">Ejercicio: *</label>
+                          <select name="id_ejercicio" id="ejercicio2" required class="form-control" th:selected="${rutinaEjer.id_ejercicio.id_ejercicio}">
+
+                            <div th:each="ejercicio : ${ejercicios}">
+                              <option th:value="${ejercicio.id_ejercicio}" th:text="${ejercicio.id_musculo.descripcion+' - '+ejercicio.descripcion}"></option>
+                            </div>
+                          </select> <br>
+                        </div>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                      </div>
+
+                    </form>
+
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
           </tbody>

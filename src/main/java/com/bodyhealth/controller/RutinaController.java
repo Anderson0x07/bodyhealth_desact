@@ -86,12 +86,10 @@ public class RutinaController {
         return "redirect:/trainer/dash-rutinas";
     }
 
-    @PostMapping("/trainer/dash-rutinas/editar-rutina")
-    public String editarRutina(Rutina rutina){
+    @PostMapping("/trainer/dash-rutinas/guardar-rutina-ejercicio")
+    public String editarRutina(RutinaEjercicio rutinaEjercicio){
 
-        rutina = rutinaService.encontrarRutina(rutina);
-
-        rutinaService.guardar(rutina);
+        rutinaEjercicioService.guardar(rutinaEjercicio);
 
         return "redirect:/trainer/dash-rutinas";
     }

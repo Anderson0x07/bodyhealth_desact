@@ -1,13 +1,8 @@
 package com.bodyhealth.controller;
 
 import com.bodyhealth.model.*;
-import com.bodyhealth.repository.ControlClienteRepository;
-import com.bodyhealth.repository.EntrenadorClienteRepository;
-import com.bodyhealth.repository.EntrenadorRepository;
-import com.bodyhealth.service.AdminService;
-import com.bodyhealth.service.ClienteService;
-import com.bodyhealth.service.ControlClienteService;
-import com.bodyhealth.service.EntrenadorService;
+import com.bodyhealth.repository.*;
+import com.bodyhealth.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +37,12 @@ public class EntrenadorController {
     private ControlClienteRepository controlClienteRepository;
 
     @Autowired
+    private ClienteRutinaRepository clienteRutinaRepository;
+
+    @Autowired
     private ControlClienteService controlClienteService;
+    @Autowired
+    private RutinaService rutinaService;
 
     @GetMapping("/admin/dash-trainers")
     public String listarTrainers(Model model){
@@ -144,17 +144,30 @@ public class EntrenadorController {
 
         Cliente cnuevo = clienteService.encontrarCliente(cliente);
         ControlCliente control = controlClienteRepository.encontrarControlCliente(cnuevo.getId_cliente());
+        ClienteRutina clienteRutina = clienteRutinaRepository.encontrarRutina(cnuevo.getId_cliente());
+        List<Rutina> rutinas = rutinaService.listarRutina();
 
         ControlCliente controlNu = new ControlCliente();
         controlNu.setId_controlcliente(cnuevo.getId_cliente());
         controlNu.setPeso(-1);
         controlNu.setEstatura(-1);
 
+
         model.addAttribute("cliente",cnuevo);
+        model.addAttribute("rutinas",rutinas);
+
         if(control != null){
             model.addAttribute("control",control);
         } else if(control == null){
             model.addAttribute("control",controlNu);
+        }
+
+        if(clienteRutina != null){
+            log.info("IF ENVIO");
+            model.addAttribute("clienteRutina",clienteRutina);
+        } else if(clienteRutina == null){
+            log.info("NO ENVIO");
+            model.addAttribute("clienteRutina",clienteRutina);
         }
 
 

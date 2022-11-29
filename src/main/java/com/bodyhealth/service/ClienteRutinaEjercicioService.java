@@ -1,6 +1,5 @@
 package com.bodyhealth.service;
 
-import com.bodyhealth.model.ClienteRutina;
 import com.bodyhealth.model.ClienteRutinaEjercicio;
 import org.springframework.stereotype.Service;
 

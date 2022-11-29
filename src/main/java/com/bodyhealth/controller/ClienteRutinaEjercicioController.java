@@ -1,6 +1,5 @@
 package com.bodyhealth.controller;
 
-import com.bodyhealth.model.ClienteRutina;
 import com.bodyhealth.model.ClienteRutinaEjercicio;
 import com.bodyhealth.service.ClienteRutinaEjercicioService;
 import org.springframework.beans.factory.annotation.Autowired;

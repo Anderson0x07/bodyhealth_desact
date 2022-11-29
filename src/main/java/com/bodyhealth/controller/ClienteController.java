@@ -51,8 +51,6 @@ public class ClienteController {
     private ClienteDetalleService clienteDetalleService;
 
     @Autowired
-    private ClienteRutinaRepository clienteRutinaRepository;
-    @Autowired
     private RolRepository rolRepository;
 
 
@@ -87,9 +85,6 @@ public class ClienteController {
             model.addAttribute("clientedetalle",clienteDetalleRepository.encontrarPlan(cnuevo.getDocumentoC()));
         }
 
-        if(clienteRutinaRepository.encontrarRutina(cnuevo.getId_cliente()) != null){
-            model.addAttribute("rutinacliente", clienteRutinaRepository.encontrarRutina(cnuevo.getDocumentoC()));
-        }
 
 
 
@@ -168,14 +163,11 @@ public class ClienteController {
         model.addAttribute("cliente",cliente);
         model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(cliente.getId_cliente()));
         model.addAttribute("plancliente", clienteDetalleRepository.encontrarPlan(cliente.getId_cliente()));
-        model.addAttribute("rutinacliente", clienteRutinaRepository.encontrarRutina(cliente.getId_cliente()));
 
         //PARA MOSTRAR TODOS LOS ENTRENADORES
         model.addAttribute("trainers",entrenadorService.listarEntrenadores());
         //PARA MOSTRAR TODOS LOS PLANES
         model.addAttribute("planesdetallados",detalleRepository.findAll());
-        //PARA MOSTRAR TODOS LOS PLANES
-        model.addAttribute("rutinas",clienteRutinaRepository.findAll());
 
 
         return "/admin/clientes/cliente-editar";
