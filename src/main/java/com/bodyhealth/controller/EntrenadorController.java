@@ -53,7 +53,7 @@ public class EntrenadorController {
 
     @GetMapping("/dash-trainers/expand/editar/{id_entrenador}")
     public String editar(Entrenador entrenador, Model model){
-        
+
 
         entrenador = entrenadorService.encontrarEntrenador(entrenador);
 
