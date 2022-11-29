@@ -2,10 +2,10 @@
 -- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 29, 2022 at 01:20 AM
--- Server version: 8.0.17
--- PHP Version: 7.3.10
+-- Servidor: localhost
+-- Tiempo de generación: 29-11-2022 a las 07:21:39
+-- Versión del servidor: 8.0.17
+-- Versión de PHP: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bodyhealth`
+-- Base de datos: `bodyhealth`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `administrador`
+-- Estructura de tabla para la tabla `administrador`
 --
 
 CREATE TABLE `administrador` (
@@ -42,7 +42,7 @@ CREATE TABLE `administrador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `administrador`
+-- Volcado de datos para la tabla `administrador`
 --
 
 INSERT INTO `administrador` (`id_admin`, `documentoA`, `tipodocumento`, `nombre`, `apellido`, `telefono`, `fecha_nacimiento`, `email`, `password`, `id_rol`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `administrador` (`id_admin`, `documentoA`, `tipodocumento`, `nombre`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente`
+-- Estructura de tabla para la tabla `cliente`
 --
 
 CREATE TABLE `cliente` (
@@ -72,7 +72,7 @@ CREATE TABLE `cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `cliente`
+-- Volcado de datos para la tabla `cliente`
 --
 
 INSERT INTO `cliente` (`id_cliente`, `documentoC`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `foto`, `jornada`, `comentario`, `estado`, `id_rol`) VALUES
@@ -80,12 +80,12 @@ INSERT INTO `cliente` (`id_cliente`, `documentoC`, `tipo_documento`, `nombre`, `
 (2, 1234, 'CC', 'Adrian', 'Rolon', '3224125464', '2003-07-06', 'anderson07rolon@gmail.com', '1234', NULL, 'mañana', NULL, 0, NULL),
 (3, 5555555, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-11', 'anderson07rolon@gmail.com', '1234', NULL, 'Mañana', NULL, 1, 2),
 (5, 134324, 'cedula', 'Andrés Norberto', 'Cáceres Becerra', '3208381557', '2022-11-01', 'andresncb03@gmail.com', 'sasda', 'Anime3.jpg', 'Mañana', NULL, 1, 2),
-(7, 123, 'cedula', 'Andres', 'Becerra', '3208381557', '2022-11-04', 'andresncb03@gmail.com', 'sdas', 'AnimeX_665356.jpeg', 'Mañana', NULL, 1, 2);
+(7, 123, 'cedula', 'Andres', 'Becerra', '3208381557', '2022-11-04', 'andresncb03@gmail.com', 'sdas', 'AnimeX_665356.jpeg', 'Mañana', NULL, 0, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente_detalle`
+-- Estructura de tabla para la tabla `cliente_detalle`
 --
 
 CREATE TABLE `cliente_detalle` (
@@ -100,7 +100,7 @@ CREATE TABLE `cliente_detalle` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente_rutina`
+-- Estructura de tabla para la tabla `cliente_rutina`
 --
 
 CREATE TABLE `cliente_rutina` (
@@ -112,7 +112,7 @@ CREATE TABLE `cliente_rutina` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente_rutina_ejercicio`
+-- Estructura de tabla para la tabla `cliente_rutina_ejercicio`
 --
 
 CREATE TABLE `cliente_rutina_ejercicio` (
@@ -124,7 +124,7 @@ CREATE TABLE `cliente_rutina_ejercicio` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `compra`
+-- Estructura de tabla para la tabla `compra`
 --
 
 CREATE TABLE `compra` (
@@ -135,7 +135,7 @@ CREATE TABLE `compra` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `compra`
+-- Volcado de datos para la tabla `compra`
 --
 
 INSERT INTO `compra` (`id_compra`, `id_cliente`, `id_metodopago`, `fecha_compra`) VALUES
@@ -144,20 +144,29 @@ INSERT INTO `compra` (`id_compra`, `id_cliente`, `id_metodopago`, `fecha_compra`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `control_cliente`
+-- Estructura de tabla para la tabla `control_cliente`
 --
 
 CREATE TABLE `control_cliente` (
+  `id_controlcliente` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL,
   `peso` double DEFAULT NULL,
   `estatura` double DEFAULT NULL,
   `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `control_cliente`
+--
+
+INSERT INTO `control_cliente` (`id_controlcliente`, `id_cliente`, `peso`, `estatura`, `fecha`) VALUES
+(9, 5, 23, 23, '2022-11-22'),
+(10, 3, 50, 150, '2022-11-10');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `control_entrenador`
+-- Estructura de tabla para la tabla `control_entrenador`
 --
 
 CREATE TABLE `control_entrenador` (
@@ -170,7 +179,7 @@ CREATE TABLE `control_entrenador` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detalle`
+-- Estructura de tabla para la tabla `detalle`
 --
 
 CREATE TABLE `detalle` (
@@ -181,7 +190,7 @@ CREATE TABLE `detalle` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `detalle`
+-- Volcado de datos para la tabla `detalle`
 --
 
 INSERT INTO `detalle` (`id_detalle`, `plan`, `precio`, `meses`) VALUES
@@ -190,7 +199,7 @@ INSERT INTO `detalle` (`id_detalle`, `plan`, `precio`, `meses`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ejercicio`
+-- Estructura de tabla para la tabla `ejercicio`
 --
 
 CREATE TABLE `ejercicio` (
@@ -202,10 +211,22 @@ CREATE TABLE `ejercicio` (
   `url_video` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `ejercicio`
+--
+
+INSERT INTO `ejercicio` (`id_ejercicio`, `id_musculo`, `descripcion`, `series`, `repeticiones`, `url_video`) VALUES
+(1, 4, 'PRUEBA', '12', 12, 'www'),
+(2, 4, '123', '12', 12, '1222'),
+(3, 5, 'HOLA', '5', 5, 'HOLA'),
+(4, 4, 'asd', '1', 1, '1'),
+(5, 4, 'asd', '12', 12, '1'),
+(6, 2, '11111', '11', 11, '1111');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `entrenador`
+-- Estructura de tabla para la tabla `entrenador`
 --
 
 CREATE TABLE `entrenador` (
@@ -229,7 +250,7 @@ CREATE TABLE `entrenador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `entrenador`
+-- Volcado de datos para la tabla `entrenador`
 --
 
 INSERT INTO `entrenador` (`id_entrenador`, `documentoE`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `foto`, `experiencia`, `hoja_vida`, `titulo_academico`, `jornada`, `estado`, `id_admin`, `id_rol`) VALUES
@@ -241,18 +262,29 @@ INSERT INTO `entrenador` (`id_entrenador`, `documentoE`, `tipo_documento`, `nomb
 -- --------------------------------------------------------
 
 --
--- Table structure for table `entrenador_cliente`
+-- Estructura de tabla para la tabla `entrenador_cliente`
 --
 
 CREATE TABLE `entrenador_cliente` (
+  `id_asignacion` int(11) NOT NULL,
   `id_entrenador` int(15) NOT NULL,
   `id_cliente` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `entrenador_cliente`
+--
+
+INSERT INTO `entrenador_cliente` (`id_asignacion`, `id_entrenador`, `id_cliente`) VALUES
+(1, 1, 2),
+(2, 1, 3),
+(3, 1, 5),
+(4, 1, 7);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `maquina`
+-- Estructura de tabla para la tabla `maquina`
 --
 
 CREATE TABLE `maquina` (
@@ -264,7 +296,7 @@ CREATE TABLE `maquina` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `maquina`
+-- Volcado de datos para la tabla `maquina`
 --
 
 INSERT INTO `maquina` (`id_maquina`, `nombre`, `estado`, `observacion`, `id_proveedor`) VALUES
@@ -273,7 +305,7 @@ INSERT INTO `maquina` (`id_maquina`, `nombre`, `estado`, `observacion`, `id_prov
 -- --------------------------------------------------------
 
 --
--- Table structure for table `metodo_pago`
+-- Estructura de tabla para la tabla `metodo_pago`
 --
 
 CREATE TABLE `metodo_pago` (
@@ -282,7 +314,7 @@ CREATE TABLE `metodo_pago` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `metodo_pago`
+-- Volcado de datos para la tabla `metodo_pago`
 --
 
 INSERT INTO `metodo_pago` (`id_metodopago`, `descripcion`) VALUES
@@ -292,7 +324,7 @@ INSERT INTO `metodo_pago` (`id_metodopago`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `musculo`
+-- Estructura de tabla para la tabla `musculo`
 --
 
 CREATE TABLE `musculo` (
@@ -300,10 +332,21 @@ CREATE TABLE `musculo` (
   `descripcion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `musculo`
+--
+
+INSERT INTO `musculo` (`id_musculo`, `descripcion`) VALUES
+(1, 'Triceps'),
+(2, 'Biceps'),
+(3, 'Cuadriceps'),
+(4, 'Abdomen'),
+(5, 'Hombros');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pedido`
+-- Estructura de tabla para la tabla `pedido`
 --
 
 CREATE TABLE `pedido` (
@@ -314,7 +357,7 @@ CREATE TABLE `pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `pedido`
+-- Volcado de datos para la tabla `pedido`
 --
 
 INSERT INTO `pedido` (`id_pedido`, `id_producto`, `id_compra`, `cantidad`) VALUES
@@ -324,7 +367,7 @@ INSERT INTO `pedido` (`id_pedido`, `id_producto`, `id_compra`, `cantidad`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `producto`
+-- Estructura de tabla para la tabla `producto`
 --
 
 CREATE TABLE `producto` (
@@ -338,18 +381,18 @@ CREATE TABLE `producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `producto`
+-- Volcado de datos para la tabla `producto`
 --
 
 INSERT INTO `producto` (`id_producto`, `nombre`, `stock`, `precio`, `foto`, `estado`, `id_proveedor`) VALUES
-(1, 'Producto 1', 24, 15000, '', 1, 1),
-(2, 'Producto 2', 30, 20000, 'Anime4.jpg', 0, 1),
+(1, 'Producto 1', 24, 15000, 'Screenshot_20221127-204435.png', 1, 1),
+(2, 'Producto 2', 30, 20000, 'Anime4.jpg', 1, 1),
 (3, 'Jarabe Apetinat', 4, 20, 'artworks-000375152691-0w407w-original.jpg', 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `proveedor`
+-- Estructura de tabla para la tabla `proveedor`
 --
 
 CREATE TABLE `proveedor` (
@@ -360,7 +403,7 @@ CREATE TABLE `proveedor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `proveedor`
+-- Volcado de datos para la tabla `proveedor`
 --
 
 INSERT INTO `proveedor` (`id_proveedor`, `nombre_empresa`, `telefono`, `direccion`) VALUES
@@ -369,7 +412,7 @@ INSERT INTO `proveedor` (`id_proveedor`, `nombre_empresa`, `telefono`, `direccio
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rol`
+-- Estructura de tabla para la tabla `rol`
 --
 
 CREATE TABLE `rol` (
@@ -378,7 +421,7 @@ CREATE TABLE `rol` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `rol`
+-- Volcado de datos para la tabla `rol`
 --
 
 INSERT INTO `rol` (`id_rol`, `descripcion`) VALUES
@@ -389,7 +432,7 @@ INSERT INTO `rol` (`id_rol`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rutina`
+-- Estructura de tabla para la tabla `rutina`
 --
 
 CREATE TABLE `rutina` (
@@ -398,10 +441,28 @@ CREATE TABLE `rutina` (
   `descripcion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `rutina`
+--
+
+INSERT INTO `rutina` (`id_rutina`, `nombre_rutina`, `descripcion`) VALUES
+(1, 'Hola12223', 'asdasdasd'),
+(2, 'DOS', 'asd'),
+(3, 'ERERER', 'asd'),
+(4, 'REEEEE', 'asd'),
+(5, 'asd', 'asd'),
+(6, 'asd', 'asd'),
+(7, '55555', 'asd'),
+(8, 'asd', 'asd'),
+(9, 'asd', 'asd'),
+(10, 'TTTTT', 'asd'),
+(11, 'asd', 'asd'),
+(12, 'asdasdasdasd', 'asdasdasdasd');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rutina_ejercicio`
+-- Estructura de tabla para la tabla `rutina_ejercicio`
 --
 
 CREATE TABLE `rutina_ejercicio` (
@@ -411,11 +472,11 @@ CREATE TABLE `rutina_ejercicio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `administrador`
+-- Indices de la tabla `administrador`
 --
 ALTER TABLE `administrador`
   ADD PRIMARY KEY (`id_admin`),
@@ -423,7 +484,7 @@ ALTER TABLE `administrador`
   ADD KEY `UK` (`documentoA`);
 
 --
--- Indexes for table `cliente`
+-- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id_cliente`),
@@ -431,7 +492,7 @@ ALTER TABLE `cliente`
   ADD KEY `UK` (`documentoC`);
 
 --
--- Indexes for table `cliente_detalle`
+-- Indices de la tabla `cliente_detalle`
 --
 ALTER TABLE `cliente_detalle`
   ADD PRIMARY KEY (`id_factura`),
@@ -440,7 +501,7 @@ ALTER TABLE `cliente_detalle`
   ADD KEY `id_metodopago` (`id_metodopago`);
 
 --
--- Indexes for table `cliente_rutina`
+-- Indices de la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
   ADD PRIMARY KEY (`id_clienterutina`),
@@ -448,7 +509,7 @@ ALTER TABLE `cliente_rutina`
   ADD KEY `id_rutina` (`id_rutina`);
 
 --
--- Indexes for table `cliente_rutina_ejercicio`
+-- Indices de la tabla `cliente_rutina_ejercicio`
 --
 ALTER TABLE `cliente_rutina_ejercicio`
   ADD PRIMARY KEY (`id_cliente_rutina_ejercicio`),
@@ -456,7 +517,7 @@ ALTER TABLE `cliente_rutina_ejercicio`
   ADD KEY `id_rutina_ejercicio` (`id_rutina_ejercicio`);
 
 --
--- Indexes for table `compra`
+-- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`id_compra`),
@@ -464,32 +525,33 @@ ALTER TABLE `compra`
   ADD KEY `id_metodopago` (`id_metodopago`);
 
 --
--- Indexes for table `control_cliente`
+-- Indices de la tabla `control_cliente`
 --
 ALTER TABLE `control_cliente`
-  ADD PRIMARY KEY (`id_cliente`,`fecha`);
+  ADD PRIMARY KEY (`id_controlcliente`) USING BTREE,
+  ADD KEY `id_cliente` (`id_cliente`);
 
 --
--- Indexes for table `control_entrenador`
+-- Indices de la tabla `control_entrenador`
 --
 ALTER TABLE `control_entrenador`
   ADD PRIMARY KEY (`id_entrenador`,`fecha`);
 
 --
--- Indexes for table `detalle`
+-- Indices de la tabla `detalle`
 --
 ALTER TABLE `detalle`
   ADD PRIMARY KEY (`id_detalle`);
 
 --
--- Indexes for table `ejercicio`
+-- Indices de la tabla `ejercicio`
 --
 ALTER TABLE `ejercicio`
   ADD PRIMARY KEY (`id_ejercicio`),
   ADD KEY `id_musculo` (`id_musculo`);
 
 --
--- Indexes for table `entrenador`
+-- Indices de la tabla `entrenador`
 --
 ALTER TABLE `entrenador`
   ADD PRIMARY KEY (`id_entrenador`),
@@ -498,33 +560,34 @@ ALTER TABLE `entrenador`
   ADD KEY `UK` (`documentoE`);
 
 --
--- Indexes for table `entrenador_cliente`
+-- Indices de la tabla `entrenador_cliente`
 --
 ALTER TABLE `entrenador_cliente`
-  ADD PRIMARY KEY (`id_entrenador`,`id_cliente`),
-  ADD KEY `id_cliente` (`id_cliente`);
+  ADD PRIMARY KEY (`id_asignacion`) USING BTREE,
+  ADD KEY `id_cliente` (`id_cliente`),
+  ADD KEY `id_entrenador` (`id_entrenador`);
 
 --
--- Indexes for table `maquina`
+-- Indices de la tabla `maquina`
 --
 ALTER TABLE `maquina`
   ADD PRIMARY KEY (`id_maquina`),
   ADD KEY `id_proveedor` (`id_proveedor`);
 
 --
--- Indexes for table `metodo_pago`
+-- Indices de la tabla `metodo_pago`
 --
 ALTER TABLE `metodo_pago`
   ADD PRIMARY KEY (`id_metodopago`);
 
 --
--- Indexes for table `musculo`
+-- Indices de la tabla `musculo`
 --
 ALTER TABLE `musculo`
   ADD PRIMARY KEY (`id_musculo`);
 
 --
--- Indexes for table `pedido`
+-- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`id_pedido`),
@@ -532,32 +595,32 @@ ALTER TABLE `pedido`
   ADD KEY `id_producto` (`id_producto`);
 
 --
--- Indexes for table `producto`
+-- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_producto`),
   ADD KEY `id_proveedor` (`id_proveedor`);
 
 --
--- Indexes for table `proveedor`
+-- Indices de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
   ADD PRIMARY KEY (`id_proveedor`);
 
 --
--- Indexes for table `rol`
+-- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`id_rol`);
 
 --
--- Indexes for table `rutina`
+-- Indices de la tabla `rutina`
 --
 ALTER TABLE `rutina`
   ADD PRIMARY KEY (`id_rutina`);
 
 --
--- Indexes for table `rutina_ejercicio`
+-- Indices de la tabla `rutina_ejercicio`
 --
 ALTER TABLE `rutina_ejercicio`
   ADD PRIMARY KEY (`id_rutina_ejercicio`),
@@ -565,135 +628,147 @@ ALTER TABLE `rutina_ejercicio`
   ADD KEY `id_rutina` (`id_rutina`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `administrador`
+-- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
   MODIFY `id_admin` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `cliente`
+-- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   MODIFY `id_cliente` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `cliente_detalle`
+-- AUTO_INCREMENT de la tabla `cliente_detalle`
 --
 ALTER TABLE `cliente_detalle`
   MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `cliente_rutina`
+-- AUTO_INCREMENT de la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
   MODIFY `id_clienterutina` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `cliente_rutina_ejercicio`
+-- AUTO_INCREMENT de la tabla `cliente_rutina_ejercicio`
 --
 ALTER TABLE `cliente_rutina_ejercicio`
   MODIFY `id_cliente_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `compra`
+-- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
   MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8586;
 
 --
--- AUTO_INCREMENT for table `control_cliente`
+-- AUTO_INCREMENT de la tabla `control_cliente`
 --
 ALTER TABLE `control_cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_controlcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `control_entrenador`
+-- AUTO_INCREMENT de la tabla `control_entrenador`
 --
 ALTER TABLE `control_entrenador`
   MODIFY `id_entrenador` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `detalle`
+-- AUTO_INCREMENT de la tabla `detalle`
 --
 ALTER TABLE `detalle`
   MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `ejercicio`
+-- AUTO_INCREMENT de la tabla `ejercicio`
 --
 ALTER TABLE `ejercicio`
-  MODIFY `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `entrenador`
+-- AUTO_INCREMENT de la tabla `entrenador`
 --
 ALTER TABLE `entrenador`
   MODIFY `id_entrenador` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `maquina`
+-- AUTO_INCREMENT de la tabla `entrenador_cliente`
+--
+ALTER TABLE `entrenador_cliente`
+  MODIFY `id_asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `maquina`
 --
 ALTER TABLE `maquina`
   MODIFY `id_maquina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `metodo_pago`
+-- AUTO_INCREMENT de la tabla `metodo_pago`
 --
 ALTER TABLE `metodo_pago`
   MODIFY `id_metodopago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `pedido`
+-- AUTO_INCREMENT de la tabla `musculo`
+--
+ALTER TABLE `musculo`
+  MODIFY `id_musculo` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
--- AUTO_INCREMENT for table `producto`
+-- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `proveedor`
+-- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
   MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `rutina`
+-- AUTO_INCREMENT de la tabla `rutina`
 --
 ALTER TABLE `rutina`
-  MODIFY `id_rutina` int(15) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rutina` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `rutina_ejercicio`
+-- AUTO_INCREMENT de la tabla `rutina_ejercicio`
 --
 ALTER TABLE `rutina_ejercicio`
   MODIFY `id_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `administrador`
+-- Filtros para la tabla `administrador`
 --
 ALTER TABLE `administrador`
   ADD CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`);
 
 --
--- Constraints for table `cliente`
+-- Filtros para la tabla `cliente`
 --
 ALTER TABLE `cliente`
   ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`);
 
 --
--- Constraints for table `cliente_detalle`
+-- Filtros para la tabla `cliente_detalle`
 --
 ALTER TABLE `cliente_detalle`
   ADD CONSTRAINT `cliente_detalle_ibfk_1` FOREIGN KEY (`id_detalle`) REFERENCES `detalle` (`id_detalle`),
@@ -701,73 +776,79 @@ ALTER TABLE `cliente_detalle`
   ADD CONSTRAINT `cliente_detalle_ibfk_3` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`);
 
 --
--- Constraints for table `cliente_rutina`
+-- Filtros para la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
   ADD CONSTRAINT `cliente_rutina_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
   ADD CONSTRAINT `cliente_rutina_ibfk_2` FOREIGN KEY (`id_rutina`) REFERENCES `rutina` (`id_rutina`);
 
 --
--- Constraints for table `cliente_rutina_ejercicio`
+-- Filtros para la tabla `cliente_rutina_ejercicio`
 --
 ALTER TABLE `cliente_rutina_ejercicio`
   ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk_1` FOREIGN KEY (`id_cliente_rutina`) REFERENCES `cliente_rutina` (`id_clienterutina`),
   ADD CONSTRAINT `cliente_rutina_ejercicio_ibfk_2` FOREIGN KEY (`id_rutina_ejercicio`) REFERENCES `rutina_ejercicio` (`id_rutina_ejercicio`);
 
 --
--- Constraints for table `compra`
+-- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
   ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
   ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`);
 
 --
--- Constraints for table `control_entrenador`
+-- Filtros para la tabla `control_cliente`
+--
+ALTER TABLE `control_cliente`
+  ADD CONSTRAINT `control_cliente_fk` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `control_entrenador`
 --
 ALTER TABLE `control_entrenador`
   ADD CONSTRAINT `control_entrenador_ibfk_1` FOREIGN KEY (`id_entrenador`) REFERENCES `entrenador` (`id_entrenador`);
 
 --
--- Constraints for table `ejercicio`
+-- Filtros para la tabla `ejercicio`
 --
 ALTER TABLE `ejercicio`
-  ADD CONSTRAINT `ejercicio_ibfk_1` FOREIGN KEY (`id_musculo`) REFERENCES `musculo` (`id_musculo`);
+  ADD CONSTRAINT `ejercicio_ibfk_1` FOREIGN KEY (`id_musculo`) REFERENCES `musculo` (`id_musculo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `entrenador`
+-- Filtros para la tabla `entrenador`
 --
 ALTER TABLE `entrenador`
   ADD CONSTRAINT `entrenador_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `administrador` (`id_admin`),
   ADD CONSTRAINT `entrenador_ibfk_2` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`);
 
 --
--- Constraints for table `entrenador_cliente`
+-- Filtros para la tabla `entrenador_cliente`
 --
 ALTER TABLE `entrenador_cliente`
-  ADD CONSTRAINT `entrenador_cliente_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
-  ADD CONSTRAINT `entrenador_cliente_ibfk_2` FOREIGN KEY (`id_entrenador`) REFERENCES `entrenador` (`id_entrenador`);
+  ADD CONSTRAINT `ec_cliente_fk` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ec_entrenador_fk` FOREIGN KEY (`id_entrenador`) REFERENCES `entrenador` (`id_entrenador`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `maquina`
+-- Filtros para la tabla `maquina`
 --
 ALTER TABLE `maquina`
   ADD CONSTRAINT `maquina_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`);
 
 --
--- Constraints for table `pedido`
+-- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compra` (`id_compra`),
   ADD CONSTRAINT `pedido_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`);
 
 --
--- Constraints for table `producto`
+-- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`);
 
 --
--- Constraints for table `rutina_ejercicio`
+-- Filtros para la tabla `rutina_ejercicio`
 --
 ALTER TABLE `rutina_ejercicio`
   ADD CONSTRAINT `rutina_ejercicio_ibfk_1` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id_ejercicio`),

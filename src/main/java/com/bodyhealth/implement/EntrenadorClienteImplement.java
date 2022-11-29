@@ -29,6 +29,6 @@ public class EntrenadorClienteImplement implements EntrenadorClienteService {
     @Override
     public EntrenadorCliente encontrarEntrenadorCliente(EntrenadorCliente entrenadorCliente) {
 
-        return entrenadorClienteRepository.findById(entrenadorCliente.getId_cliente()).orElse(null);
+        return entrenadorClienteRepository.findById(entrenadorCliente.getCliente().getId_cliente()).orElse(null);
     }
 }

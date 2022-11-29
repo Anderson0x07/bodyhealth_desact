@@ -21,10 +21,12 @@ public interface EntrenadorClienteRepository extends JpaRepository<EntrenadorCli
             nativeQuery=true
     )
     EntrenadorCliente encontrarEntrenador(@Param("cliente") int id_cliente);
+
     @Query(
-            value = "SELECT * from entrenador_cliente d where d.id_cliente = :entrenador",
+            value = "SELECT * from entrenador_cliente d where d.id_entrenador = :id_entrenador",
             nativeQuery = true
     )
-    List<EntrenadorCliente> encontrarClientes(@Param("entrenador") int id_entrenador);
+    List<EntrenadorCliente> encontrarClientes(@Param("id_entrenador") int id_entrenador);
+
 
 }

@@ -13,7 +13,7 @@ public class Ejercicio implements Serializable {
     private int id_ejercicio;
 
     @ManyToOne
-    @JoinColumn(name = "id_musculo",insertable = false,updatable = false)
+    @JoinColumn(name = "id_musculo")
     private Musculo id_musculo;
 
     private String descripcion;

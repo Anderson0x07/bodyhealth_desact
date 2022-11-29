@@ -1,11 +1,14 @@
 package com.bodyhealth.controller;
 
-import com.bodyhealth.model.Cliente;
-import com.bodyhealth.model.Entrenador;
-import com.bodyhealth.model.Producto;
-import com.bodyhealth.model.Proveedor;
+import com.bodyhealth.model.*;
+import com.bodyhealth.repository.ControlClienteRepository;
+import com.bodyhealth.repository.EntrenadorClienteRepository;
+import com.bodyhealth.repository.EntrenadorRepository;
 import com.bodyhealth.service.AdminService;
+import com.bodyhealth.service.ClienteService;
+import com.bodyhealth.service.ControlClienteService;
 import com.bodyhealth.service.EntrenadorService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +25,26 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
+@Slf4j
 public class EntrenadorController {
     @Autowired
     private EntrenadorService entrenadorService;
+
+    @Autowired
+    private EntrenadorClienteRepository entrenadorClienteRepository;
     @Autowired
     private AdminService adminService;
-    @GetMapping("/dash-trainers")
+
+    @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
+    private ControlClienteRepository controlClienteRepository;
+
+    @Autowired
+    private ControlClienteService controlClienteService;
+
+    @GetMapping("/admin/dash-trainers")
     public String listarTrainers(Model model){
 
         List<Entrenador> activos = entrenadorService.listarActivos();
@@ -40,7 +56,7 @@ public class EntrenadorController {
         return "/admin/trainers/dash-trainers";
     }
 
-    @GetMapping("/dash-trainers/expand/{id_entrenador}")
+    @GetMapping("/admin/dash-trainers/expand/{id_entrenador}")
     public String mostrarEntrenador(Entrenador entrenador, Model model){
 
 
@@ -51,7 +67,7 @@ public class EntrenadorController {
         return "/admin/trainers/trainer-expand";
     }
 
-    @GetMapping("/dash-trainers/expand/editar/{id_entrenador}")
+    @GetMapping("/admin/dash-trainers/expand/editar/{id_entrenador}")
     public String editar(Entrenador entrenador, Model model){
         
 
@@ -64,7 +80,7 @@ public class EntrenadorController {
     }
 
     //Guarda edición de entrenador en el dashboard del admin
-    @PostMapping("/dash-trainers/expand/guardar")
+    @PostMapping("/admin/dash-trainers/expand/guardar")
     public String guardarEdicionEntrenador(Entrenador entrenador,@RequestParam("file") MultipartFile imagen){
         Path directorioImagenes = Paths.get("src//main//resources//static/images");
         String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
@@ -83,7 +99,7 @@ public class EntrenadorController {
     }
 
     //Desactiva entrenadores en el dashboard del admin
-    @GetMapping("/dash-trainers/expand/desactivar/{id_entrenador}")
+    @GetMapping("/admin/dash-trainers/expand/desactivar/{id_entrenador}")
     public String desactivarEntrenador(Entrenador entrenador){
 
         entrenador = entrenadorService.encontrarEntrenador(entrenador);
@@ -97,7 +113,7 @@ public class EntrenadorController {
     }
 
     //Desactiva entrenadores en el dashboard del admin
-    @GetMapping("/dash-trainers/expand/activar/{id_entrenador}")
+    @GetMapping("/admin/dash-trainers/expand/activar/{id_entrenador}")
     public String activarEntrenador(Entrenador entrenador){
 
         entrenador = entrenadorService.encontrarEntrenador(entrenador);
@@ -108,5 +124,52 @@ public class EntrenadorController {
 
 
         return "redirect:/admin/dash-trainers";
+    }
+
+    //ACCESO A TRAINER/RUTINAS
+
+    @GetMapping("/trainer/dash-clientes")
+    public String listarClientesEntrenador(Model model){
+
+        List<EntrenadorCliente> clientesAsignados = entrenadorClienteRepository.encontrarClientes(1);
+
+
+        model.addAttribute("clientesAsignados",clientesAsignados);
+
+        return "/trainer/clientes/dash-clientes";
+    }
+
+    @GetMapping("/trainer/dash-clientes/expand/{id_cliente}")
+    public String mostrarCliente(Cliente cliente, Model model){
+
+        Cliente cnuevo = clienteService.encontrarCliente(cliente);
+        ControlCliente control = controlClienteRepository.encontrarControlCliente(cnuevo.getId_cliente());
+
+        ControlCliente controlNu = new ControlCliente();
+        controlNu.setId_controlcliente(cnuevo.getId_cliente());
+        controlNu.setPeso(-1);
+        controlNu.setEstatura(-1);
+
+        model.addAttribute("cliente",cnuevo);
+        if(control != null){
+            model.addAttribute("control",control);
+        } else if(control == null){
+            model.addAttribute("control",controlNu);
+        }
+
+
+
+        return "/trainer/clientes/cliente-expand";
+    }
+
+
+    @PostMapping("/trainer/dash-clientes/guardar-control")
+    public String guardarEdicionControl(ControlCliente controlCliente){
+
+        log.info("CONTROL ENTRANTE: "+controlCliente.toString());
+
+        controlClienteService.guardar(controlCliente);
+
+        return "redirect:/trainer/dash-clientes/expand/"+controlCliente.getCliente().getId_cliente();
     }
 }

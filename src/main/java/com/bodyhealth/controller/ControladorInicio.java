@@ -53,7 +53,7 @@ public class ControladorInicio {
     @GetMapping("/trainer/trainer")
     public String trainers(){
         log.info("ENTRO A TRAINER");
-        return "/trainer/trainer";
+        return "/trainer/dashboard";
     }
 
     @GetMapping("/errores/403")
