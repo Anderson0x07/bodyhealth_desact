@@ -222,5 +222,35 @@ public class ClienteController {
     public String index(){
         return "/index";
     }
+    @GetMapping("/cliente/registro-cliente")
+    public String registroCliente(){
+        return "/cliente/registro-cliente";
+    }
+    @GetMapping("/cliente/login1")
+    public String login(){
+        return "/login1";
+    }
+    //Prueba de nuevo regstro cliente plantilla
+    @GetMapping("/cliente/registroCliente")
+    public String registroClientePlantilla(){
+        return "/cliente/registroCliente";
+    }
+    @PostMapping("/cliente/dash-clientes/expand/guardar")
+    public String guardarClienteIndex(Cliente cliente,@RequestParam("file") MultipartFile imagen){
+        Path directorioImagenes = Paths.get("src//main//resources//static/images");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+            Files.write(rutaCompleta, bytesImg);
+            cliente.setFoto(imagen.getOriginalFilename());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        log.info("LLEGÓ: "+cliente.getDocumentoC());
+        clienteService.guardar(cliente);
+
+        return "/login1";
+    }
 
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Registro | GymPlus</title>
@@ -22,22 +23,55 @@
     <div class="col-10">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="../index.jsp">
-                    <img src="../img/gym-plus.png" alt="Gym Plus">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <a class="nav-link"  href="../index.jsp">Inicio</a>
-                        <a class="nav-link" href="planes.jsp">Planes</a>
-                        <a class="nav-link" href="noticias.html">Noticias</a>
-                        <a class="nav-link" href="productos.jsp">Productos</a>
-                    </ul>
 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+            <a class="navbar-brand" th:href="@{/index}">
+                <img src="/images/Logo-BodyHealth.jpeg" width="80" height="68">
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav mr-auto">
+                    <li><a class="nav-link"  th:href="@{/index}"><i class="fa-sharp fa-solid fa-house"></i> Home</a></li>
+                    <li><a class="nav-link" th:href="@{/cliente/planes}"><i class="fa-sharp fa-solid fa-tag"></i> Planes</a></li>
+                    <li><a class="nav-link" th:href="@{/cliente/noticias}"><i class="fa-solid fa-newspaper"></i> Noticias</a></li>
+                    <li><a class="nav-link" th:href="@{/cliente/productos}"><i class="fa-sharp fa-solid fa-shop"></i> Productos</a></li>
+
+                </ul>
+
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown" style="justify-content:flex-end;">
+                <div class="dropdown-divider"></div>
+
+
+                <div>
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="img/otro.png" class="img-fluid" width="50" height="50" />
+
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="mi-perfil.jsp"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a></li>
+                                <li><a class="dropdown-item" href="html/carrito.jsp"><i class="fa-sharp fa-solid fa-cart-shopping"></i> Carrito</a></li>
+                                <div class="dropdown-divider"></div>
+                                <li><a class="dropdown-item" th:href="@{/cliente/login1}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i> Iniciar sesión</a></li>
+                                <li><a class="dropdown-item" th:href=" @{/cliente/registro-cliente}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i>Registrarse</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
+
+                <ul class="navbar-nav mr-auto">
+                    <li><a class="nav-link" th:href="@{/cliente/login1}"><i class="fa-solid fa-circle-user"></i> Login</a></li>
+
+                </ul>
+
+
+
             </div>
         </nav>
 
@@ -60,52 +94,75 @@
             </div>
 
             <div class="card-body">
-                <form action="registro.jsp" method="post">
-                    <div class="form-group">
-                        <label for="nombre" class="form-label">Nombre: *</label>
-                        <input type="text" name="nombre" id="nombre" placeholder="Digite su nombre" required class="form-control"> <br>
-                    </div>
-                    <div class="form-group">
-                        <label for="apellido" class="form-label">Apellido *</label>
-                        <input type="text" name="apellido" id="apellido" placeholder="Digite su apellido" required class="form-control"> <br>
-                    </div>
-                    <div class="form-group">
-                        <label for="date" class="form-label">Fecha de nacimiento *</label>
-                        <input type="date" name="date" id="date" required class="form-control"> <br>
-                    </div>
-                    <div class="form-group">
-                        <label for="tipo" class="form-label">Tipo de documento: *</label>
-                        <select name="tipo" id="tipo" required class="form-control">
-                            <option value="CC">Cedula de Ciudadani­a</option>
-                            <option value="TI">Tarjeta de Identidad</option>
-                            <option value="CE">Cedula de Extranjeri­a</option>
-                        </select> <br>
+                <form th:action="@{/cliente/dash-clientes/expand/guardar}" th:object="${cliente}"
+                      method="POST" enctype="multipart/form-data" class="was-validated">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="documentoC">Documento: </label>
+                            <input type="text" class="form-control" name="documentoC" id="documentoC" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="tipo_documento">Tipo de Documento: </label>
+                            <input type="text" class="form-control" name="tipo_documento" id="tipo_documento" required="true">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Nombre: </label>
+                            <input type="text" class="form-control" name="nombre" id="nombre" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="apellido">Apellido: </label>
+                            <input type="text" class="form-control" name="apellido" id="apellido" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Telefono: </label>
+                            <input type="text" class="form-control" name="telefono" id="telefono" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaN">Fecha de Nacimiento: </label>
+                            <input type="date" class="form-control" name="fechaN" id="fechaN" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email: </label>
+                            <input type="email" class="form-control" name="email" id="email" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password: </label>
+                            <input type="text" class="form-control" name="password" id="password" required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="foto">Foto: </label>
+                            <input type="file" class="form-control" name="file" id="foto" >
+                        </div>
+                        <div class="form-group">
+                            <label for="jornada" class="form-label">Jornada: </label>
+                            <select name="jornada" id="jornada" required class="form-control mi-selector ">
+
+                                <option th:value="${'Mañana'}" th:text="${'Mañana'}"></option>
+                                <option th:value="${'Tarde'}" th:text="${'Tarde'}"></option>
+
+                            </select> <br>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="estado">Estado: </label>
+                            <input type="text" class="form-control" name="estado" id="estado"
+                                   readonly value="1"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_rol">Rol: </label>
+                            <input type="text" class="form-control" name="id_rol" id="id_rol"
+                                   readonly th:value="${2}"/>
+                        </div>
+
+
+
                     </div>
 
-                    <div class="form-group">
-                        <label for="documento" class="form-label">Documento: *</label>
-                        <input type="documento" name="documento" id="documento" placeholder="Digite su documento" required class="form-control"> <br>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefono" class="form-label">Telefono movil: *</label>
-                        <input type="tel" name="telefono" id="telefono" placeholder="Digite su telefono" required class="form-control"> <br>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Correo electronico: *</label>
-                        <input type="email" name="email" id="email" placeholder="Digite su email" required class="form-control"> <br>
-                    </div>
-                    <div class="form-group">
-                        <label for="contraseña" class="form-label">Contraseña: *</label>
-                        <input type="password" name="pass" id="pass" placeholder="Digite nueva contraseña" required class="form-control"> <br>
-                    </div>
-                    <div class="form-group">
-                        <label for="contraseña2" class="form-label">Confirmar contraseña: *</label>
-                        <input type="password" name="pass2" id="pass2" placeholder="Confirmación de contraseña" required class="form-control"> <br>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" name="registrar" value="Registrarme" class="btn btn-success">
-                        <input type="reset" value="Limpiar" class="btn btn-danger">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
                     </div>
 
                 </form>
