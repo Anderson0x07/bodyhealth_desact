@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-11-2022 a las 17:49:06
+-- Tiempo de generación: 30-11-2022 a las 05:18:02
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -114,7 +114,8 @@ CREATE TABLE `cliente_rutina` (
 --
 
 INSERT INTO `cliente_rutina` (`id_clienterutina`, `id_cliente`, `id_rutina`) VALUES
-(1, 5, 2);
+(20, 5, 15),
+(21, 3, 14);
 
 -- --------------------------------------------------------
 
@@ -127,6 +128,14 @@ CREATE TABLE `cliente_rutina_ejercicio` (
   `id_cliente_rutina` int(11) DEFAULT NULL,
   `id_rutina_ejercicio` int(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `cliente_rutina_ejercicio`
+--
+
+INSERT INTO `cliente_rutina_ejercicio` (`id_cliente_rutina_ejercicio`, `id_cliente_rutina`, `id_rutina_ejercicio`) VALUES
+(16, 21, 8),
+(17, 20, 10);
 
 -- --------------------------------------------------------
 
@@ -168,7 +177,8 @@ CREATE TABLE `control_cliente` (
 
 INSERT INTO `control_cliente` (`id_controlcliente`, `id_cliente`, `peso`, `estatura`, `fecha`) VALUES
 (9, 5, 23, 23, '2022-11-22'),
-(10, 3, 50, 150, '2022-11-10');
+(10, 3, 50, 150, '2022-11-10'),
+(11, 3, 60, 60, '2022-11-29');
 
 -- --------------------------------------------------------
 
@@ -223,11 +233,8 @@ CREATE TABLE `ejercicio` (
 --
 
 INSERT INTO `ejercicio` (`id_ejercicio`, `id_musculo`, `descripcion`, `series`, `repeticiones`, `url_video`) VALUES
-(1, 4, 'a', '12', 12, 'www'),
-(2, 4, '123', '12', 12, '1222'),
-(3, 5, 'HOLA', '5', 5, 'HOLA'),
-(4, 4, 'asd', '1', 1, '1'),
-(5, 4, 'asd', '12', 12, '1');
+(10, 1, 'Ejercicios para triceps', '5', 15, 'videox'),
+(11, 1, '', '12', 12, 'www');
 
 -- --------------------------------------------------------
 
@@ -452,19 +459,8 @@ CREATE TABLE `rutina` (
 --
 
 INSERT INTO `rutina` (`id_rutina`, `nombre_rutina`, `descripcion`) VALUES
-(1, 'Hola12223', 'asdasdasd'),
-(2, 'DOS', 'asd'),
-(3, 'ERERER', 'asd'),
-(4, 'REEEEE', 'asd'),
-(5, 'asd', 'asd'),
-(6, 'asd', 'asd'),
-(7, '55555', 'asd'),
-(8, 'asd', 'XD'),
-(9, 'asd', 'asd'),
-(10, 'TTTTT', 'asd'),
-(11, 'asd', 'asd'),
-(12, 'asdasdasdasd', 'asdasdasdasd'),
-(13, 'Hola', '.ll.');
+(14, 'Numero 1', 'Esta es la rutina numero 1'),
+(15, 'Numero 2', '');
 
 -- --------------------------------------------------------
 
@@ -483,8 +479,9 @@ CREATE TABLE `rutina_ejercicio` (
 --
 
 INSERT INTO `rutina_ejercicio` (`id_rutina_ejercicio`, `id_rutina`, `id_ejercicio`) VALUES
-(1, 10, 3),
-(4, 10, 1);
+(8, 14, 10),
+(9, 15, 11),
+(10, 15, 10);
 
 --
 -- Índices para tablas volcadas
@@ -668,13 +665,13 @@ ALTER TABLE `cliente_detalle`
 -- AUTO_INCREMENT de la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
-  MODIFY `id_clienterutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_clienterutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente_rutina_ejercicio`
 --
 ALTER TABLE `cliente_rutina_ejercicio`
-  MODIFY `id_cliente_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_cliente_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
@@ -686,7 +683,7 @@ ALTER TABLE `compra`
 -- AUTO_INCREMENT de la tabla `control_cliente`
 --
 ALTER TABLE `control_cliente`
-  MODIFY `id_controlcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_controlcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `control_entrenador`
@@ -704,7 +701,7 @@ ALTER TABLE `detalle`
 -- AUTO_INCREMENT de la tabla `ejercicio`
 --
 ALTER TABLE `ejercicio`
-  MODIFY `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `entrenador`
@@ -758,13 +755,13 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `rutina`
 --
 ALTER TABLE `rutina`
-  MODIFY `id_rutina` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_rutina` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `rutina_ejercicio`
 --
 ALTER TABLE `rutina_ejercicio`
-  MODIFY `id_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas

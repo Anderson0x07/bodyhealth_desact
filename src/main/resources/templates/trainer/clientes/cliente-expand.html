@@ -173,9 +173,39 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
+                </div>
+                <br>
+
+                <!--TABLA DE RUTINA COMPLETA -->
+                <div th:if="${clienteRutina!=null}" class="table-responsive">
+                    <table class="table table-bordered table-striped">
+
+                        <tr>
+                            <th colspan="5" style="text-align: center; font-size: xx-large" th:text="${'Rutina '+clienteRutina.id_rutina.nombre_rutina}"></th>
+
+                        </tr>
+                        <tr>
+                            <th>Musculo</th>
+                            <th>Descripcion de Ejercicio</th>
+                            <th>Series</th>
+                            <th>Repeticiones</th>
+                            <th>URL Video</th>
+
+                        </tr>
+                        <tr th:each="rutinaejercicio : ${rutinaconejercicios}">
+                            <td th:text="${rutinaejercicio.id_rutina_ejercicio.id_ejercicio.id_musculo.descripcion}"></td>
+                            <td th:text="${rutinaejercicio.id_rutina_ejercicio.id_ejercicio.descripcion}"></td>
+                            <td th:text="${rutinaejercicio.id_rutina_ejercicio.id_ejercicio.series}"></td>
+                            <td th:text="${rutinaejercicio.id_rutina_ejercicio.id_ejercicio.repeticiones}"></td>
+                            <td th:text="${rutinaejercicio.id_rutina_ejercicio.id_ejercicio.url_video}"></td>
+                        </tr>
+
+
+                    </table>
                 </div>
 
             </div>

@@ -6,11 +6,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface ClienteRutinaEjercicioRepository extends JpaRepository<ClienteRutinaEjercicio,Integer> {
 
-    /*@Query(
-            value = "SELECT * from cliente_rutina_ejercicio c where c.id_cliente = :id_cliente ORDER BY c.id_cliente DESC limit 1",
+    @Query(
+            value = "SELECT * from cliente_rutina_ejercicio c where c.id_cliente_rutina = :id_cliente_rutina ",
             nativeQuery = true
     )
-    ClienteRutinaEjercicio encontrarRutinaCliente(@Param("id_cliente") int id_cliente);*/
+    List<ClienteRutinaEjercicio> encontrarRutinaCompletaCliente(@Param("id_cliente_rutina") int id_cliente_rutina);
+
+    @Query(
+            value = "SELECT `AUTO_INCREMENT` FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'bodyhealth' AND  TABLE_NAME = 'cliente_rutina_ejercicio'",
+            nativeQuery = true
+    )
+    int idActual();
+
 }

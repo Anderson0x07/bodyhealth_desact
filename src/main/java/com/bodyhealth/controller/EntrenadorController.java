@@ -44,6 +44,19 @@ public class EntrenadorController {
     @Autowired
     private RutinaService rutinaService;
 
+    @Autowired
+    private ClienteRutinaService clienteRutinaService;
+
+    @Autowired
+    private ClienteRutinaEjercicioRepository clienteRutinaEjercicioRepository;
+
+    @Autowired
+    private RutinaEjercicioRepository rutinaEjercicioRepository;
+    @Autowired
+    private ClienteRutinaEjercicioService clienteRutinaEjercicioService;
+
+
+
     @GetMapping("/admin/dash-trainers")
     public String listarTrainers(Model model){
 
@@ -132,6 +145,7 @@ public class EntrenadorController {
     public String listarClientesEntrenador(Model model){
 
         List<EntrenadorCliente> clientesAsignados = entrenadorClienteRepository.encontrarClientes(1);
+        log.info("ENTRE INICIO");
 
 
         model.addAttribute("clientesAsignados",clientesAsignados);
@@ -147,6 +161,8 @@ public class EntrenadorController {
         ClienteRutina clienteRutina = clienteRutinaRepository.encontrarRutina(cnuevo.getId_cliente());
         List<Rutina> rutinas = rutinaService.listarRutina();
 
+
+        //PARA EL CONTROL DE PESO Y ESTATURA
         ControlCliente controlNu = new ControlCliente();
         controlNu.setId_controlcliente(cnuevo.getId_cliente());
         controlNu.setPeso(-1);
@@ -165,10 +181,34 @@ public class EntrenadorController {
         if(clienteRutina != null){
             log.info("IF ENVIO");
             model.addAttribute("clienteRutina",clienteRutina);
+
+            //*GUARDA TODAS LOS EJERCICIOS DE LA RUTINA ESPECIFICADA EN LA TABLA CLIENTE_RUTINA_EJERCICIO
+            List<ClienteRutinaEjercicio>  rutinaconejercicios = clienteRutinaEjercicioRepository.encontrarRutinaCompletaCliente(clienteRutina.getId_clienterutina());
+            model.addAttribute("rutinaconejercicios",rutinaconejercicios);
+
+            if(rutinaconejercicios.size()<=0){
+                List<RutinaEjercicio> rutinaEjercicio = rutinaEjercicioRepository.encontrarRutinaEjercicios(clienteRutina.getId_rutina().getId_rutina());
+                ClienteRutinaEjercicio clienteRutinaEjercicio;
+                int idActual = clienteRutinaEjercicioRepository.idActual();
+                for (int i = 1; i <= rutinaEjercicio.size(); i++) {
+                    log.info("Ejecucion: "+i);
+                    clienteRutinaEjercicio=new ClienteRutinaEjercicio();
+                    clienteRutinaEjercicio.setId_cliente_rutina_ejercicio(idActual+i);
+                    clienteRutinaEjercicio.setId_cliente_rutina(clienteRutina);
+                    clienteRutinaEjercicio.setId_rutina_ejercicio(rutinaEjercicio.get(i-1));
+                    clienteRutinaEjercicioService.guardar(clienteRutinaEjercicio);
+                    log.info("ID ACTUAL: "+idActual+i);
+
+                    log.info("Guardado: "+i);
+                }
+                //ACTUALIZADA
+                model.addAttribute("rutinaconejercicios",clienteRutinaEjercicioRepository.encontrarRutinaCompletaCliente(clienteRutina.getId_clienterutina()));
+            }
         } else if(clienteRutina == null){
             log.info("NO ENVIO");
             model.addAttribute("clienteRutina",clienteRutina);
         }
+
 
 
 
@@ -184,5 +224,20 @@ public class EntrenadorController {
         controlClienteService.guardar(controlCliente);
 
         return "redirect:/trainer/dash-clientes/expand/"+controlCliente.getCliente().getId_cliente();
+    }
+
+
+    @PostMapping("/trainer/dash-rutinas/guardar-cliente-rutina")
+    public String guardarAsignacionRutina(ClienteRutina clienteRutina){
+
+        clienteRutinaService.guardar(clienteRutina);
+
+        return "redirect:/trainer/dash-clientes/expand/"+clienteRutina.getId_cliente().getId_cliente();
+    }
+
+    @GetMapping("/trainer/dashboard")
+    public String irDashboard(Model model){
+
+        return "/trainer/dashboard";
     }
 }
