@@ -79,13 +79,13 @@ public class ClienteController {
         model.addAttribute("cliente",cnuevo);
 
 
-        if(entrenadorClienteRepository.encontrarEntrenador(cnuevo.getId_cliente())!=null){
+        /*if(entrenadorClienteRepository.encontrarEntrenador(cnuevo.getId_cliente())!=null){
             model.addAttribute("entrenadorcliente",entrenadorClienteRepository.encontrarEntrenador(cnuevo.getDocumentoC()));
         }
 
         if(clienteDetalleRepository.encontrarPlan(cnuevo.getId_cliente())!=null){
             model.addAttribute("clientedetalle",clienteDetalleRepository.encontrarPlan(cnuevo.getDocumentoC()));
-        }
+        }*/
 
 
 
@@ -114,23 +114,16 @@ public class ClienteController {
 
 
     //ACTUALIZA ENTRENADOR A CLIENTE
-    @PostMapping("/admin/dash-clientes/expand/guardar-trainer")
+    @PostMapping("/admin/dash-clientes/expand/guardartrainer")
     public String cambioEntrenador(EntrenadorCliente entrenadorCliente, Model model){
 
-        log.info("ENTRENADOR ENTRANTE: "+entrenadorCliente.toString());
-        EntrenadorCliente copia = entrenadorClienteRepository.encontrarEntrenador(entrenadorCliente.getCliente().getDocumentoC());
-        int documentoC = entrenadorCliente.getCliente().getDocumentoC();
+        int id_cliente = entrenadorCliente.getCliente().getId_cliente();
 
-        entrenadorCliente.setEntrenador(entrenadorCliente.getEntrenador());
-        entrenadorCliente.setCliente(entrenadorCliente.getCliente());
-
-        entrenadorClienteService.eliminar(copia);
         entrenadorClienteService.guardar(entrenadorCliente);
 
         model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(entrenadorCliente.getCliente().getId_cliente()));
 
-
-        return "redirect:/admin/dash-clientes/expand/editar/"+documentoC;
+        return "redirect:/admin/dash-clientes/expand/editar/"+id_cliente;
     }
 
     //ACTUALIZA PLAN DEL CLIENTE
@@ -157,25 +150,31 @@ public class ClienteController {
 
 
     //Editar clientes en el dashboard del admin
-    @GetMapping("/admin/dash-clientes/expand/editar/{documentoC}")
+    @GetMapping("/admin/dash-clientes/expand/editar/{id_cliente}")
     public String editarCliente(Cliente cliente, Model model){
     log.info("entre...");
         cliente = clienteService.encontrarCliente(cliente);
-
         model.addAttribute("cliente",cliente);
-        model.addAttribute("trainer",entrenadorClienteRepository.encontrarEntrenador(cliente.getId_cliente()));
-        model.addAttribute("plancliente", clienteDetalleRepository.encontrarPlan(cliente.getId_cliente()));
 
-        //PARA MOSTRAR TODOS LOS ENTRENADORES
-        model.addAttribute("trainers",entrenadorService.listarEntrenadores());
+        EntrenadorCliente entrenadorCliente = entrenadorClienteRepository.encontrarEntrenador(cliente.getId_cliente());
+
+        if(entrenadorCliente!=null){
+            model.addAttribute("trainer",entrenadorCliente);
+        }
+        //model.addAttribute("plancliente", clienteDetalleRepository.encontrarPlan(cliente.getId_cliente()));
+
+        //PARA MOSTRAR TODOS LOS ENTRENADORES POR JORNADA
+        List<Entrenador> entrenadoresJornada = entrenadorRepository.entrenadoresJornada(cliente.getJornada());
+        if(entrenadoresJornada.size()>0){
+            model.addAttribute("trainers",entrenadoresJornada);
+        }
+
         //PARA MOSTRAR TODOS LOS PLANES
-        model.addAttribute("planesdetallados",detalleRepository.findAll());
+        //model.addAttribute("planesdetallados",detalleRepository.findAll());
 
 
         return "/admin/clientes/cliente-editar";
     }
-
-
     //Desactiva clientes en el dashboard del admin
     @GetMapping("/admin/dash-clientes/expand/desactivar/{id_cliente}")
     public String desactivarCliente(Cliente cliente){
@@ -189,7 +188,6 @@ public class ClienteController {
 
         return "redirect:/admin/dash-clientes";
     }
-
     //Desactiva clientes en el dashboard del admin
     @GetMapping("/admin/dash-clientes/expand/activar/{id_cliente}")
     public String activarCliente(Cliente cliente){
@@ -203,7 +201,6 @@ public class ClienteController {
 
         return "redirect:/admin/dash-clientes";
     }
-
     @GetMapping("/cliente/productos")
     public String productos(Model model){
         List<Producto> product = productoService.listarProductos();
@@ -221,36 +218,6 @@ public class ClienteController {
     @GetMapping("/index")
     public String index(){
         return "/index";
-    }
-    @GetMapping("/cliente/registro-cliente")
-    public String registroCliente(){
-        return "/cliente/registro-cliente";
-    }
-    @GetMapping("/cliente/login1")
-    public String login(){
-        return "/login1";
-    }
-    //Prueba de nuevo regstro cliente plantilla
-    @GetMapping("/cliente/registroCliente")
-    public String registroClientePlantilla(){
-        return "/cliente/registroCliente";
-    }
-    @PostMapping("/cliente/dash-clientes/expand/guardar")
-    public String guardarClienteIndex(Cliente cliente,@RequestParam("file") MultipartFile imagen){
-        Path directorioImagenes = Paths.get("src//main//resources//static/images");
-        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
-        try {
-            byte[] bytesImg = imagen.getBytes();
-            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-            Files.write(rutaCompleta, bytesImg);
-            cliente.setFoto(imagen.getOriginalFilename());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        log.info("LLEGÓ: "+cliente.getDocumentoC());
-        clienteService.guardar(cliente);
-
-        return "/login1";
     }
 
 }

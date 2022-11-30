@@ -16,4 +16,10 @@ public interface EntrenadorRepository extends JpaRepository<Entrenador,Integer> 
     )
     List<Entrenador> findByEstado(@Param("estado") boolean estado);
 
+    @Query(
+            value = "SELECT * from entrenador e where e.jornada = :jornada",
+            nativeQuery=true
+    )
+    List<Entrenador> entrenadoresJornada(@Param("jornada") String jornada);
+
 }

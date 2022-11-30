@@ -236,8 +236,55 @@ public class EntrenadorController {
     }
 
     @GetMapping("/trainer/dashboard")
-    public String irDashboard(Model model){
+    public String irDashboard(){
 
         return "/trainer/dashboard";
     }
+
+    //M I P E R F I L
+    @GetMapping("/trainer/perfil")
+    public String perfilTrainer(Model model, Entrenador entrenador){
+
+        entrenador.setId_entrenador(1);
+        entrenador = entrenadorService.encontrarEntrenador(entrenador);
+
+        model.addAttribute("trainer",entrenador);
+
+        return "/trainer/perfil";
+    }
+
+    @GetMapping("/trainer/dash-trainer/ver-horario/{id_entrenador}")
+    public String horarioTrainer(Model model, Entrenador entrenador){
+        String rta="";
+
+        entrenador = entrenadorService.encontrarEntrenador(entrenador);
+
+        if(entrenador.getJornada().equalsIgnoreCase("Mañana")){
+            rta = "/layouts/horario-manana";
+        } else if (entrenador.getJornada().equalsIgnoreCase("Tarde")){
+            rta = "/layouts/horario-tarde";
+        }
+
+        model.addAttribute("trainer",entrenador);
+        return rta;
+    }
+
+    @PostMapping("/trainer/perfil/guardar-perfil")
+    public String guardarEdicionPerfil(Entrenador entrenador,@RequestParam("file") MultipartFile imagen){
+
+        Path directorioImagenes = Paths.get("src//main//resources//static/images");
+        String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+        try {
+            byte[] bytesImg = imagen.getBytes();
+            Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+            Files.write(rutaCompleta, bytesImg);
+            entrenador.setFoto(imagen.getOriginalFilename());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        entrenadorService.guardar(entrenador);
+
+        return "redirect:/trainer/perfil";
+    }
+
 }

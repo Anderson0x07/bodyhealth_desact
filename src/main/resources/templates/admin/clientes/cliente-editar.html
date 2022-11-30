@@ -37,11 +37,10 @@
                     </div>
                     <div class="card-body">
 
-                        <form th:action="@{/admin/dash-clientes/expand/guardar}" th:object="${cliente}" method="POST">
-                            <input type="hidden" name="id_cliente" th:field="*{id_cliente}"/>
-                            <input type="hidden" name="documentoC" th:field="*{documentoC}"/>
-                            <input type="hidden" name="tipo_documento" th:field="*{tipo_documento}"/>
-                            <input type="hidden" name="rol" th:field="*{id_rol}"/>
+                        <form th:action="@{/admin/dash-clientes/expand/guardar}" th:object="${cliente}"
+                              enctype="multipart/form-data" method="POST">
+                            <input type="hidden" name="id_cliente" th:value="${cliente.id_cliente}"/>
+                            <input type="hidden" name="rol" th:value="${cliente.id_rol}"/>
 
                             <div class="container">
                                 <div class="row">
@@ -50,34 +49,34 @@
                                             <div class="card-body">
 
                                                 <div class="form-group">
-                                                    <label for="tdocumento">Tipo de Documento: </label>
-                                                    <input type="text" class="form-control" name="tdocumento" id="tdocumento"
-                                                           disabled th:field="*{tipo_documento}"/>
+                                                    <label for="tipo_documentoo">Tipo de Documento: </label>
+                                                    <input type="text" class="form-control" name="tipo_documento" id="tipo_documentoo"
+                                                           readonly th:value="${cliente.tipo_documento}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="documento">Documento: </label>
-                                                    <input type="text" class="form-control" name="documento" id="documento"
-                                                           disabled th:field="*{documentoC}"/>
+                                                    <label for="documentoC">Documento: </label>
+                                                    <input type="text" class="form-control" name="documentoC" id="documentoC"
+                                                           readonly th:value="${cliente.documentoC}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="nombre">Nombre: </label>
                                                     <input type="text" class="form-control" name="nombre" id="nombre"
-                                                           required="true" th:field="*{nombre}"/>
+                                                           required="true" th:value="${cliente.nombre}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="apellido">Apellido: </label>
                                                     <input type="text" class="form-control" name="apellido" id="apellido"
-                                                           required="true" th:field="*{apellido}"/>
+                                                           required="true" th:value="${cliente.apellido}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="telefono">Telefono: </label>
                                                     <input type="text" class="form-control" name="telefono" id="telefono"
-                                                           required="true" th:field="*{telefono}"/>
+                                                           required="true" th:value="${cliente.telefono}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="fechan">Fecha Nacimiento: </label>
-                                                    <input type="date" class="form-control" name="fechan" id="fechan"
-                                                           required="true" th:field="*{fechaN}"/>
+                                                    <label for="fechaN">Fecha Nacimiento: </label>
+                                                    <input type="date" class="form-control" name="fechaN" id="fechaN"
+                                                           required="true" th:field="${cliente.fechaN}"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -89,41 +88,52 @@
                                                 <div class="form-group">
                                                     <label for="email">Email: </label>
                                                     <input type="email" class="form-control" name="email" id="email"
-                                                           required="true" th:field="*{email}"/>
+                                                           required="true" th:value="${cliente.email}"/>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="pass">Contraseña: </label>
-                                                    <input type="text" class="form-control" name="pass" id="pass"
-                                                           required="true" th:field="*{password}"/>
+                                                    <label for="password">Contraseña: </label>
+                                                    <input type="text" class="form-control" name="password" id="password"
+                                                           required="true" th:value="${cliente.password}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="foto">Foto: </label>
-                                                    <input type="text" class="form-control" name="foto" id="foto"
-                                                           required="true" th:field="*{foto}"/>
+                                                    <input type="file" class="form-control" name="file" id="foto"
+                                                           th:value="${cliente.foto}"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="jornada">Jornada: </label>
                                                     <input type="text" class="form-control" name="jornada" id="jornada"
-                                                           required="true" th:field="*{jornada}"/>
+                                                           required="true" th:value="${cliente.jornada}"/>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label for="estado">Estado: </label>
+                                                    <input type="text" class="form-control" name="estado" id="estado"
+                                                           readonly th:value="${cliente.estado}"/>
+                                                </div>
+
 
                                                 <div class="form-group">
                                                     <label for="trainer">Entrenador: </label>
-                                                    <input type="text" class="form-control" name="trainer" id="trainer"
-                                                           readonly th:value="${trainer.documentoE+' - '+trainer.entrenador.nombre+' '+trainer.entrenador.apellido}"/>
+                                                    <input th:if="${trainer!=null}" type="text" class="form-control" name="trainer" id="trainer"
+                                                           disabled th:value="${trainer.entrenador.documentoE+' - '+trainer.entrenador.nombre+' '+trainer.entrenador.apellido}"/>
+                                                    <input th:if="${trainer==null}" type="text" class="form-control" name="trainer" id="trainer"
+                                                           disabled th:value="${'No Asignado'}"/>
                                                 </div>
 
+
+                                                <!--
                                                 <div class="form-group">
                                                         <label for="plan">Plan: </label>
                                                     <input type="text" class="form-control" name="plan" id="plan"
-                                                           readonly th:value="${'Plan '+plancliente.detalle.id_detalle+' - '+plancliente.detalle+' Meses'}"/>
+                                                           disabled th:value="${'Plan '+plancliente.detalle.id_detalle+' - '+plancliente.detalle+' Meses'}"/>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="rutina">Rutina: </label>
                                                     <input type="text" class="form-control" name="rutina"
-                                                           readonly th:value="${rutinacliente.id_rutina.nombre_rutina}"/>
+                                                           disabled th:value="${rutinacliente.id_rutina.nombre_rutina}"/>
                                                 </div>
+                                                -->
 
                                             </div>
                                         </div>
@@ -134,9 +144,9 @@
 
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-8"></div>
+                                    <div class="col-6"></div>
                                     <div class="col-2">
-                                        <a th:href="@{/admin/dash-clientes/expand/}+${cliente.documentoC}" class="btn btn-dark btn-block">
+                                        <a th:href="@{/admin/dash-clientes/expand/}+${cliente.id_cliente}" class="btn btn-dark btn-block">
                                             <i class="fas fa-arrow-left"></i> Regresar
                                         </a>
                                     </div>
@@ -145,157 +155,117 @@
                                             <i class="fas fa-check"></i> Guardar
                                         </button>
                                     </div>
-                                </div>
-                            </div>
 
-                        </form>
+                                    <!--Asignacion de entrenador-->
+                                    <div th:if="${trainer==null}" class="col-2">
+                                        <a href="#" class="btn btn-secondary"
+                                           data-bs-toggle="modal" data-bs-target="#asignar-entrenador">
+                                            <i class="fas fa-plus-square-o"></i> Asignar Entrenador
+                                        </a>
 
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="dashboard-content px-3 pt-4">
-                <div class="card border-light">
-                    <div class="card-header">
-                        <h3 class="card-title">Cambio de entrenador</h3>
-                    </div>
-                    <div class="card-body">
-                        <form th:action="@{/admin/dash-clientes/expand/guardar-trainer}" th:object="${trainer}" method="POST">
-                            <input type="text" readonly name="documentoC" th:field="*{cliente}"/>
-                            <div class="row">
-                                <div class="col-2"></div>
-                                <div class="col-8">
-                                    <div class="form-group">
-                                        <label for="entrenador" class="form-label">Entrenador: *</label>
-                                        <select name="entrenador" id="entrenador" required class="form-control mi-selector ">
-
-                                            <div th:each="entrenador : ${trainers}">
-                                                <option th:value="${entrenador.documentoE}" th:text="${entrenador.documentoE+' - '+entrenador.nombre+' '+entrenador.apellido}"></option>
-                                            </div>
-                                        </select> <br>
                                     </div>
-                                </div>
-                                <div class="col-2"></div>
-                            </div><br>
-
-
-
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="col-8"></div>
-                                    <div class="col-2"></div>
-                                    <div class="col-2">
-                                        <button type="submit" class="btn btn-success btn-block">
-                                            <i class="fas fa-check"></i> Guardar
-                                        </button>
+                                    <!--Cambio de entrenador-->
+                                    <div th:if="${trainer!=null}" class="col-2">
+                                        <a href="#" class="btn btn-secondary"
+                                           data-bs-toggle="modal" data-bs-target="#cambio-entrenador">
+                                            <i class="fas fa-plus-square-o"></i> Cambio de Entrenador
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="dashboard-content px-3 pt-4">
-                <div class="card border-light">
-                    <div class="card-header">
-                        <h3 class="card-title">Actualización de Plan</h3>
-                    </div>
-                    <div class="card-body">
-                        <form th:action="@{/admin/dash-clientes/expand/guardar-plan}" th:object="${plancliente}" method="POST">
-
-                            <input type="text" readonly name="documentoC" th:field="*{cliente}"/>
-                            <input type="text" disabled name="fecha_inicio" th:field="*{detalle.id_plan}"/>
-                            <input type="text" readonly name="fecha_inicio" th:field="*{fecha_inicio}"/>
-
-                            <div class="row">
-                                <div class="col-2"></div>
-                                <div class="col-8">
-                                    <div class="form-group">
-                                        <label for="plann" class="form-label">Plan: *</label>
-                                        <select name="plann" id="plann"  required class=" mi-selector form-control ">
-
-                                            <div th:each="plane : ${planesdetallados}">
-                                                <option th:value="${plane}" th:text="${plane}"></option>
-
-                                            </div>
-                                        </select> <br>
-
-                                    </div>
-                                </div>
-                                <div class="col-2"></div>
-                            </div><br>
-
-
-
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="col-8"></div>
-                                    <div class="col-2"></div>
-                                    <div class="col-2">
-                                        <button type="submit" class="btn btn-success btn-block">
-                                            <i class="fas fa-check"></i> Guardar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
                         </form>
                     </div>
                 </div>
             </div>
 
-            <div class="dashboard-content px-3 pt-4">
-                <div class="card border-light">
-                    <div class="card-header">
-                        <h3 class="card-title">Actualización de Rutinas</h3>
-                    </div>
-                    <div class="card-body">
-                        <form th:action="@{/admin/dash-clientes/expand/guardar-rutina}" th:object="${rutinacliente}" method="POST">
+        </div>
+    </div>
 
-                            <input type="text" readonly name="cliente" th:field="*{documentoC}"/>
-                            <input type="text" readonly name="rut" th:field="*{id_rutina.nombre_rutina}"/>
-
-                            <div class="row">
-                                <div class="col-2"></div>
-                                <div class="col-8">
-                                    <div class="form-group">
-                                        <label for="rutina" class="form-label">Rutina: </label>
-                                        <select name="rutina" id="rutina"  required class=" mi-selector form-control ">
-
-                                            <div th:each="rutina : ${rutinas}">
-                                                <option th:value="${rutina}" th:text="${rutina}"></option>
-
-                                            </div>
-                                        </select> <br>
-
-                                    </div>
-                                </div>
-                                <div class="col-2"></div>
-                            </div><br>
-
-
-
-                            <div class="card-footer">
-                                <div class="row">
-                                    <div class="col-8"></div>
-                                    <div class="col-2"></div>
-                                    <div class="col-2">
-                                        <button type="submit" class="btn btn-success btn-block">
-                                            <i class="fas fa-check"></i> Guardar
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
+    <!--Modales cambio trainer-->
+    <div class="modal fade" id="asignar-entrenador" tabindex="-1" aria-labelledby="perfil" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="perfil">Asignacion de Entrenador</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form th:action="@{/admin/dash-clientes/expand/guardartrainer}" th:object="${entrenador_cliente}"
+                      method="POST" class="was-validated">
+                    <div class="modal-body">
+
+
+                        <div class="form-group">
+                            <label for="cliente2">Id Cliente: </label>
+                            <input type="text" class="form-control" readonly id="cliente2" name="cliente" th:value="${cliente.id_cliente}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="entrenador" class="form-label">Entrenador: </label>
+                            <select name="entrenador" id="entrenador" required class="form-control ">
+
+                                <div th:each="entrenador : ${trainers}"> <!--Trainers disponibles jornada-->
+                                    <option th:value="${entrenador.id_entrenador}" th:text="${entrenador.documentoE+' - '+entrenador.nombre+' '+entrenador.apellido}"></option>
+                                </div>
+                            </select> <br>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+
+                </form>
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cambio-entrenador" tabindex="-1" aria-labelledby="perfil2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="perfil2">Cambio de Entrenador</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:action="@{/admin/dash-clientes/expand/guardartrainer}" th:object="${entrenador_cliente}"
+                      method="POST" class="was-validated">
+
+                    <div class="modal-body">
+
+                        <div th:if="trainer==null" class="form-group">
+                            <label for="id_asignacion2">Id Asignacion: </label>
+                            <input type="text" class="form-control" readonly id="id_asignacion2" name="id_asignacion" th:value="${trainer.id_asignacion}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cliente">Id Cliente: </label>
+                            <input type="text" class="form-control" readonly id="cliente" name="cliente" th:value="${cliente.id_cliente}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="entrenador2" class="form-label">Entrenador: </label>
+                            <select name="entrenador" id="entrenador2" required class="form-control ">
+
+                                <div th:each="entrenador : ${trainers}"> <!--Trainers disponibles jornada-->
+                                    <option th:value="${entrenador.id_entrenador}" th:text="${entrenador.documentoE+' - '+entrenador.nombre+' '+entrenador.apellido}"></option>
+                                </div>
+                            </select> <br>
+                        </div>
 
 
 
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 
