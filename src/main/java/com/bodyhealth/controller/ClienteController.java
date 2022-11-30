@@ -52,6 +52,8 @@ public class ClienteController {
 
     @Autowired
     private RolRepository rolRepository;
+    @Autowired
+    ProductoService productoService;
 
 
 
@@ -200,6 +202,25 @@ public class ClienteController {
 
 
         return "redirect:/admin/dash-clientes";
+    }
+
+    @GetMapping("/cliente/productos")
+    public String productos(Model model){
+        List<Producto> product = productoService.listarProductos();
+        model.addAttribute("productos",product);
+        return "/cliente/productos";
+    }
+    @GetMapping("/cliente/planes")
+    public String planes(){
+        return "/cliente/planes";
+    }
+    @GetMapping("/cliente/noticias")
+    public String noticias(){
+        return "/cliente/noticias";
+    }
+    @GetMapping("/index")
+    public String index(){
+        return "/index";
     }
 
 }
