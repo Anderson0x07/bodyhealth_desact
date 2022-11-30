@@ -53,10 +53,10 @@ public class PDFGeneratorService {
         info.setRowspan(4);
         factura.addCell(info);
 
-        factura.addCell("Identificacion: "+clienteDetalle.getCliente().getTipo_documento()+" - "+clienteDetalle.getCliente().getDocumentoC());
-        factura.addCell("Nombre: "+clienteDetalle.getCliente().getNombre());
-        factura.addCell("Teléfono: "+clienteDetalle.getCliente().getTelefono());
-        factura.addCell("Email: "+clienteDetalle.getCliente().getEmail());
+        factura.addCell("Identificacion: "+clienteDetalle.getId_cliente().getTipo_documento()+" - "+clienteDetalle.getId_cliente().getDocumentoC());
+        factura.addCell("Nombre: "+clienteDetalle.getId_cliente().getNombre());
+        factura.addCell("Teléfono: "+clienteDetalle.getId_cliente().getTelefono());
+        factura.addCell("Email: "+clienteDetalle.getId_cliente().getEmail());
 
         PdfPCell deta = new PdfPCell();
         Paragraph infoD = new Paragraph("Detalle de Plan");
@@ -64,12 +64,12 @@ public class PDFGeneratorService {
         deta.setRowspan(3);
         factura.addCell(deta);
 
-        factura.addCell("ID: "+clienteDetalle.getDetalle().getId_detalle()+"");
-        factura.addCell(clienteDetalle.getDetalle().getPlan()+"");
-        factura.addCell("Precio: $"+clienteDetalle.getDetalle().getPrecio()+"");
+        factura.addCell("ID: "+clienteDetalle.getId_detalle().getId_detalle()+"");
+        factura.addCell(clienteDetalle.getId_detalle().getPlan()+"");
+        factura.addCell("Precio: $"+clienteDetalle.getId_detalle().getPrecio()+"");
 
         factura.addCell("Suscripción");
-        factura.addCell(clienteDetalle.getDetalle().getMeses()+" Meses");
+        factura.addCell(clienteDetalle.getId_detalle().getMeses()+" Meses");
 
         factura.addCell("Fecha de Inicio");
         factura.addCell(dateFormat(clienteDetalle.getFecha_inicio()));
@@ -78,10 +78,10 @@ public class PDFGeneratorService {
         factura.addCell(dateFormat(clienteDetalle.getFecha_fin()));
 
         factura.addCell("Total");
-        factura.addCell(clienteDetalle.getDetalle().getPrecio()+"");
+        factura.addCell(clienteDetalle.getId_detalle().getPrecio()+"");
 
         factura.addCell("Método de Pago");
-        factura.addCell(clienteDetalle.getMetodoPago().getDescripcion()+"");
+        factura.addCell(clienteDetalle.getId_metodopago().getDescripcion()+"");
 
 
         factura.setSpacingAfter(300);

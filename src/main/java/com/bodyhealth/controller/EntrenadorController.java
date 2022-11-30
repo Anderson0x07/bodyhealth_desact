@@ -223,7 +223,7 @@ public class EntrenadorController {
 
         controlClienteService.guardar(controlCliente);
 
-        return "redirect:/trainer/dash-clientes/expand/"+controlCliente.getCliente().getId_cliente();
+        return "redirect:/trainer/dash-clientes/expand/"+controlCliente.getId_cliente().getId_cliente();
     }
 
 

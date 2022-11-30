@@ -45,7 +45,7 @@ public class ClienteController {
     private EntrenadorRepository entrenadorRepository;
 
     @Autowired
-    private EntrenadorService entrenadorService;
+    private MetodoPagoRepository metodoPagoRepository;
 
     @Autowired
     private ClienteDetalleService clienteDetalleService;
@@ -54,6 +54,28 @@ public class ClienteController {
     private RolRepository rolRepository;
     @Autowired
     ProductoService productoService;
+
+    @Autowired
+    private ControlClienteRepository controlClienteRepository;
+    @Autowired
+    private ClienteRutinaRepository clienteRutinaRepository;
+
+    @Autowired
+    private RutinaService rutinaService;
+    @Autowired
+    private ClienteRutinaEjercicioRepository clienteRutinaEjercicioRepository;
+    @Autowired
+    private RutinaEjercicioRepository rutinaEjercicioRepository;
+    @Autowired
+    private ClienteRutinaEjercicioService clienteRutinaEjercicioService;
+    @Autowired
+    private ControlClienteService controlClienteService;
+
+    @Autowired
+    private ClienteRutinaService clienteRutinaService;
+
+
+
 
 
 
@@ -78,14 +100,57 @@ public class ClienteController {
         Cliente cnuevo = clienteService.encontrarCliente(cliente);
         model.addAttribute("cliente",cnuevo);
 
+        EntrenadorCliente entrenadorCliente = entrenadorClienteRepository.encontrarEntrenador(cnuevo.getId_cliente());
 
-        /*if(entrenadorClienteRepository.encontrarEntrenador(cnuevo.getId_cliente())!=null){
-            model.addAttribute("entrenadorcliente",entrenadorClienteRepository.encontrarEntrenador(cnuevo.getDocumentoC()));
+        //ENTRENADOR DEL CLIENTE EN CASO DE TENER
+        if(entrenadorCliente!=null){
+            model.addAttribute("entrenadorcliente",entrenadorCliente);
         }
 
-        if(clienteDetalleRepository.encontrarPlan(cnuevo.getId_cliente())!=null){
-            model.addAttribute("clientedetalle",clienteDetalleRepository.encontrarPlan(cnuevo.getDocumentoC()));
-        }*/
+        //PLAN DE CLIENTE EN CASO DE TENER
+        ClienteDetalle clienteDetalle = clienteDetalleRepository.encontrarPlan(cnuevo.getId_cliente());
+        log.info("CLIENTE PLAN XD: "+clienteDetalle.toString());
+        if(clienteDetalle!=null){
+            model.addAttribute("clientedetalle",clienteDetalle);
+        }
+
+        //PARA EL CONTROL DE PESO Y ESTATURA
+        ControlCliente control = controlClienteRepository.encontrarControlCliente(cnuevo.getId_cliente());
+        if(control != null){
+            model.addAttribute("control",control);
+        }
+
+        ClienteRutina clienteRutina = clienteRutinaRepository.encontrarRutina(cnuevo.getId_cliente());
+
+        List<Rutina> rutinas = rutinaService.listarRutina();
+        model.addAttribute("rutinas",rutinas);
+        if(clienteRutina != null){
+            log.info("IF ENVIO");
+            model.addAttribute("clienteRutina",clienteRutina);
+
+            //*GUARDA TODAS LOS EJERCICIOS DE LA RUTINA ESPECIFICADA EN LA TABLA CLIENTE_RUTINA_EJERCICIO
+            List<ClienteRutinaEjercicio>  rutinaconejercicios = clienteRutinaEjercicioRepository.encontrarRutinaCompletaCliente(clienteRutina.getId_clienterutina());
+            model.addAttribute("rutinaconejercicios",rutinaconejercicios);
+
+            if(rutinaconejercicios.size()<=0){
+                List<RutinaEjercicio> rutinaEjercicio = rutinaEjercicioRepository.encontrarRutinaEjercicios(clienteRutina.getId_rutina().getId_rutina());
+                ClienteRutinaEjercicio clienteRutinaEjercicio;
+                int idActual = clienteRutinaEjercicioRepository.idActual();
+                for (int i = 1; i <= rutinaEjercicio.size(); i++) {
+                    log.info("Ejecucion: "+i);
+                    clienteRutinaEjercicio=new ClienteRutinaEjercicio();
+                    clienteRutinaEjercicio.setId_cliente_rutina_ejercicio(idActual+i);
+                    clienteRutinaEjercicio.setId_cliente_rutina(clienteRutina);
+                    clienteRutinaEjercicio.setId_rutina_ejercicio(rutinaEjercicio.get(i-1));
+                    clienteRutinaEjercicioService.guardar(clienteRutinaEjercicio);
+                    log.info("ID ACTUAL: "+idActual+i);
+
+                    log.info("Guardado: "+i);
+                }
+                //ACTUALIZADA
+                model.addAttribute("rutinaconejercicios",clienteRutinaEjercicioRepository.encontrarRutinaCompletaCliente(clienteRutina.getId_clienterutina()));
+            }
+        }
 
 
 
@@ -127,24 +192,18 @@ public class ClienteController {
     }
 
     //ACTUALIZA PLAN DEL CLIENTE
-    @PostMapping("/admin/dash-clientes/expand/guardar-plan")
+    @PostMapping("/admin/dash-clientes/expand/guardarPlan")
     public String cambioPlan(ClienteDetalle clienteDetalle, Model model){
 
-        log.info("LO QUE LLEGA: "+clienteDetalle.toString());
-        ClienteDetalle copia = clienteDetalleRepository.encontrarPlan(clienteDetalle.getCliente().getDocumentoC());
+        log.info("Cambio o add de plan: "+clienteDetalle.toString());
 
-        log.info("COPIA: "+copia);
-        int documentoC = clienteDetalle.getCliente().getDocumentoC();
+        int id_cliente = clienteDetalle.getId_cliente().getId_cliente();
 
-        clienteDetalle.setDetalle(clienteDetalle.getDetalle());
-
-        //clienteDetalleService.eliminar(copia);
         clienteDetalleService.guardar(clienteDetalle);
 
+        model.addAttribute("clienteDetalle",clienteDetalleRepository.encontrarPlan(clienteDetalle.getId_cliente().getId_cliente()));
 
-        model.addAttribute("plancliente",clienteDetalleRepository.encontrarPlan(clienteDetalle.getCliente().getDocumentoC()));
-
-        return "redirect:/admin/dash-clientes/expand/editar/"+documentoC;
+        return "redirect:/admin/dash-clientes/expand/editar/"+id_cliente;
     }
 
 
@@ -156,25 +215,48 @@ public class ClienteController {
         cliente = clienteService.encontrarCliente(cliente);
         model.addAttribute("cliente",cliente);
 
+        //ENCONTRAR ENTRENADOR ASIGNADO EN CASO DE TENER UNO
         EntrenadorCliente entrenadorCliente = entrenadorClienteRepository.encontrarEntrenador(cliente.getId_cliente());
-
         if(entrenadorCliente!=null){
             model.addAttribute("trainer",entrenadorCliente);
         }
-        //model.addAttribute("plancliente", clienteDetalleRepository.encontrarPlan(cliente.getId_cliente()));
-
         //PARA MOSTRAR TODOS LOS ENTRENADORES POR JORNADA
         List<Entrenador> entrenadoresJornada = entrenadorRepository.entrenadoresJornada(cliente.getJornada());
         if(entrenadoresJornada.size()>0){
             model.addAttribute("trainers",entrenadoresJornada);
         }
 
-        //PARA MOSTRAR TODOS LOS PLANES
-        //model.addAttribute("planesdetallados",detalleRepository.findAll());
+        //PARA MOSTRAR PLAN ASIGNADO EN CASO DE TENER UNO
+        ClienteDetalle clienteDetalle = clienteDetalleRepository.encontrarPlan(cliente.getId_cliente());
+        if(clienteDetalle!=null){
+            model.addAttribute("clienteDetalle",clienteDetalle);
+        }
+        //PARA MOSTRAR TODOS LOS PLANES PARA SELECCIONAR
+        model.addAttribute("planesdetallados",detalleRepository.findAll());
+        //PARA MOSTRAR TODOS LOS METODOS DE PAGO DISPONIBLES
+        model.addAttribute("metodos",metodoPagoRepository.findAll());
 
 
         return "/admin/clientes/cliente-editar";
     }
+
+    @PostMapping("/admin/dash-clientes/expand/guardar-control")
+    public String guardarEdicionControl(ControlCliente controlCliente){
+
+        log.info("CONTROL ENTRANTE: "+controlCliente.toString());
+
+        controlClienteService.guardar(controlCliente);
+
+        return "redirect:/admin/dash-clientes/expand/"+controlCliente.getId_cliente().getId_cliente();
+    }
+    @PostMapping("/admin/dash-clientes/expand/guardar-cliente-rutina")
+    public String guardarAsignacionRutina(ClienteRutina clienteRutina){
+
+        clienteRutinaService.guardar(clienteRutina);
+
+        return "redirect:/admin/dash-clientes/expand/"+clienteRutina.getId_cliente().getId_cliente();
+    }
+
     //Desactiva clientes en el dashboard del admin
     @GetMapping("/admin/dash-clientes/expand/desactivar/{id_cliente}")
     public String desactivarCliente(Cliente cliente){

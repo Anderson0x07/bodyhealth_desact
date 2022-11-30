@@ -18,11 +18,11 @@ public class ClienteDetalle implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
+    private Cliente id_cliente;
 
     @ManyToOne
     @JoinColumn(name = "id_detalle")
-    private Detalle detalle;
+    private Detalle id_detalle;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_inicio;
@@ -32,5 +32,5 @@ public class ClienteDetalle implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_metodopago")
-    private MetodoPago metodoPago;
+    private MetodoPago id_metodopago;
 }

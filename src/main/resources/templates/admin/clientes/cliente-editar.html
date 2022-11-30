@@ -120,6 +120,13 @@
                                                            disabled th:value="${'No Asignado'}"/>
                                                 </div>
 
+                                                <div class="form-group">
+                                                    <label for="trainer">Plan: </label>
+                                                    <input th:if="${clienteDetalle!=null}" type="text" class="form-control" name="clienteDetalle" id="plan"
+                                                           disabled th:value="${clienteDetalle.id_factura+' - '+clienteDetalle.id_detalle.plan+' || Inicio: '+clienteDetalle.fecha_inicio+' || Fin: '+clienteDetalle.fecha_fin}"/>
+                                                    <input th:if="${clienteDetalle==null}" type="text" class="form-control" name="clienteDetalle" id="plan"
+                                                           disabled th:value="${'Sin Plan'}"/>
+                                                </div>
 
                                                 <!--
                                                 <div class="form-group">
@@ -144,7 +151,7 @@
 
                             <div class="card-footer">
                                 <div class="row">
-                                    <div class="col-6"></div>
+                                    <div class="col-4"></div>
                                     <div class="col-2">
                                         <a th:href="@{/admin/dash-clientes/expand/}+${cliente.id_cliente}" class="btn btn-dark btn-block">
                                             <i class="fas fa-arrow-left"></i> Regresar
@@ -171,6 +178,21 @@
                                             <i class="fas fa-plus-square-o"></i> Cambio de Entrenador
                                         </a>
                                     </div>
+                                    <!--Asignacion de Plan-->
+                                    <div th:if="${clienteDetalle==null}" class="col-2">
+                                        <a href="#" class="btn btn-secondary"
+                                           data-bs-toggle="modal" data-bs-target="#asignar-plan">
+                                            <i class="fas fa-plus-square-o"></i> Asignar Plan
+                                        </a>
+
+                                    </div>
+                                    <!--Cambio de Plan-->
+                                    <div th:if="${clienteDetalle!=null}" class="col-2">
+                                        <a href="#" class="btn btn-secondary"
+                                           data-bs-toggle="modal" data-bs-target="#cambio-plan">
+                                            <i class="fas fa-plus-square-o"></i> Cambio de Plan
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -181,7 +203,7 @@
         </div>
     </div>
 
-    <!--Modales cambio trainer-->
+    <!--Modales asginacion de entrenador-->
     <div class="modal fade" id="asignar-entrenador" tabindex="-1" aria-labelledby="perfil" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -222,6 +244,7 @@
         </div>
     </div>
 
+    <!--Modal cambio de entrenador-->
     <div class="modal fade" id="cambio-entrenador" tabindex="-1" aria-labelledby="perfil2" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -234,7 +257,7 @@
 
                     <div class="modal-body">
 
-                        <div th:if="trainer==null" class="form-group">
+                        <div th:if="${trainer!=null}" class="form-group">
                             <label for="id_asignacion2">Id Asignacion: </label>
                             <input type="text" class="form-control" readonly id="id_asignacion2" name="id_asignacion" th:value="${trainer.id_asignacion}"/>
                         </div>
@@ -268,6 +291,131 @@
             </div>
         </div>
     </div>
+
+    <!--Modales asginacion de plan-->
+    <div th:if="${metodos!=null && planesdetallados!=null}" class="modal fade" id="asignar-plan" tabindex="-1" aria-labelledby="aplan" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="aplan">Asignacion de Plan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:action="@{/admin/dash-clientes/expand/guardarPlan}" th:object="${cliente_detalle}"
+                      method="POST" class="was-validated">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="clienteap">Id Cliente: </label>
+                            <input type="text" class="form-control" readonly id="clienteap" name="id_cliente" th:value="${cliente.id_cliente}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="planA" class="form-label">Plan: </label>
+                            <select name="id_detalle" id="planA" required class="form-control ">
+
+                                <div th:each="plan : ${planesdetallados}"> <!--Planes disponibles-->
+                                    <option th:value="${plan.id_detalle}" th:text="${plan.id_detalle+' - '+plan.plan+' '+plan.precio+' '+plan.meses+' Meses'}"></option>
+                                </div>
+                            </select> <br>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha_inicioap">Fecha inicio: </label>
+                            <input type="date" class="form-control" id="fecha_inicioap" name="fecha_inicio" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_finap">Fecha fin: </label>
+                            <input type="date" class="form-control" id="fecha_finap" name="fecha_fin" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_metodopago2" class="form-label">Metodo de pago: </label>
+                            <select name="id_metodopago" id="id_metodopago2" required class="form-control ">
+
+                                <div th:each="metoPago : ${metodos}"> <!--Metodos de pago disponibles-->
+                                    <option th:value="${metoPago.id_metodopago}" th:text="${metoPago.id_metodopago+' '+metoPago.descripcion}"></option>
+                                </div>
+                            </select> <br>
+                        </div>
+
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal cambio de plan-->
+    <div th:if="${clienteDetalle!=null && metodos!=null && planesdetallados!=null}" class="modal fade" id="cambio-plan" tabindex="-1" aria-labelledby="cplan" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="cplan">Cambio de Plan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:action="@{/admin/dash-clientes/expand/guardarPlan}" th:object="${cliente_detalle}"
+                      method="POST" class="was-validated">
+
+                    <div class="modal-body">
+
+                        <div th:if="clienteDetalle!=null" class="form-group">
+                            <label for="id_factura">Id Factura: </label>
+                            <input type="text" class="form-control" readonly id="id_factura" name="id_factura" th:value="${clienteDetalle.id_factura}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="clientecp">Id Cliente: </label>
+                            <input type="text" class="form-control" readonly id="clientecp" name="id_cliente" th:value="${cliente.id_cliente}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plancp" class="form-label">Plan: </label>
+                            <select name="id_detalle" id="plancp" required class="form-control ">
+
+                                <div th:each="plan : ${planesdetallados}"> <!--Planes disponibles-->
+                                    <option th:value="${plan.id_detalle}" th:text="${plan.id_detalle+' - '+plan.plan+' '+plan.precio+' '+plan.meses+' Meses'}"></option>
+                                </div>
+                            </select> <br>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_inicio">Fecha inicio: </label>
+                            <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" th:field="${clienteDetalle.fecha_inicio}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_fin">Fecha fin: </label>
+                            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" th:field="${clienteDetalle.fecha_fin}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_metodopago4" class="form-label">Metodo de pago: </label>
+                            <select name="id_metodopago" id="id_metodopago4" required class="form-control ">
+
+                                <div th:each="metPago : ${metodos}"> <!--Metodos de pago disponibles-->
+                                    <option th:value="${metPago.id_metodopago}" th:text="${metPago.id_metodopago+' - '+metPago.descripcion}"></option>
+                                </div>
+                            </select> <br>
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Guardar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 
     <!--SCRIPT SIDEBAR-->
     <script th:replace="/layouts/script-sidebar :: script-sidebar"></script>
