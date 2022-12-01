@@ -67,14 +67,15 @@
                                 <li><a class="dropdown-item" href="mi-perfil.jsp"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a></li>
                                 <li><a class="dropdown-item" href="html/carrito.jsp"><i class="fa-sharp fa-solid fa-cart-shopping"></i> Carrito</a></li>
                                 <div class="dropdown-divider"></div>
-                                <li><a class="dropdown-item" href="html/login.jsp?cerrar=true"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i> Cerrar Sesion</a></li>
+                                <li><a class="dropdown-item" th:href="@{/cliente/login1}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i> Iniciar sesión</a></li>
+                                <li><a class="dropdown-item" th:href=" @{/cliente/registroCliente}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i>Registrarse</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
 
                 <ul class="navbar-nav mr-auto">
-                    <li><a class="nav-link" href="html/login.jsp"><i class="fa-solid fa-circle-user"></i> Login</a></li>
+                    <li><a class="nav-link" th:href="@{/cliente/login1}"><i class="fa-solid fa-circle-user"></i> Login</a></li>
 
                 </ul>
 
@@ -168,41 +169,41 @@
 
         <div class="col-sm-4">
             <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <img src="/images/mancuerna.png" width="150" height="150">
-                    <h2>PRODUCTOS</h2>
+                <div class="card-body">
+                    <div class="card-title">
+                        <img src="/images/mancuerna.png" width="150" height="150">
+                        <h2>PRODUCTOS</h2>
+                    </div>
+
+
+                    <p class="card-text">Gran variedad de productos que te sirven para aumentar musculatura, perder peso o mejorar la resistencia.</p>
+
+                    <div class="d-grid gap-2">
+                        <a class="btn btn-dark" href="/cliente/productos">Ver Productos</a>
+                    </div>
                 </div>
 
-
-                <p class="card-text">Gran variedad de productos que te sirven para aumentar musculatura, perder peso o mejorar la resistencia.</p>
-
-                <div class="d-grid gap-2">
-                    <a class="btn btn-dark" href="/cliente/productos">Ver Productos</a>
-                </div>
             </div>
+        </div>
 
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <img src="/images/mancuerna2.png" width="150" height="150">
+                        <h2 >PLANES</h2>
+                    </div>
+                    <p class="card-text">Los mejores planes de entrenamiento.
+                        Únete a nuestros planes, únete a la revolucion.</p>
+
+                    <div class="d-grid gap-2">
+                        <a class="btn btn-dark"  href="/cliente/planes">Ver Planes</a>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-
-    <div class="col-sm-4">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title">
-                    <img src="/images/mancuerna2.png" width="150" height="150">
-                    <h2 >PLANES</h2>
-                </div>
-                <p class="card-text">Los mejores planes de entrenamiento.
-                    Únete a nuestros planes, únete a la revolucion.</p>
-
-                <div class="d-grid gap-2">
-                    <a class="btn btn-dark"  href="/cliente/planes">Ver Planes</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 </div>
 
