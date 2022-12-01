@@ -34,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Administrador encontrarAdministrador(Administrador administrador) {
 
-        return adminRepository.findById(administrador.getDocumentoA()).orElse(null);
+        return adminRepository.findById(administrador.getId_admin()).orElse(null);
     }
 
     /*@Override

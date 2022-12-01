@@ -51,13 +51,13 @@
                         <tr th:each="factura : ${factPlan}">
                             <td th:text="${factura.id_factura}"></td>
                             <td th:text="${#dates.format(factura.fecha_inicio, 'dd-MMM-yyyy')}"></td>
-                            <td th:text="${factura.cliente.nombre}"></td>
-                            <td th:text="${factura.detalle.plan}"></td>
-                            <td th:text="'Por '+${factura.detalle.meses}+' Meses'"></td>
+                            <td th:text="${factura.id_cliente.nombre}"></td>
+                            <td th:text="${factura.id_detalle.plan}"></td>
+                            <td th:text="'Por '+${factura.id_detalle.meses}+' Meses'"></td>
                             <td th:text="${#dates.format(factura.fecha_inicio, 'dd-MMM-yyyy')}"></td>
                             <td th:text="${#dates.format(factura.fecha_fin, 'dd-MMM-yyyy')}"></td>
-                            <td th:text="'$'+${factura.detalle.meses}"></td>
-                            <td th:text="${factura.metodoPago.descripcion}"></td>
+                            <td th:text="'$'+${factura.id_detalle.meses}"></td>
+                            <td th:text="${factura.id_metodopago.descripcion}"></td>
 
                             <td>
                                 <a th:href="@{/admin/dash-fact-planes/expand/} + ${factura.id_factura}" style="text-decoration: none">

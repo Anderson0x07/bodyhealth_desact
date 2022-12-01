@@ -1,5 +1,6 @@
 package com.bodyhealth.model;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class Administrador implements Serializable{
 
     private String telefono;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date fecha_nacimiento;
 
     private String email;

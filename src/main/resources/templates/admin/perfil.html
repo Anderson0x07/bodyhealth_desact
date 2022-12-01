@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Admin</title>
+    <title>Mi Perfil Admin</title>
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
@@ -35,7 +35,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped">
                         <tr>
-                            <th colspan="5" style="text-align: center; font-size: xx-large" th:text="${'Perfil del Entrenador'}"></th>
+                            <th colspan="5" style="text-align: center; font-size: xx-large" th:text="${'Perfil del Administrador'}"></th>
                         </tr>
                     </table>
                 </div>
@@ -47,55 +47,49 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-5">
-                                <img th:src="@{'/images/' + ${trainer.foto}}" width="500" height="450">
-                            </div>
-                            <div class="col-7">
+                            <div class="col-2"></div>
+                            <div class="col-8">
 
                                 <div class="table-responsive">
                                     <table  class="table table-bordered table-striped">
 
                                         <tr>
                                             <th>Tipo documento</th>
-                                            <td th:text="${trainer.tipo_documento}"></td>
+                                            <td th:text="${admin.tipodocumento}"></td>
                                         </tr>
                                         <tr>
                                             <th>Documento</th>
-                                            <td th:text="${trainer.documentoE}"></td>
+                                            <td th:text="${admin.documentoA}"></td>
                                         </tr>
                                         <tr>
                                             <th>Nombres</th>
-                                            <td th:text="${trainer.nombre}"></td>
+                                            <td th:text="${admin.nombre}"></td>
                                         </tr>
                                         <tr>
                                             <th>Apellido</th>
-                                            <td th:text="${trainer.apellido}"></td>
+                                            <td th:text="${admin.apellido}"></td>
                                         </tr>
                                         <tr>
                                             <th>Telefono</th>
-                                            <td th:text="${trainer.telefono}"></td>
+                                            <td th:text="${admin.telefono}"></td>
                                         </tr>
                                         <tr>
                                             <th>Fecha de Nacimiento</th>
-                                            <td th:text="${#dates.format(trainer.fechaN, 'dd-MMM-yyyy')}"></td>
+                                            <td th:text="${#dates.format(admin.fecha_nacimiento, 'dd-MMM-yyyy')}"></td>
                                         </tr>
                                         <tr>
                                             <th>Email</th>
-                                            <td th:text="${trainer.email}"></td>
+                                            <td th:text="${admin.email}"></td>
                                         </tr>
                                         <tr>
                                             <th>Contraseña</th>
-                                            <td th:text="${trainer.password}"></td>
+                                            <td th:text="${admin.password}"></td>
                                         </tr>
-                                        <tr>
-                                            <th>Jornada</th>
-                                            <td th:text="${trainer.jornada}"></td>
-                                        </tr>
-
 
                                     </table>
                                 </div>
                             </div>
+                            <div class="col-2"></div>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -114,85 +108,55 @@
                                                 <h1 class="modal-title fs-5" id="perfil">Editar Mi Perfil</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <form th:action="@{/trainer/perfil/guardar-perfil}" th:object="${entrenador}"
+                                            <form th:action="@{/admin/perfil/guardar-perfil}" th:object="${admin}"
                                                   method="POST" enctype="multipart/form-data" class="was-validated">
                                                 <div class="modal-body">
-                                                    <input type="hidden" name="id_admin" id="id_admin" th:value="${trainer.id_admin.id_admin}"/>
-                                                    <input type="hidden" name="id_rol" id="id_rol" th:value="${trainer.id_rol.id_rol}"/>
+                                                    <input type="hidden" name="id_rol" id="id_rol" th:value="${admin.id_rol.id_rol}"/>
                                                     <div class="form-group">
-                                                        <label for="id_entrenador">Id Entrenador: </label>
-                                                        <input type="number" class="form-control" name="id_entrenador" id="id_entrenador"
-                                                               readonly th:value="${trainer.id_entrenador}"/>
+                                                        <label for="id_admin">Id Administrador: </label>
+                                                        <input type="number" class="form-control" name="id_admin" id="id_admin"
+                                                               readonly th:value="${admin.id_admin}"/>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="tipo_documento">Tipo de Documento: </label>
-                                                        <input type="text" class="form-control" name="tipo_documento" id="tipo_documento"
-                                                               readonly th:value="${trainer.tipo_documento}"/>
+                                                        <label for="tipodocumento">Tipo de Documento: </label>
+                                                        <input type="text" class="form-control" name="tipodocumento" id="tipodocumento"
+                                                               readonly th:value="${admin.tipodocumento}"/>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="documentoE">Documento: </label>
-                                                        <input type="number" class="form-control" name="documentoE" id="documentoE"
-                                                               readonly th:value="${trainer.documentoE}">
+                                                        <label for="documentoA">Documento: </label>
+                                                        <input type="number" class="form-control" name="documentoA" id="documentoA"
+                                                               readonly th:value="${admin.documentoA}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="nombre">Nombre: </label>
                                                         <input type="text" class="form-control" name="nombre" id="nombre"
-                                                               th:value="${trainer.nombre}">
+                                                               th:value="${admin.nombre}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="apellido">Apellido: </label>
                                                         <input type="text" class="form-control" name="apellido" id="apellido"
-                                                               th:value="${trainer.apellido}">
+                                                               th:value="${admin.apellido}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="telefono">Telefono: </label>
                                                         <input type="text" class="form-control" name="telefono" id="telefono"
-                                                               th:value="${trainer.telefono}">
+                                                               th:value="${admin.telefono}">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="fechaN">Fecha de Nacimiento: </label>
-                                                        <input type="date" class="form-control" name="fechaN" id="fechaN"
-                                                               th:value="${trainer.fechaN}">
+                                                        <label for="fecha_nacimiento">Fecha de Nacimiento: </label>
+                                                        <input type="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento"
+                                                               th:field="${admin.fecha_nacimiento}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="email">Email: </label>
                                                         <input type="text" class="form-control" name="email" id="email"
-                                                               th:value="${trainer.email}">
+                                                               th:value="${admin.email}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="password">Password: </label>
                                                         <input type="text" class="form-control" name="password" id="password"
-                                                               th:value="${trainer.password}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="foto">Foto: </label>
-                                                        <input type="file" class="form-control" name="file" id="foto"
-                                                               th:value="${trainer.foto}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="experiencia">Experiencia: </label>
-                                                        <input type="number" class="form-control" name="experiencia" id="experiencia"
-                                                               th:value="${trainer.experiencia}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="hoja_vida">Hoja de Vida: </label>
-                                                        <input type="text" class="form-control" name="hoja_vida" id="hoja_vida"
-                                                               th:value="${trainer.hoja_vida}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="titulo_academico">Titulo Académico: </label>
-                                                        <input type="text" class="form-control" name="titulo_academico" id="titulo_academico"
-                                                               th:value="${trainer.titulo_academico}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="jornada" class="form-label">Jornada: </label>
-                                                        <select name="jornada" id="jornada" required class="form-control  ">
-
-                                                            <option th:value="${'Mañana'}" th:text="${'Mañana'}"></option>
-                                                            <option th:value="${'Tarde'}" th:text="${'Tarde'}"></option>
-
-                                                        </select> <br>
+                                                               th:value="${admin.password}">
                                                     </div>
 
                                                 </div>
@@ -206,12 +170,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div  class="col-2">
-                                <a th:href="@{/trainer/dash-trainer/ver-horario/} + ${trainer.id_entrenador}" class="btn btn-success btn-block">
-                                    <i class="fa-solid fa-xmark"></i> Ver Horario
-                                </a>
 
                             </div>
                         </div>

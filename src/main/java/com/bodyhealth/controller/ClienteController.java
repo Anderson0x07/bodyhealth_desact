@@ -109,8 +109,9 @@ public class ClienteController {
 
         //PLAN DE CLIENTE EN CASO DE TENER
         ClienteDetalle clienteDetalle = clienteDetalleRepository.encontrarPlan(cnuevo.getId_cliente());
-        log.info("CLIENTE PLAN XD: "+clienteDetalle.toString());
+
         if(clienteDetalle!=null){
+            log.info("CLIENTE PLAN XD: "+clienteDetalle.toString());
             model.addAttribute("clientedetalle",clienteDetalle);
         }
 

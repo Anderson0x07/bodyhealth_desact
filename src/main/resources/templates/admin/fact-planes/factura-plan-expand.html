@@ -52,28 +52,28 @@
                                         </tr>
                                         <tr>
                                             <th rowspan="3">Información del Cliente</th>
-                                            <td th:text="'Documento: '+${detalle.cliente.documentoC}"></td>
+                                            <td th:text="'Documento: '+${detalle.id_cliente.documentoC}"></td>
                                         </tr>
 
                                         <tr>
-                                            <td th:text="'Nombre: '+${detalle.cliente.nombre}"></td>
+                                            <td th:text="'Nombre: '+${detalle.id_cliente.nombre}"></td>
                                         </tr>
                                         <tr>
-                                            <td th:text="'Telefono: '+${detalle.cliente.telefono}"></td>
+                                            <td th:text="'Telefono: '+${detalle.id_cliente.telefono}"></td>
                                         </tr>
                                         <tr>
                                             <th rowspan="3">Detalle de Plan</th>
-                                            <td th:text="'ID: '+${detalle.detalle.id_detalle}"></td>
+                                            <td th:text="'ID: '+${detalle.id_detalle.id_detalle}"></td>
                                         </tr>
                                         <tr>
-                                            <td th:text="${detalle.detalle.plan}"></td>
+                                            <td th:text="${detalle.id_detalle.plan}"></td>
                                         </tr>
                                         <tr>
-                                            <td th:text="'Precio: $'+${detalle.detalle.precio}"></td>
+                                            <td th:text="'Precio: $'+${detalle.id_detalle.precio}"></td>
                                         </tr>
                                         <tr>
                                             <th>Suscripción</th>
-                                            <td th:text="${detalle.detalle.meses}+' Meses'"></td>
+                                            <td th:text="${detalle.id_detalle.meses}+' Meses'"></td>
                                         </tr>
                                         <tr>
                                             <th>Fecha de Inicio</th>
@@ -85,11 +85,11 @@
                                         </tr>
                                         <tr>
                                             <th>Total</th>
-                                            <td th:text="${'$'+detalle.detalle.precio}"></td>
+                                            <td th:text="${'$'+detalle.id_detalle.precio}"></td>
                                         </tr>
                                         <tr>
                                             <th>Método de Pago</th>
-                                            <td th:text="${detalle.metodoPago.descripcion}"></td>
+                                            <td th:text="${detalle.id_metodopago.descripcion}"></td>
                                         </tr>
 
                                     </table>
