@@ -17,8 +17,8 @@
 </head>
 <body id="body-index">
 <!--barra navegacion-->
-<div class="row">
-    <div class="col-1"></div>
+<div id="navbar" class="row" style="margin-bottom: 10px">
+    <div class="col-1" ></div>
     <div class="col-10">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,16 +28,16 @@
             </button>
 
 
-            <a class="navbar-brand" th:href="@{/index}">
-                <img src="/images/Logo-BodyHealth.jpeg" width="80" height="68">
+            <a class="navbar-brand" th:href="@{/}">
+                <img src="/images/Logo-BodyHealth.jpeg" width="140" height="70">
             </a>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mr-auto">
-                    <li><a class="nav-link"  th:href="@{/index}"><i class="fa-sharp fa-solid fa-house"></i> Home</a></li>
-                    <li><a class="nav-link" th:href="@{/cliente/planes}"><i class="fa-sharp fa-solid fa-tag"></i> Planes</a></li>
-                    <li><a class="nav-link" th:href="@{/cliente/noticias}"><i class="fa-solid fa-newspaper"></i> Noticias</a></li>
-                    <li><a class="nav-link" th:href="@{/cliente/productos}"><i class="fa-sharp fa-solid fa-shop"></i> Productos</a></li>
+                    <li><a class="nav-link"  th:href="@{/}"><i class="fa-sharp fa-solid fa-house"></i> Home</a></li>
+                    <li><a class="nav-link" th:href="@{/planes}"><i class="fa-sharp fa-solid fa-tag"></i> Planes</a></li>
+                    <li><a class="nav-link" th:href="@{/noticias}"><i class="fa-solid fa-newspaper"></i> Noticias</a></li>
+                    <li><a class="nav-link" th:href="@{/productos}"><i class="fa-sharp fa-solid fa-shop"></i> Productos</a></li>
 
                 </ul>
 
@@ -46,26 +46,27 @@
                 <div class="dropdown-divider"></div>
 
 
+                <!--SI ESTA AUTENTICADO MUESTRA ESTO-->
                 <div>
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="img/otro.png" class="img-fluid" width="50" height="50" />
+                                <img th:src="@{'/images/otro.png'}" class="img-fluid" width="50" height="50" />
 
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="mi-perfil.jsp"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a></li>
-                                <li><a class="dropdown-item" href="html/carrito.jsp"><i class="fa-sharp fa-solid fa-cart-shopping"></i> Carrito</a></li>
+                                <li><a class="dropdown-item" th:href="@{/mi-perfil}"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a></li>
                                 <div class="dropdown-divider"></div>
-                                <li><a class="dropdown-item" th:href="@{/cliente/login1}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i> Iniciar sesión</a></li>
-                                <li><a class="dropdown-item" th:href=" @{/cliente/registro-cliente}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i>Registrarse</a></li>
+                                <li><a class="dropdown-item" th:href="@{/login1}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i> Iniciar sesión</a></li>
+                                <li><a class="dropdown-item" th:href=" @{/registroCliente}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i>Registrarse</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
 
+                <!--SI NO ESTA AUTENTICADO MUESTRA ESTO-->
                 <ul class="navbar-nav mr-auto">
-                    <li><a class="nav-link" th:href="@{/cliente/login1}"><i class="fa-solid fa-circle-user"></i> Login</a></li>
+                    <li><a class="nav-link" th:href="@{/login1}"><i class="fa-solid fa-circle-user"></i> Login</a></li>
 
                 </ul>
 

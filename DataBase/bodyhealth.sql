@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 30-11-2022 a las 05:18:02
+-- Tiempo de generación: 01-12-2022 a las 03:27:18
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -46,7 +46,7 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`id_admin`, `documentoA`, `tipodocumento`, `nombre`, `apellido`, `telefono`, `fecha_nacimiento`, `email`, `password`, `id_rol`) VALUES
-(1, 100451, 'CC', 'Admin', 'Uno', '3212323322', '2003-07-07', 'admin@bodyhealth.com', '15948', 1);
+(1, 100451, 'CC', 'Admin2', 'Uno', '3212323322', '2022-07-10', 'admin@bodyhealth.com', '15948', 1);
 
 -- --------------------------------------------------------
 
@@ -76,11 +76,12 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_cliente`, `documentoC`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `foto`, `jornada`, `comentario`, `estado`, `id_rol`) VALUES
-(1, 999, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-09', 'anderson07rolon@gmail.com', '1234', NULL, 'mañana', NULL, 1, NULL),
-(2, 1234, 'CC', 'Adrian', 'Rolon', '3224125464', '2003-07-06', 'anderson07rolon@gmail.com', '1234', NULL, 'mañana', NULL, 0, NULL),
-(3, 5555555, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-11', 'anderson07rolon@gmail.com', '1234', NULL, 'Mañana', NULL, 1, 2),
-(5, 134324, 'cedula', 'Andrés Norberto', 'Cáceres Becerra', '3208381557', '2022-11-01', 'andresncb03@gmail.com', 'sasda', 'Anime3.jpg', 'Mañana', NULL, 1, 2),
-(7, 123, 'cedula', 'Andres', 'Becerra', '3208381557', '2022-11-04', 'andresncb03@gmail.com', 'sdas', 'AnimeX_665356.jpeg', 'Mañana', NULL, 0, 2);
+(1, 999, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-09', 'anderson07rolon@gmail.com', '1234', 'energia M.A.S.png', 'mañana', NULL, 1, NULL),
+(2, 1234, 'CC', 'Adrian', 'Rolon', '3224125464', '2003-07-06', 'anderson07rolon@gmail.com', '1234', 'WhatsApp Image 2022-11-22 at 7.12.09 PM.jpeg', 'Tarde', NULL, 1, NULL),
+(3, 5555555, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-11', 'anderson07rolon@gmail.com', '1234', 'Screenshot_20221127-204435.png', 'Mañana', NULL, 1, NULL),
+(5, 134324, 'cedula', 'prueba', 'Cáceres Becerra', '3208381557', '2022-11-09', 'andresncb03@gmail.com', 'sasda', 'WhatsApp Image 2022-11-21 at 12.41.23 PM.jpeg', 'Mañana', NULL, 1, NULL),
+(7, 123, 'cedula', 'Andres', 'Becerra', '3208381557', '2022-11-04', 'andresncb03@gmail.com', 'sdas', 'WhatsApp Image 2022-11-21 at 12.41.23 PM.jpeg', 'Mañana', NULL, 1, NULL),
+(8, 1235, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-23', 'anderson07rolon@gmail.com', 'sdsd', 'WhatsApp Image 2022-11-22 at 7.11.52 PM.jpeg', 'Mañana', NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,8 +115,7 @@ CREATE TABLE `cliente_rutina` (
 --
 
 INSERT INTO `cliente_rutina` (`id_clienterutina`, `id_cliente`, `id_rutina`) VALUES
-(20, 5, 15),
-(21, 3, 14);
+(26, 2, 14);
 
 -- --------------------------------------------------------
 
@@ -134,8 +134,17 @@ CREATE TABLE `cliente_rutina_ejercicio` (
 --
 
 INSERT INTO `cliente_rutina_ejercicio` (`id_cliente_rutina_ejercicio`, `id_cliente_rutina`, `id_rutina_ejercicio`) VALUES
-(16, 21, 8),
-(17, 20, 10);
+(102, 26, 12),
+(103, 26, 13),
+(104, 26, 14),
+(105, 26, 15),
+(106, 26, 16),
+(107, 26, 17),
+(108, 26, 18),
+(109, 26, 19),
+(110, 26, 20),
+(111, 26, 21),
+(112, 26, 22);
 
 -- --------------------------------------------------------
 
@@ -178,7 +187,13 @@ CREATE TABLE `control_cliente` (
 INSERT INTO `control_cliente` (`id_controlcliente`, `id_cliente`, `peso`, `estatura`, `fecha`) VALUES
 (9, 5, 23, 23, '2022-11-22'),
 (10, 3, 50, 150, '2022-11-10'),
-(11, 3, 60, 60, '2022-11-29');
+(11, 3, 60, 60, '2022-11-29'),
+(12, 8, 600, 600, '2022-11-30'),
+(14, 5, 50, 60, '2022-11-30'),
+(15, 1, 100, 100, '2022-11-24'),
+(16, 7, 60, 170, '2022-11-16'),
+(17, 5, 80, 180, '2022-11-30'),
+(18, 2, 70, 170, '2022-11-30');
 
 -- --------------------------------------------------------
 
@@ -211,7 +226,8 @@ CREATE TABLE `detalle` (
 --
 
 INSERT INTO `detalle` (`id_detalle`, `plan`, `precio`, `meses`) VALUES
-(1, 'Plan Avanzado', 80000, 3);
+(1, 'Plan Avanzado', 80000, 3),
+(2, 'Plan Basico', 80000, 3);
 
 -- --------------------------------------------------------
 
@@ -233,8 +249,17 @@ CREATE TABLE `ejercicio` (
 --
 
 INSERT INTO `ejercicio` (`id_ejercicio`, `id_musculo`, `descripcion`, `series`, `repeticiones`, `url_video`) VALUES
-(10, 1, 'Ejercicios para triceps', '5', 15, 'videox'),
-(11, 1, '', '12', 12, 'www');
+(14, 1, 'Ejercicios triceps', '4', 15, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(15, 2, 'Ejercicios biceps', '4', 12, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(16, 3, 'Ejercicios cuadriceps', '4', 14, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(17, 4, 'Ejercicios abdomen', '4', 14, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(18, 5, 'Ejercicios hombros', '3', 20, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(19, 6, 'Ejercicios Aductores', '4', 8, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(20, 7, 'Ejercicios pecho', '4', 14, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(21, 8, 'Ejercicios pantorrilla', '4', 13, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(22, 9, 'Ejercicios trapecio', '3', 15, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(23, 10, 'Ejercicios espalda', '4', 15, 'https://www.youtube.com/watch?v=XSQrTe0mDGo'),
+(24, 11, 'Ejercicios gluteos', '4', 12, 'https://www.youtube.com/watch?v=XSQrTe0mDGo');
 
 -- --------------------------------------------------------
 
@@ -252,7 +277,7 @@ CREATE TABLE `entrenador` (
   `fechaN` date DEFAULT NULL,
   `email` varchar(200) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
-  `foto` varchar(150) DEFAULT NULL,
+  `foto` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `experiencia` varchar(15) DEFAULT NULL,
   `hoja_vida` varchar(100) DEFAULT NULL,
   `titulo_academico` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -267,10 +292,10 @@ CREATE TABLE `entrenador` (
 --
 
 INSERT INTO `entrenador` (`id_entrenador`, `documentoE`, `tipo_documento`, `nombre`, `apellido`, `telefono`, `fechaN`, `email`, `password`, `foto`, `experiencia`, `hoja_vida`, `titulo_academico`, `jornada`, `estado`, `id_admin`, `id_rol`) VALUES
-(1, 1004926016, 'CC', 'Entrenador', 'Uno', '3219238493', '2003-10-15', 'trainer@gmail.com', '1234', NULL, '4', NULL, 'entrenador profesional', 'Mañana', 1, 1, 3),
-(2, 10254, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-29', 'anderson07rolon@gmail.com', '1234', 'Anime5.jpg', '1', 'as', 'as', 'Mañana', 1, 1, NULL),
-(4, 32424, 'cedula', 'Androlo', 'dads', 'sa23', '2022-11-16', 'andresncb03@gmail.com', 'Carolooo', 'sfsfs', 'sfdsf', 'sfdsfd', 'sfdsf', 'Mañana', 0, 1, NULL),
-(5, 1245, 'cedula', 'Andrés Norberto', 'Cáceres Becerra', '3208381557', '2022-11-16', 'andresncb03@gmail.com', 'sdas', 'Anime1.jpg', 'sfdsf', 'sfdsfd', 'sfdsf', 'Mañana', 1, 1, NULL);
+(1, 1004926016, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-23', 'anderson07rolon@gmail.com', '1234', 'Screenshot_20221127-204435.png', '4', 'Hoja de Vida', 'entrenador profesional', 'Mañana', 0, 1, 3),
+(2, 10254, 'CC', 'Anderson', 'Orozco', '3219238493', '2022-11-29', 'anderson07rolon@gmail.com', '1234', 'Anime5.jpg', '1', 'as', 'as', 'Mañana', 1, 1, 3),
+(4, 32424, 'cedula', 'Androlo', 'dads', 'sa23', '2022-11-16', 'andresncb03@gmail.com', 'Carolooo', 'sfsfs', 'sfdsf', 'sfdsfd', 'sfdsf', 'Mañana', 0, 1, 3),
+(5, 1245, 'cedula', 'Andrés Norberto', 'Cáceres Becerra', '3208381557', '2022-11-16', 'andresncb03@gmail.com', 'sdas', '261278641_626726082271096_3891881707494189074_n.jpg', 'sfdsf', 'sfdsfd', 'sfdsf', 'Tarde', 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -289,10 +314,12 @@ CREATE TABLE `entrenador_cliente` (
 --
 
 INSERT INTO `entrenador_cliente` (`id_asignacion`, `id_entrenador`, `id_cliente`) VALUES
-(1, 1, 2),
-(2, 1, 3),
-(3, 1, 5),
-(4, 1, 7);
+(1, 4, 2),
+(2, 4, 3),
+(4, 4, 7),
+(8, 1, 5),
+(9, 4, 8),
+(10, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -332,7 +359,8 @@ CREATE TABLE `metodo_pago` (
 
 INSERT INTO `metodo_pago` (`id_metodopago`, `descripcion`) VALUES
 (1, 'PSE'),
-(2, 'Tarjeta de Credito');
+(2, 'Tarjeta de Credito'),
+(3, 'Pago en efectivo');
 
 -- --------------------------------------------------------
 
@@ -354,7 +382,13 @@ INSERT INTO `musculo` (`id_musculo`, `descripcion`) VALUES
 (2, 'Biceps'),
 (3, 'Cuadriceps'),
 (4, 'Abdomen'),
-(5, 'Hombros');
+(5, 'Hombros'),
+(6, 'Aductores'),
+(7, 'Pecho'),
+(8, 'Pantorrilla'),
+(9, 'Trapecio'),
+(10, 'Espalda'),
+(11, 'Gluteos');
 
 -- --------------------------------------------------------
 
@@ -460,7 +494,12 @@ CREATE TABLE `rutina` (
 
 INSERT INTO `rutina` (`id_rutina`, `nombre_rutina`, `descripcion`) VALUES
 (14, 'Numero 1', 'Esta es la rutina numero 1'),
-(15, 'Numero 2', '');
+(18, 'Numero 2', 'x'),
+(19, 'Numero 3', 'x'),
+(20, 'Numero 4', 'x'),
+(21, 'Numero 5', 'x'),
+(22, 'Numero 6', 's'),
+(23, 'Numero 7', '');
 
 -- --------------------------------------------------------
 
@@ -479,9 +518,17 @@ CREATE TABLE `rutina_ejercicio` (
 --
 
 INSERT INTO `rutina_ejercicio` (`id_rutina_ejercicio`, `id_rutina`, `id_ejercicio`) VALUES
-(8, 14, 10),
-(9, 15, 11),
-(10, 15, 10);
+(12, 14, 14),
+(13, 14, 15),
+(14, 14, 16),
+(15, 14, 17),
+(16, 14, 18),
+(17, 14, 19),
+(18, 14, 20),
+(19, 14, 21),
+(20, 14, 22),
+(21, 14, 23),
+(22, 14, 24);
 
 --
 -- Índices para tablas volcadas
@@ -653,25 +700,25 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cliente` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente_detalle`
 --
 ALTER TABLE `cliente_detalle`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente_rutina`
 --
 ALTER TABLE `cliente_rutina`
-  MODIFY `id_clienterutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_clienterutina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente_rutina_ejercicio`
 --
 ALTER TABLE `cliente_rutina_ejercicio`
-  MODIFY `id_cliente_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id_cliente_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
@@ -683,7 +730,7 @@ ALTER TABLE `compra`
 -- AUTO_INCREMENT de la tabla `control_cliente`
 --
 ALTER TABLE `control_cliente`
-  MODIFY `id_controlcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_controlcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `control_entrenador`
@@ -695,13 +742,13 @@ ALTER TABLE `control_entrenador`
 -- AUTO_INCREMENT de la tabla `detalle`
 --
 ALTER TABLE `detalle`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `ejercicio`
 --
 ALTER TABLE `ejercicio`
-  MODIFY `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `entrenador`
@@ -713,7 +760,7 @@ ALTER TABLE `entrenador`
 -- AUTO_INCREMENT de la tabla `entrenador_cliente`
 --
 ALTER TABLE `entrenador_cliente`
-  MODIFY `id_asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `maquina`
@@ -725,13 +772,13 @@ ALTER TABLE `maquina`
 -- AUTO_INCREMENT de la tabla `metodo_pago`
 --
 ALTER TABLE `metodo_pago`
-  MODIFY `id_metodopago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_metodopago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `musculo`
 --
 ALTER TABLE `musculo`
-  MODIFY `id_musculo` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_musculo` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
@@ -755,13 +802,13 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `rutina`
 --
 ALTER TABLE `rutina`
-  MODIFY `id_rutina` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_rutina` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `rutina_ejercicio`
 --
 ALTER TABLE `rutina_ejercicio`
-  MODIFY `id_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_rutina_ejercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas
@@ -783,9 +830,9 @@ ALTER TABLE `cliente`
 -- Filtros para la tabla `cliente_detalle`
 --
 ALTER TABLE `cliente_detalle`
-  ADD CONSTRAINT `cliente_detalle_ibfk_1` FOREIGN KEY (`id_detalle`) REFERENCES `detalle` (`id_detalle`),
-  ADD CONSTRAINT `cliente_detalle_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`),
-  ADD CONSTRAINT `cliente_detalle_ibfk_3` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`);
+  ADD CONSTRAINT `cliente_detalle_ibfk_1` FOREIGN KEY (`id_detalle`) REFERENCES `detalle` (`id_detalle`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cliente_detalle_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `cliente_detalle_ibfk_3` FOREIGN KEY (`id_metodopago`) REFERENCES `metodo_pago` (`id_metodopago`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `cliente_rutina`

@@ -36,16 +36,16 @@
             </button>
 
 
-            <a class="navbar-brand" th:href="@{/index}">
+            <a class="navbar-brand" th:href="@{/}">
                 <img src="/images/Logo-BodyHealth.jpeg" width="140" height="70">
             </a>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav mr-auto">
-                    <li><a class="nav-link"  th:href="@{/index}"><i class="fa-sharp fa-solid fa-house"></i> Home</a></li>
-                    <li><a class="nav-link" th:href="@{/cliente/planes}"><i class="fa-sharp fa-solid fa-tag"></i> Planes</a></li>
-                    <li><a class="nav-link" th:href="@{/cliente/noticias}"><i class="fa-solid fa-newspaper"></i> Noticias</a></li>
-                    <li><a class="nav-link" th:href="@{/cliente/productos}"><i class="fa-sharp fa-solid fa-shop"></i> Productos</a></li>
+                    <li><a class="nav-link"  th:href="@{/}"><i class="fa-sharp fa-solid fa-house"></i> Home</a></li>
+                    <li><a class="nav-link" th:href="@{/planes}"><i class="fa-sharp fa-solid fa-tag"></i> Planes</a></li>
+                    <li><a class="nav-link" th:href="@{/noticias}"><i class="fa-solid fa-newspaper"></i> Noticias</a></li>
+                    <li><a class="nav-link" th:href="@{/productos}"><i class="fa-sharp fa-solid fa-shop"></i> Productos</a></li>
 
                 </ul>
 
@@ -65,8 +65,8 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" th:href="@{/mi-perfil}"><i class="fa-solid fa-circle-user"></i> Mi Perfil</a></li>
                                 <div class="dropdown-divider"></div>
-                                <li><a class="dropdown-item" th:href="@{/cliente/login1}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i> Iniciar sesión</a></li>
-                                <li><a class="dropdown-item" th:href=" @{/cliente/registroCliente}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i>Registrarse</a></li>
+                                <li><a class="dropdown-item" th:href="@{/login1}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i> Iniciar sesión</a></li>
+                                <li><a class="dropdown-item" th:href=" @{/registroCliente}"><i class="fa-solid fa-circle-info fa-beat-fade" style="--fa-beat-fade-opacity: 0.67; --fa-beat-fade-scale: 1.075;" ></i>Registrarse</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -74,7 +74,7 @@
 
                 <!--SI NO ESTA AUTENTICADO MUESTRA ESTO-->
                 <ul class="navbar-nav mr-auto">
-                    <li><a class="nav-link" th:href="@{/cliente/login1}"><i class="fa-solid fa-circle-user"></i> Login</a></li>
+                    <li><a class="nav-link" th:href="@{/login1}"><i class="fa-solid fa-circle-user"></i> Login</a></li>
 
                 </ul>
 
@@ -105,13 +105,13 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="img/fondo-gym.jpeg" class="rounded d-block w-100" alt="Fondo Gym">
+                    <img src="/images/fondo-gym.jpeg" class="rounded d-block w-100" alt="Fondo Gym">
                 </div>
                 <div class="carousel-item">
-                    <img src="img/entrenamiento.jpeg" class="rounded d-block w-100" alt="Entrenamiento">
+                    <img src="/images/entrenamiento.jpeg" class="rounded d-block w-100" alt="Entrenamiento">
                 </div>
                 <div class="carousel-item">
-                    <img src="img/gym.jpeg" class="rounded d-block w-100" alt="Entreno">
+                    <img src="/images/gym.jpeg" class="rounded d-block w-100" alt="Entreno">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
